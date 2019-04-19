@@ -1,0 +1,41 @@
+\newcommand{\autor}{Pedro Pozuelo Rodríguez}
+\newcommand{\titulo}{Reverse Proxy con capacidades de Firewall de aplicación web y aceleración TLS}
+\newcommand{\profesor}{Ana del Valle Corrales Paredes}
+\newcommand{\PFGID}{Pendiente}
+\newcommand{\fechaversion}{\today}
+
+\newcommand{\pfg}[1]{\par \textbf{{\color{blue} GUIDE: }{#1}}}
+\newcommand{\shit}{\par {\color{red} ADD SOME SHIT HERE}}
+
+\input{tex/Template}
+% \input{tex/hyphenation}
+
+\addbibresource{bib/Referencias.bib}
+
+% Create a glossary for terms and definitions
+\makeglossaries
+\input{tex/glosario}
+
+\begin{document}
+
+\input{tex/Portada}
+
+\input{tex/EstadoDelArte}
+
+% Print glossary
+\printglossary[title=Acrónimos,type=\acronymtype]
+\printglossary[title=Glosario]
+ 
+% Print bibliography
+\printbibliography[heading=bibintoc]
+
+\begin{comment}
+  \clearpage
+  \appendixpage
+  \begin{appendices}
+  \chapter{Acuerdo firmado}
+  \end{appendices}
+\end{comment}
+
+
+\end{document}

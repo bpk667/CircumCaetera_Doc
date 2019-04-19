@@ -1,0 +1,145 @@
+% \documentclass[a4paper,11pt,spanish]{article}
+\documentclass[a4paper,11pt,spanish]{report}
+
+\usepackage{amsmath, amssymb, latexsym}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xltxtra}
+
+% Highlight where is the paragraph overfull \hbox error (adding a black bar where a line is too wide)
+\overfullrule=2cm
+
+% Allows us to wrap underlined text
+\usepackage{soul}
+
+% \usepackage[spanish]{babel} % Se ha sustituido por Polyglossia
+\usepackage{polyglossia}
+  \setmainlanguage{spanish}
+  \setmainfont[Mapping=tex-text]{Linux Libertine O}
+  \defaultfontfeatures{Ligatures=TeX}
+
+\usepackage{titlesec}
+ \titleformat{\chapter}[display]
+   {\normalfont\bfseries}{}{0pt}{\Huge}
+
+\usepackage{ifpdf}
+\usepackage{moreverb}
+\usepackage{multicol}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{appendix}
+\addto\captionsspanish{%
+  \appendixtitleon
+  \renewcommand{\appendixname}{Anexo}
+  \renewcommand\appendixpagename{Anexos} }
+\usepackage{msc}                % Draw Message Sequence Charts
+\usepackage{scalefnt}           % Rescale fonts to arbitrary sizes
+\usepackage{xurl}
+\usepackage[pdfencoding=unicode,
+            unicode=true,
+            bookmarks=true,
+            colorlinks=true, 
+            pdfstartview=FitH, 
+            linkcolor=blue, 
+            citecolor=blue, 
+            breaklinks=true,
+            bookmarksopen=true,
+            urlcolor=blue]
+            {hyperref}
+\usepackage[all]{hypcap}
+\usepackage[color={0 0 1}]{attachfile2}
+\usepackage{listings}
+\usepackage[all]{xy}            % Paquete para dibujar diagramas (\xymatrix)
+\usepackage{changepage}         % Útil para modificar márgenes en mitad del documento
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{mathtools}
+\usepackage{pdflscape}
+\usepackage[autostyle]{csquotes} 
+
+\selectlanguage{spanish}
+
+%% Figures within a column...
+\makeatletter
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+\newenvironment{figurehere}
+{\def\@captype{figure}}
+{}
+\makeatother
+
+\oddsidemargin 0in
+\textwidth 6.25in
+
+\title{\titulo{}}
+\author{\autor{}}
+\date{\today}
+
+%% Información para el PDF que se genera.
+\ifpdf
+  \pdfinfo{
+    /Author (\autor{})
+    /title{\titulo{}}
+  }
+\fi
+
+% Gestión de la bibliografía.
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none
+]{biblatex}
+
+% Create glossary and definitions
+\usepackage[acronyms,toc]{glossaries}
+
+%% Información para los ficheros adjuntos.
+\attachfilesetup{author=\autor{}}
+
+%% Redefinimos el aspecto del título de las secciones
+%\renewcommand{\thesection}{Problema \arabic {section}.}
+
+%% Redefinimos el tamaño de la fuente en \section y \subsection
+%\titleformat{\section}{\large\bfseries\em}{Parte \thesection.}{1em}{}
+%\titleformat{\subsection}{\normalsize\bfseries}{Parte \thesubsection.}{1em}{}
+%\titleformat{\subsubsection}{\normalsize\bfseries}{Parte \thesubsubsection.}{1em}{}
+
+%% Definimos el tamaño de la fuente para verbatim en small
+\makeatletter
+  \g@addto@macro\@verbatim\small
+\makeatother 
+
+%% Indicamos un interlineado de 1.5
+% \renewcommand*{\baselinestretch}{1.5}
+
+%% Aumentamos el espacio de nuevo párrafo
+\parskip=2mm
+
+%% Propiedades del código fuente para todo el documento
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{numbers=none,
+        basicstyle=\scriptsize,
+        frame=single,
+        breaklines=true,
+        %title=\lstname,
+        language=sql,
+        keywordstyle=\color{blue},
+        commentstyle=\color{dkgreen},
+        stringstyle=\color{mauve},
+        extendedchars=true,
+        texcl,
+        tabsize=2}
+\def\inline{\lstinline[language=sql,
+		keywordstyle=\color{blue},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{mauve},
+		extendedchars=true,
+		texcl,
+		basicstyle=\normalsize]}
