@@ -259,6 +259,13 @@ de WAF que se han comentado anteriormente.
 \subsubsection{Desventajas}
 \par Tal como se ha anticipado, implementar y administrar este tipo de soluciones requiere de ciertos conocimientos en materia de seguridad,
 tanto acerca de las técnicas ofensivas más frecuentes, como los mecanismos necesarios para proteger la infraestructura.
+\par Por otro lado, la capacidad de crear nuevas reglas en este tipo de entornos es limitada. Si bien se menciona como ventaja que estos WAF
+permiten mayor versatilidad que las soluciones SaaS, hay que tener en cuenta que todas las soluciones de este tipo hacen uso de licencias de
+software privativas, con las restricciones que este tipo de licencias implica:  No es posible acceder al código fuente o modificarlo para
+implantar nuevas funcionalidades o solucionar fallos y el ciclo de vida del appliance es el que el fabricante impone.
+\par Este problema se agrava en las soluciones de tipo appliance debido a que no es infrecuente que el fabricante imponga la renovación de
+hardware o software de forma agresiva y nos veamos obligados a realizar inversiones adicionales no planificadas.
+
 \par Otra desventaja de este tipo de soluciones es su elevado coste económico. Si bien el coste recurrente suele ser inferior a las soluciones
 SaaS equivalentes, sigue siendo un coste elevado; por otro lado, las soluciones WAF de tipo appliance requieren la compra de los dispositivos,
 lo que supone un mayor coste de inversión inicial que en las soluciones SaaS.
@@ -266,7 +273,26 @@ lo que supone un mayor coste de inversión inicial que en las soluciones SaaS.
 particulares.
 
 \section{Soluciones WAF de software libre}
-\par XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+\par Dentro de las soluciones WAF de software libre, se han analizado las siguientes por ser las más extendidas:ModSecurity \cite{modsecurity},
+WebKnight\cite{WebKnight} o Shadow Daemon\cite{ShadowDaemon}.
+\par Otras soluciones han sido descartadas por los motivos que se indican a continuación:
+\par Soluciones que están discontinuadas desde hace tiempo: IronBee\cite{IronBee} sin actualizar desde hace más de 3 años y
+WebCastellum\cite{WebCastellum} desde hace 5 años.
+\par Soluciones que se ha considerado que no cumplen los requisitos básicos que debe tener un WAF actualmente. Por ejemplo, RAPTOR\cite{raptor} no
+soporta tráfico SSL/TLS y está en versión Beta o NAXSI\cite{NAXSI} sólo protege ataques de tipo {\em Cross-site scripting} (en adelante
+\acrshort{xss}\cite{owaspxss}) e inyecciones SQL (en adelante \acrshort{sqli}\cite{owaspsqli}). Además, se han producido duras críticas acerca
+de las funcionalidades que ofrece \cite{naxsianalisis}.
+\par Mención aparte merecen las iniciativas OpenWAF\cite{openwaf} y FreeWAF\cite{freewaf}. OpenWAF es una iniciativa con un planteamiento y
+unas funcionalidades muy interesantes, pero que lleva más de dos años sin publicar una nueva versión y además carece de suficiente madurez para
+considerarse su uso en un entorno de producción (la última versión publicada es la 0.0.4). Respecto a FreeWAF (también conocido como {\em
+lua-resty-waf}) está en una situación muy similar, pues su última versión tiene más de 2 años y se trata de la versión
+0.11.1\cite{freewafchangelog}.
+
+\par XXXXXXXXXXXXXXXXXXXXXX
+\begin{comment}
+\par WebKnight. Depende de IIS.
+
+ModSecurity es el WAF de software libre más popular y longevo.
 
 \par Actualmente existen soluciones propietarias que ofrecen funcionalidades WAF y aceleración SSL / TLS, pero son muy
 costosas y sólo son viables en proyectos con suficiente envergadura y presupuesto, quedando fuera del alcance en
@@ -277,20 +303,7 @@ soluciones requiere por lo tanto un ejercicio de integración con las aplicacion
 servidor que pueden impactar en el rendimiento.
 
 
-\begin{itemize}
-  \item Soluciones privativas.
-  \item Soluciones de software libre.
-    \begin{itemize}
-      \item Modsecurity
-      \item XXX
-    \end{itemize}
-\end{itemize}
 
-\par Dentro de las soluciones WAF, existen los siguientes tipos: Soluciones de tipo appliance, soluciones en la nube
-de tipo Software as a Service (en adelante SaaS) como parte de servicios de Red de dis\-tri\-bu\-ción de contenidos (en adelante CDN, de sus siglas en inglés, {\em Content Delivery Network}) y soluciones de tipo software.
-
-\par Las soluciones de tipo appliance o CDN son propietarias y muy costosas, por lo que sólo son viables en proyectos
-donde se justifique la inversión.
 \par Las soluciones de tipo software requieren que se contemplen como parte del diseño de la aplicación web, por lo
 que requieren un ejercicio de integración con el servicio web y consumen recursos del servidor y puede afectar al
 rendimiento.
@@ -307,3 +320,4 @@ plataforma web, con lo que se asegure que un cambio en el componente de segurida
 viceversa.
 
 
+\end{comment}
