@@ -290,6 +290,13 @@ particulares.
   \item ModSecurity \cite{modsecurity}.
 \end{itemize}
 
+\par Entre ellas destaca ModSecurity por ser la solución de software libre más extendida y activa de la comunidad e implementa un número
+significativo de los controles de seguridad deseables en un WAF.
+\par También destacan OpenWAF y FreeWAF (también conocido como {\em lua-resty-waf}) debido a que tienen un planteamiento y unas
+funcionalidades muy interesantes.
+\par Éstas y las demás soluciones se evaluarán en la posterior fase de análisis.
+
+
 \subsubsection{Modo de licenciamiento y coste}
 En la {~\hyperref[tab:waflibre]{tabla resumen de WAF de software libre}} podemos comparar las diferentes soluciones:
 
@@ -316,13 +323,72 @@ En la {~\hyperref[tab:waflibre]{tabla resumen de WAF de software libre}} podemos
 \end{table}
 
 \par \hypertarget{modlic}{*} Modsecurity ofrece la solución WAF de forma gratuita, que cuenta con soporte por parte de la
-comunidad, y una versión de pago que ofrece soporte por parte de Trustware\cite{trustware} y un conjunto mayor de reglas
+comunidad, y una versión de pago por 495 USD al año que ofrece soporte por parte de Trustware\cite{trustware} y un conjunto mayor de reglas
 \cite{modsecuritysupport}.
 
 \subsubsection{Implementación y operación}
-\par \wip
+\par Las soluciones WAF de software libre se implementan, en la mayoría de los casos, como módulos adicionales al servidor de aplicación web,
+ya sea Apache HTTP Server\cite{apache} (en adelante, Apache), Nginx\cite{nginx}, Internet Information Services\cite{iis}, etc.
+\par Esto implica que el WAF debe ejecutarse como parte del servicio web y su configuración y operación depende del administrador de la
+plataforma web.
+\par Si en los WAF de tipo appliance se ha visto que las tareas de implantación tienen cierta complejidad en lo relativo a analizar la
+plataforma web desde un punto de vista de red, en el caso de los WAF que se ejecutan como parte del servicio web la complejidad radica en que
+el WAF debe integrarse dentro de la plataforma web.
+\par Este tipo de WAF requiere que se revise el dimensionamiento de la plataforma web debido a que consumen recursos del servidor y puede
+afectar a su rendimiento.
+
+\par Estas son las tareas que se deben abordar de forma genérica a la hora de implantar un WAF de software libre:
+\begin{enumerate}
+  \item Evaluar la plataforma web actual e identificar qué soluciones WAF son compatibles con el servicio web.
+  \item Desplegar un un entorno de pruebas equivalente a la plataforma web actual o prueba de concepto (en adelante \acrshort{poc}, de sus
+    siglas en inglés, \acrlong{poc}).
+  \item Desplegar el WAF en el entorno de pruebas.
+  \item Realizar pruebas exhaustivas sobre el nuevo entorno, especialmente pruebas funcionales y de rendimiento.
+  \item Evaluar el impacto del WAF, entre otros se debe evaluar errores en la lógica de aplicación, latencia que añade, aumento en el consumo
+    de recursos o cómo afecta al throughput soportado por la plataforma.
+    \par Tradicionalmente este punto y el anterior se deberán ejecutar de forma reiterativa hasta que los resultados sean concluyentes y la
+    nueva configuración se considere suficientemente robusta como para desplegarla en producción.
+  \item Desplegar el WAF en el entorno de producción (si la plataforma lo permite, se recomienda realizar el despliegue de forma escalonada) y
+    realizar un conjunto de pruebas similar a las realizadas en el entorno de pruebas.
+\end{enumerate}
+
+\par Aunque en este tipo de soluciones se han enumerado menos pasos que en las soluciones anteriores, esto es debido a que las tareas dependen
+en gran medida del software y la plataforma elegidos, por lo que las actividades se han identificado de forma más general.
+
+\subsubsection{Ventajas}
+\par Los WAF de software libre son más económicos que las alternativas privativas. Si bien es cierto que esto no quiere decir que sean gratis,
+pues requieren personas que los administren y consumen una serie de recursos de la plataforma web.
+\par Pero, aun eligiendo alguna de las opciones de pago y con soporte como por ejemplo ModSecurity, el coste en licencias es muy inferior a las
+otros modelos privativos.
+\par Debido al tipo de licenciamiento, estas soluciones se distribuyen como software libre, con todas las ventajas inherentes a este
+tipo de software entre las que destaca desde un punto de vista funcional el acceso al código fuente y la capacidad de modificarlo de acuerdo a
+nuestras necesidades entre otras. Está fuera del alcance del documento evaluar las ventajas generales del software libre frente a otro tipo de
+licencias.
+\par No en todos los casos, pero en la mayoría de las soluciones analizadas el equipo de desarrollo es un conjunto de individuos pertenecientes
+a distintos ámbitos o empresas, por lo que se elimina la estricta dependencia del proveedor. Si bien este modelo tiene sus ventajas e
+inconvenientes, lo cierto es que se elimina la dependencia de realizar una migración del software si se considera conveniente (por ejemplo,
+para alinear dicha migración según una planificación propia en lugar de una planificación impuesta).
+\par Se puede pues decir que estas soluciones son más adaptables a las necesidades específicas de cada entorno.
+
+\subsubsection{Desventajas}
+\par Este tipo de soluciones son más difíciles de implementar y de mantener. El hecho de que estén integradas como parte de la plataforma web
+hace que sea complejo diferenciar los roles del administrador de la plataforma web del administrador del WAF. Por lo tanto, la misma persona
+debe tener conocimiento de ambas plataformas y ambos campos del conocimiento, lo cual no es común y puede provocar en errores de configuración
+de alguna de las plataformas.
+\par Precisamente debido a la gran dependencia existente entre el software WAF y de la plataforma web, es necesario analizar en detalle las
+configuraciones y las reglas que se habilitarán, pues el proceso de depuración de errores es más complejo y los fallos son más difíciles de
+identificar y solucionar.
+\par Las actividades de actualización de componentes y migraciones de software son así mismo más complejas, pues se deben actualizar o migrar
+ambas plataformas conjuntamente.
+\par Por otro lado, el soporte en este tipo de soluciones puede ser de menor calidad que en las alternativas privativas. Al fin y al cabo en
+muchos casos el soporte depende de la comunidad y si se elige un WAF que tenga una comunidad reducida, es probable que no se obtenga una
+respuesta inmediata. Por supuesto, si se elige una solución con soporte o se contrata un servicio de consultoría, se puede paliar esta
+desventaja. Si se trata de un entorno de producción en el que el tiempo de caída del servicio es crítico, se recomienda contratar algún
+servicio de soporte o consultoría.
+
 
 \begin{comment}
+\subsubsection{Análisis de WAF de software libre}
 \par Algunas soluciones se han descartado debido a que están discontinuadas desde hace tiempo: IronBee sin actualizar desde hace más de 3 años
 y WebCastellum desde hace 5 años.
 \par RAPTOR se ha descartado debido a que no soporta tráfico SSL/TLS y está en versión Beta.
@@ -342,11 +408,7 @@ elemento externo e independiente de la plataforma web.
 compatible con el software de aplicación web Internet Information Services\cite{iis} y Vulture requiere un sistema operativo FreeBSD.
 
 
-\subsubsection{Ventajas}
-\subsubsection{Desventajas}
-
-
-
+\subsubsection{Conclusión}
 \par Actualmente existen soluciones propietarias que ofrecen funcionalidades WAF y aceleración SSL / TLS, pero son muy
 costosas y sólo son viables en proyectos con suficiente envergadura y presupuesto, quedando fuera del alcance en
 aplicaciones web con menos presupuesto o que no generen suficientes beneficios para justificar su inversión.
@@ -355,11 +417,6 @@ al servidor web, como por ejemplo {\em modSecurity} como módulo del servidor we
 soluciones requiere por lo tanto un ejercicio de integración con las aplicaciones web y consumen recursos del
 servidor que pueden impactar en el rendimiento.
 
-
-
-\par Las soluciones de tipo software requieren que se contemplen como parte del diseño de la aplicación web, por lo
-que requieren un ejercicio de integración con el servicio web y consumen recursos del servidor y puede afectar al
-rendimiento.
 \par En materia de aceleración SSL/TLS, nos encontramos que en los últimos 5 años se ha producido un cambio
 significativo; el mercado ha apostado por utilizar canales cifrados HTTPS de forma masiva frente a la política previa
 en la que sólo se cifraban ciertas comunicaciones que se consideraban sensibles.
@@ -371,11 +428,6 @@ Internet.
 \par Es por ello que se propone una solución que pueda desplegarse y configurarse de forma in\-de\-pen\-dien\-te a la
 plataforma web, con lo que se asegure que un cambio en el componente de seguridad no afectará a la plataforma web y
 viceversa.
-
-
-\par Por último, ModSecurity es la solución de software libre más extendida y activa de la comunidad, y además implementa un número
-significativo de los controles de seguridad deseables en un WAF. Por lo tanto, es el software base que se va a elegir para implementar nuestra
-solución.
 
 
 \end{comment}
