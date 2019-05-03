@@ -246,3 +246,5 @@ TSWLatexianTemp*
 
 # Misc files
 *.atfi
+
+delete*
