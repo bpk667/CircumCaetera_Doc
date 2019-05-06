@@ -1,4 +1,6 @@
 #!/bin/bash
+# This script will remove Docker images and remove all the associated containers
+
 
 checkArgs() {
   if (( $# != 1 )); then

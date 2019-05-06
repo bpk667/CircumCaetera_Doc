@@ -1,10 +1,44 @@
-FROM circumcaetera_img
+FROM debian:buster-slim
+
+ENV WAF_USER=waf
+ENV WAF_HOME=/home/${WAF_USER}
 
 ADD ./files/ /
 
-RUN apt-get install -y  screen autoconf automake build-essential liblmdb-dev pkgconf zlib1g-dev \
-    && chmod 700 /build_nginx.sh && \
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends apt-utils
+
+RUN apt-get install -y wget git sudo net-tools vim openssl openssh-server iproute2 screen\
+    && mkdir -p /run/sshd
+
+# modSecurity
+RUN apt-get install -y g++ flex bison curl doxygen libyajl-dev libgeoip-dev libtool \
+    && apt-get install -y dh-autoreconf libcurl4-gnutls-dev libxml2 libpcre++-dev libxml2-dev \
+    && apt-get install -y  autoconf automake build-essential liblmdb-dev pkgconf zlib1g-dev \
+    && cd /opt/ \
+    && git clone https://github.com/SpiderLabs/ModSecurity \
+    && cd ModSecurity/ \
+    # Carefull We are reseting the branch
+    # && git checkout -b v3/master origin/v3/master \
+      && git checkout -B v3/master origin/v3/master \
+    && sh build.sh \
+    && git submodule init \
+    && git submodule update \
+    && ./configure \
+    && make \
+    && make install
+
+# Nginx + modSecurity connector
+RUN chmod 700 /build_nginx.sh && \
     /build_nginx.sh
+
+
+RUN useradd ${WAF_USER} -d ${WAF_HOME} -m --shell /bin/bash -G sudo\
+    && chown -R ${WAF_USER}:${WAF_USER} ${WAF_HOME} \
+    && echo "root:Docker!" | chpasswd \
+    && echo "waf:waf!" | chpasswd
+
 
 EXPOSE 22 
     
