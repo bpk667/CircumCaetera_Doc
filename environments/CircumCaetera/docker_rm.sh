@@ -10,7 +10,7 @@ print_help() {
   NAME="$(basename "$0")"
 cat << EOF
 ---
-Use: $NAME [imagename]
+Usage: $NAME [imagename]
 If specified, it will delete the image and all its containers.
 
 Without params it will print the list of images and containers.
