@@ -1,0 +1,25 @@
+\chapter{Requisitos candidatos}
+\par En esta sección se exponen los requisitos candidatos que se intentarán cubrir con nuestra solución.
+\par En primer lugar se identifican los requisitos orientados principalmente al componente WAF:
+\begin{enumerate}[\bfseries{}R1. ]
+  \item La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
+    objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
+  \item La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a
+    los ataques más comunes.
+  \item La solución debe permitir la elaboración de reglas personalizadas según las necesidades específicas de la plataforma del cliente.
+  \item La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo
+    Licencia Pública General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}) o Licencia Pública General Reducida
+    de GNU (en adelánte \acrshort{lgpl}, de  sus siglas en inglés \acrlong{lgpl}).
+  \item La plataforma debe generar logs de seguridad exportables a soluciones externas de gestión de información y eventos de seguridad (en
+    adelante \acrshort{siem} de sus siglas en inglés, \acrlong{siem}).
+\end{enumerate}
+
+\par A continuación se recogen los requisitos asociados al componente de TLS:
+\begin{enumerate}[\bfseries{}R1. ]
+  \item La solución debe poder participar en la negociación TLS, gestionando los certificados presentados a los clientes.
+  \item Debe permitir aplicar soluciones de SSL offloading entre el WAf y los frontales de la plataforma web, en entornos controlados en los
+    que prime el rendimiento, o establecer un segundo túnel TLS en las soluciones en las que el entorno tenga un mayor riesgo o prime la
+    seguridad.
+\end{enumerate}
+
+% https://www.gnu.org/licenses/license-compatibility.html
