@@ -1,11 +1,14 @@
-\chapter{Requisitos candidatos}
-\par En esta sección se exponen los requisitos candidatos que se intentarán cubrir con nuestra solución.
-\par En primer lugar se identifican los requisitos orientados principalmente al componente WAF:
+\chapter{Requisitos y casos de uso}
+\section{Requisitos candidatos}
+\par En primer lugar se identifican los requisitos que se intentarán cumplir con la solución propuesta.
+\par Se agrupan los requisitos según estén más orientados al componente WAF o al componente de TLS.
+\par Requisitos orientados principalmente al componente WAF:
 \begin{enumerate}[\bfseries{}R1. ]
   \item La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
     objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
   \item La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a
     los ataques más comunes.
+  \item La plataforma debe permitir implementar parches virtuales frente a ataques conocidos.
   \item La solución debe permitir la elaboración de reglas personalizadas según las necesidades específicas de la plataforma del cliente.
   \item La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo
     Licencia Pública General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}) o Licencia Pública General Reducida
@@ -16,10 +19,56 @@
 
 \par A continuación se recogen los requisitos asociados al componente de TLS:
 \begin{enumerate}[\bfseries{}R1. ]
-  \item La solución debe poder participar en la negociación TLS, gestionando los certificados presentados a los clientes.
-  \item Debe permitir aplicar soluciones de SSL offloading entre el WAf y los frontales de la plataforma web, en entornos controlados en los
-    que prime el rendimiento, o establecer un segundo túnel TLS en las soluciones en las que el entorno tenga un mayor riesgo o prime la
-    seguridad.
+  \item La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
+  \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
+  \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{{TLSBestPractices}}.
+  \item Debe permitir aplicar soluciones de SSL offloading, entre el WAF y los frontales de la plataforma web, o permitir cifrado punto a punto.
+    \par En caso de utilizar la funcionalidad de SSL offloading:
+      \begin{enumerate}[label=\emph{\alph*})]
+        \item Esta opción es recomendable en entornos controlados en los que prima el rendimiento.
+        \item Las comunicación entre el WAF y la plataforma web debe permitir tráfico HTTP.
+      \end{enumerate}
+    \par En caso de cifrado punto a punto:
+      \begin{enumerate}[label=\emph{\alph*})]
+        \item Esta opción es recomendable en las soluciones en las que prime la seguridad o en aquellos escenarios en los que no se tenga el control de elementos intermedios, como por ejemplo en entornos cloud o multi-datacenter.
+        \item Las comunicación entre el WAF y la plataforma web debe permitir tráfico HTTPS.
+        \item El WAF debe confiar en la CA que firma los certificados de la plataforma web o, alternativamente, en los certificados hoja.
+      \end{enumerate}
 \end{enumerate}
+
+\section{Identificación de actores}
+\par Se han identificado los siguientes actores.
+\begin{itemize}
+  \item {\bf Cliente}. Se utiliza este término para referirse al cliente web que consume los servicios HTTP o HTTPS.
+  \item {\bf Plataforma web}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no se incluyen los elementos desarrollados en el presente proyecto.
+  \item {\bf Autoridad de certificación} (en adelante \GLS{CA}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
+  \item {\bf Sistema de virtualización o gestión de contenedores}. Es la infrastructura sobre la que se desplegará la solución WAF. Inicialmente se considera una solución de gestión de contenedores como \cite{Docker}.
+\end{itemize}
+
+\section{Casos de uso}
+\par Estos son los casos identificados.
+\begin{enumerate}
+  \item Caso de uso: Petición legítima de recurso web.
+    \begin{itemize}
+      \item Actores: Cliente, plataforma web.
+      \item Descripción: El cliente realiza una petición web a nuestra solución. Ésta a su vez realiza la petición a la plataforma web. La plataforma web envía una respuesta a la plataforma WAF, que a su vez se la entrega al cliente.
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUso1}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+  \item Caso de uso: XXXXXXXXX
+    \begin{itemize}
+      \item Actores: XXXXXXXXXX
+      \item Descripción: XXXXXXXX
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUso1}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+    \end{itemize}
+
+\end{enumerate}
+
 
 % https://www.gnu.org/licenses/license-compatibility.html
