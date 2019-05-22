@@ -21,7 +21,7 @@
 \begin{enumerate}[\bfseries{}R1. ]
   \item La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
   \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
-  \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{{TLSBestPractices}}.
+  \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{TLSBestPractices}}.
   \item Debe permitir aplicar soluciones de SSL offloading, entre el WAF y los frontales de la plataforma web, o permitir cifrado punto a punto.
     \par En caso de utilizar la funcionalidad de SSL offloading:
       \begin{enumerate}[label=\emph{\alph*})]
@@ -40,34 +40,69 @@
 \par Se han identificado los siguientes actores.
 \begin{itemize}
   \item {\bf Cliente}. Se utiliza este término para referirse al cliente web que consume los servicios HTTP o HTTPS.
+  \item {\bf \Gls{Atacante}}. Se trata de un tipo de cliente malintencionado.
   \item {\bf Plataforma web}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no se incluyen los elementos desarrollados en el presente proyecto.
   \item {\bf Autoridad de certificación} (en adelante \GLS{CA}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
-  \item {\bf Sistema de virtualización o gestión de contenedores}. Es la infrastructura sobre la que se desplegará la solución WAF. Inicialmente se considera una solución de gestión de contenedores como \cite{Docker}.
+  \item {\bf Sistema de virtualización o gestión de contenedores}. Es la infrastructura sobre la que se desplegará la solución WAF. Inicialmente se
+    considera una solución de gestión de contenedores como \cite{docker}.
 \end{itemize}
 
 \section{Casos de uso}
 \par Estos son los casos identificados.
 \begin{enumerate}
-  \item Caso de uso: Petición legítima de recurso web.
+  \item Caso de uso: Petición identificada como legítima de recurso web.
     \begin{itemize}
       \item Actores: Cliente, plataforma web.
-      \item Descripción: El cliente realiza una petición web a nuestra solución. Ésta a su vez realiza la petición a la plataforma web. La plataforma web envía una respuesta a la plataforma WAF, que a su vez se la entrega al cliente.
-      \item Diagrama:
-        \begin{center}
-          \label{fig:CasoUso1}
-          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
-        \end{center}
-  \item Caso de uso: XXXXXXXXX
-    \begin{itemize}
-      \item Actores: XXXXXXXXXX
-      \item Descripción: XXXXXXXX
+      \item Descripción: El cliente realiza una petición web a nuestra solución. Ésta a su vez realiza la petición a la plataforma web. La
+        plataforma web envía una respuesta a la plataforma WAF, que a su vez se la entrega al cliente. En este caso de uso se incluyen peticiones
+        legítimas y falsos negativos cuando el WAF falla al detectar un ataque.
       \item Diagrama:
         \begin{center}
           \label{fig:CasoUso1}
           \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
         \end{center}
     \end{itemize}
-
+  \item Caso de uso: Petición identificada como no legítima de recurso web.
+    \begin{itemize}
+      \item Actores: \Gls{Atacante}, plataforma web.
+      \item Descripción: El atacante realiza una petición a nuestra solución WAF. El WAF detecta la petición como no legítima y envía un mensaje de
+        error al cliente. Este caso de uso incluye ataque reales y falsos positivos cuando se diagnostica como ataque a una petición legítima.
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUsoX}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+    \end{itemize}
+  \item Caso de uso: Petición HTTPS en un entorno con SSL offloading.
+    \begin{itemize}
+      \item Actores: Cliente, plataforma web.
+      \item Descripción: XXXXXXXX
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUsoXX}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+    \end{itemize}
+  \item Caso de uso: Petición HTTPS con cifrado punto a punto.
+    \begin{itemize}
+      \item Actores: Cliente, plataforma web.
+      \item Descripción: XXXXXXXX
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUsoXXX}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+    \end{itemize}
+  \item Caso de uso: Petición de validación y firma de certificado TLS a una CA de confianza.
+    \begin{itemize}
+      \item Actores: \acrlong{CA}.
+      \item Descripción: XXXXXXXX
+      \item Diagrama:
+        \begin{center}
+          \label{fig:CasoUsoXXXXX}
+          \includegraphics[width=0.4\textwidth]{fig/CasoUso1}
+        \end{center}
+    \end{itemize}
 \end{enumerate}
 
 
