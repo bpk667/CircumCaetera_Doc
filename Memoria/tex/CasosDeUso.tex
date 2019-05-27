@@ -3,7 +3,7 @@
 \par En primer lugar se identifican los requisitos que se intentarán cumplir con la solución propuesta.
 \par Se agrupan los requisitos según estén más orientados al componente WAF o al componente de TLS.
 \par Requisitos orientados principalmente al componente WAF:
-\begin{enumerate}[\bfseries{}R1. ]
+\begin{enumerate}[\bfseries{WAF-}Req1. ]
   \item La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
     objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
   \item La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a
@@ -18,7 +18,7 @@
 \end{enumerate}
 
 \par A continuación se recogen los requisitos asociados al componente de TLS:
-\begin{enumerate}[\bfseries{}R1. ]
+\begin{enumerate}[\bfseries{TLS-}Req1. ]
   \item La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
   \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
   \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{TLSBestPractices}}.
@@ -96,7 +96,7 @@
       \item Diagrama:
         \begin{center}
           \label{fig:CasoUso3}
-          \includegraphics[width=0.3\textwidth]{fig/UseCase3}
+          \includegraphics[width=0.7\textwidth]{fig/UseCase3}
         \end{center}
     \end{itemize}
 \clearpage
@@ -108,7 +108,7 @@
       \item Diagrama:
         \begin{center}
           \label{fig:CasoUso4}
-          \includegraphics[width=0.3\textwidth]{fig/UseCase4}
+          \includegraphics[width=0.7\textwidth]{fig/UseCase4}
         \end{center}
     \end{itemize}
 \clearpage
@@ -127,17 +127,16 @@
         \end{enumerate}
         \par El segundo flujo es opcional. Se trataría de un flujo similar al descrito para el WAF pero el solicitante de certificado sería la plataforma web en este caso.
         \par Se considera que es opcional debido a que la plataforma web sólo estará expuesta al WAF y se podría crear una relación de confianza sin necesidad de hacer uso de una CA externa.
-        \par No obstante, dado que actualmente obtener este tipo de certificados no tiene un coste económico, y que tampoco debería tener un impacto operacional significado, se recomienda seguir el mismo proceso que para el WAF.
-        \par En nuestro caso, se intentará hacer uso del protocolo \acrshort{acme} (\acrlong{acme}) mediante {\em Let’s Encrypt~\cite{letsencrypt}} con el objetivo de automatizar las actividades de creación y renovado de
-        certificados.
-
+        \par No obstante, dado que actualmente obtener este tipo de certificados no tiene un coste económico, y que tampoco debería tener un impacto operacional significativo, se recomienda seguir el mismo proceso que para el WAF y
+        hacer uso de certificados firmados digitalmente por un CA.
+        \par En nuestro caso, para la gestión de certificados del WAF se intentará hacer uso del protocolo \acrshort{acme} (\acrlong{acme}) mediante {\em Let’s Encrypt~\cite{letsencrypt}} con el objetivo de automatizar las
+        actividades de creación y renovado de certificados.
       \item Diagrama:
         \begin{center}
           \label{fig:CasoUso5}
-          \includegraphics[width=0.3\textwidth]{fig/UseCase4}
+          \includegraphics[width=0.7\textwidth]{fig/UseCase5}
         \end{center}
     \end{itemize}
 \end{enumerate}
 
 
-% https://www.gnu.org/licenses/license-compatibility.html
