@@ -1,0 +1,307 @@
+
+\newcommand{\autor}{Pedro Pozuelo Rodríguez}
+\newcommand{\titulo}{Reverse Proxy con capacidades de Firewall de aplicación web y aceleración TLS}
+\newcommand{\profesor}{Ana del Valle Corrales Paredes}
+\newcommand{\PFGID}{Pendiente}
+\newcommand{\fechaversion}{30 de diciembre de 2018}
+
+\newcommand{\pfg}[1]{\par \textbf{{\color{blue} GUIDE: }{#1}}}
+\newcommand{\wip}{\par {\color{red} WIP}}
+
+\input{Template}
+% \input{tex/hyphenation}
+
+\addbibresource{Referencias.bib}
+
+% Create a glossary for terms and definitions
+\makeglossaries
+\input{glosario}
+
+\begin{document}
+
+\input{Portada}
+
+\clearpage
+\section{Identificación de la Propuesta}
+El presente documento recoge la propuesta asociada al Proyecto de Fin de Grado {\em \titulo} presentada por
+{\em \autor} cuyo historial de versiones se detalla a continuación:
+\subsection{Control de versiones del documento}
+\begin{center}
+  \begin{tabularx}{0.9\textwidth} {llll}
+		\multicolumn{1}{c}{\textbf{Versión}} &
+		\multicolumn{1}{c}{\textbf{Fecha}} &
+		\multicolumn{1}{c}{\textbf{Autor}} &
+		\multicolumn{1}{c}{\textbf{Descripción}}\\
+		\hline
+    1.0 & 30/12/2018  & Pedro Pozuelo & Primera versión de la propuesta \\
+    1.1 & 29/05/2019  & Pedro Pozuelo & Añadida información de viabilidad y profesora asignada\\
+  \end{tabularx}
+\end{center}
+
+
+\section{Identificación del Proyecto}
+% \pfg{Título y acrónimo}
+% \pfg{resumen de un párrafo de extensión, del objetivo prioritario del proyecto}
+% \pfg{nombre, temática y objetivo principal}
+\par El título del proyecto propuesto es: {\em \titulo}.
+\par El objetivo del proyecto es crear una solución de software libre de firewall de aplicación web perimetral con
+capacidades de aceleración TLS que permita proteger aplicaciones web con in\-de\-pen\-den\-cia de su arquitectura
+para lo que actuará como un proxy inverso sobre una tecnología de contenedores de software tipo Docker.
+
+
+% \section{Intervinientes principales en el proyecto}
+% % \pfg{equipo desarrollador}
+% % \pfg{profesor que desempeña el papel de director del proyecto}
+% % \pfg{cliente (el director-cliente).}
+% % \pfg{número identificador del PFG}
+% 
+% \par Equipo desarrollador: \autor
+% \par Director de proyecto: \profesor
+% \par Número de identificador del proyecto: \PFGID
+
+\clearpage
+\section{Resumen del proyecto}
+% \pfg{mayor detalle que el párrafo informativo incluido en el apartado 2 de la Propuesta (entre media cara y una cara de DIN-A4.)}
+% \pfg{El resumen deberá incluir el objetivo global del proyecto, aunque sin detallar ni de\-sa\-rro\-llar.}
+% \pfg{Tras la lectura de este apartado, el lector debe quedar informado del problema que afronta el proyecto y del alcance de la solución.}
+
+\subsection{Versión en español}
+\par El objetivo del proyecto es construir una solución de software libre con capacidades de firewall de aplicación web (en adelante WAF, de sus siglas en inglés, {\em Web Application Firewall}) y aceleración SSL/TLS.
+\par Actualmente la mayoría de los ataques se realizan contra aplicaciones web, con lo que es cada vez más importante
+contar con una solución que sea capaz de analizar el tráfico web y proteger las aplicaciones.
+\par Por otro lado, en los últimos años existe una tendencia a publicar los servicios web sobre canales cifrados y el
+tráfico sin cifrar es cada vez menor. Este cambio tiene un impacto en el rendimiento de las plataformas sobre los que
+se ejecutan los servicios web y añade complejidad. Máxime cuando recientemente se han descubierto múltiples
+vulnerabilidades en los protocolos SSL/TLS que requieren realizar continuamente cambios y actualizaciones.
+\par Actualmente existen soluciones propietarias que ofrecen funcionalidades WAF y aceleración SSL / TLS, pero son muy
+costosas y sólo son viables en proyectos con suficiente envergadura y presupuesto, quedando fuera del alcance en
+aplicaciones web con menos presupuesto o que no generen suficientes beneficios para justificar su inversión.
+\par Por otro lado, existen soluciones WAF de software libre, que tradicionalmente funcionan como módulos adicionales
+al servidor web, como por ejemplo {\em modSecurity} como módulo del servidor web {\em Apache}. Este tipo de
+soluciones requiere por lo tanto un ejercicio de integración con las aplicaciones web y consumen recursos del
+servidor que pueden impactar en el rendimiento.
+\par Adicionalmente, para la implementación y configuración adecuada de estos módulos se requiere de una figura con
+conocimientos de seguridad, y si se despliegan dentro del servicio web, se requiere que la figura responsable de la
+plataforma web configure unos componentes para los que carece de los conocimientos necesarios y se requiere que asuma
+el rol de administrador de servicios que desconoce.
+\par Es por ello que se propone una solución que funcione en su propio contenedor o servidor, lo
+que permitirá desplegarla de manera independiente a la plataforma, con lo que no impactará a los recursos de la
+arquitectura web, y permitirá una administración basada en roles y que los cambios realizados en uno de los
+componentes no afecten a otros componentes.
+
+\subsection{English version}
+\par The goal of the project is to build a free software solution with WAF (Web Application Firewall) capabilities and SSL/TLS acceleration.
+\par Nowadays, most of the attacks are run against web applications, hence it is more important than ever to have a
+mechanism able to analyze web traffic and protect web applications.
+\par On the other hand, during the past few years it is more common to publish web services over encrypted channels
+instead of traditional decrypted ones. This trend impacts servers' performance where the web services are running
+and adds complexity. Especially, since recently several vul\-ne\-ra\-bi\-li\-ties in the SSL/TLS protocols have been published,
+requiring configuration changes and applying updates.
+\par There are proprietary solutions that give us the WAF and SSL/TLS acceleration capabilities, but they are costly
+and they are only affordable for projects with enough magnitude and budget. So it is not worth it to deploy these type
+of solutions when the web applications don't have enough budget in order to justify the investment.
+\par There are also free software WAFs, which run as a web server module, for instance {\em modSecurity} is a WAF
+module for Apache. These solutions require to be integrated as part of the web applications and they consume server
+resources that can impact on server's performance.
+\par Additionally, the deployment and setup of these modules require security knowledge and, if they are deployed
+within the web server, it'd mean the person responsible for web administration, who may not have the proper knowledge,
+would need to set up the security components and would need to assume a role for tasks he/she is not qualified.
+\par For all the reasons previously stated, I propose an autonomous solution running in its own con\-tai\-ner or server,
+which will be platform independent and will not impact on the web platform resources. It will also allow an
+administration based on roles (RBAC) and any configuration change would only affect its own component.
+
+\begin{comment}
+\end{comment}
+
+\section{Antecedentes y estado actual del tema}
+% \pfg{características del problema a abordar, las técnicas empleadas en el pasado para su solución y los resultados obtenidos. También deberá investigarse cómo se está abordando el pro\-ble\-ma actualmente y con qué resultados.}
+% \pfg{listado comentado de la bibliografía más relevante.}
+
+\par Dentro de las soluciones de seguridad tradicionales, nos encontramos los firewall de red pe\-ri\-me\-tra\-les que
+permiten proteger los servicios que no se quieren publicar en Internet, pero estas soluciones no permiten analizar o
+proteger la capa de aplicación de los servicios web que sí se publican, y permiten todo el tráfico dirigido a los
+servicios web, sea este legítimo o una amenaza de seguridad.
+
+\par Para proteger estos servicios web, una de las claves es mejorar los patrones de desarrollo incluyendo principios
+y buenas prácticas de desarrollo seguro, pero estas medidas no son suficientes por diversas causas: se descubren
+nuevos ataques que no se conocían en el momento de realizar el desarrollo, los equipos de desarrollo no están
+adecuadamente formados, no existen los controles de validación adecuados como parte del ciclo de desarrollo, existen
+aplicaciones en producción que no se actualizan cuando se descubre una nueva vulnerabilidad, etc.
+\par Por estos y otros motivos no se puede considerar que las aplicaciones web sean seguras y se deben desplegar
+controles de seguridad que ayuden a protegerlas frente a los ataques.
+\par Las soluciones WAF nos permiten analizar este tipo de tráfico y proteger las aplicaciones web.
+\par Dentro de las soluciones WAF, existen los siguientes tipos: Soluciones de tipo appliance, soluciones en la nube
+de tipo Software as a Service (en adelante SaaS) como parte de servicios de Red de dis\-tri\-bu\-ción de contenidos (en adelante CDN, de sus siglas en inglés, {\em Content Delivery Network}) y soluciones de tipo software.
+\par Las soluciones de tipo appliance o CDN son propietarias y muy costosas, por lo que sólo son viables en proyectos
+donde se justifique la inversión.
+\par Las soluciones de tipo software requieren que se contemplen como parte del diseño de la aplicación web, por lo
+que requieren un ejercicio de integración con el servicio web y consumen recursos del servidor y puede afectar al
+rendimiento.
+\par En materia de aceleración SSL/TLS, nos encontramos que en los últimos 5 años se ha producido un cambio
+significativo; el mercado ha apostado por utilizar canales cifrados HTTPS de forma masiva frente a la política previa
+en la que sólo se cifraban ciertas comunicaciones que se consideraban sensibles.
+\par Paralelamente a este cambio, se han publicado múltiples ataques a los protocolos SSL y TLS que han supuesto que
+la práctica tradicional de habilitar cifrado por defecto y no cambiarlo ya no sea válida. Actualmente son habituales
+los cambios de configuración de los {\em ciphersuites}, certificados y configuración en general de los protocolos.
+Estos cambios no son triviales y deben realizarse sobre los terminadores del protocolo que están expuestos a
+Internet.
+\par Es por ello que se propone una solución que pueda desplegarse y configurarse de forma in\-de\-pen\-dien\-te a la
+plataforma web, con lo que se asegure que un cambio en el componente de seguridad no afectará a la plataforma web y
+viceversa.
+
+
+\subsection{Bibliografía}
+\par A continuación se destacan las referencias que se han consultado para evaluar la necesidad del proyecto:
+\begin{itemize}
+  \item {\em OWASP Top 10 Most Critical Web Application Security Risks~ \cite{OWASP}}
+  \item {\em Modelo de amenazas SSL propuesto por {\em Qualys}~ \cite{Qualys}}
+  \item {\em Majority of the world’s top million websites now use HTTPS~ \cite{HTTPUSage}}
+  \item {\em HTTPS encryption on the web~ \cite{Encryption}}
+  \item {\em ModSecurity~ \cite{ModSecurity}}
+  \item {\em Fabricante de appliances WAF lider del mercado~ \cite{Imperva}}
+\end{itemize}
+\par Estas y otras referencias se recogen en la sección de {\em Referencias~\ref{biblio}}.
+
+
+\section{Objetivos}
+\subsection{Objetivo global}
+% \pfg{objetivo global, que es explicado con un lenguaje general y sin entrar en gran detalle.}
+\par El objetivo del proyecto es crear una solución de software libre de firewall de aplicación web perimetral con
+capacidades de aceleración TLS que permita proteger aplicaciones web con in\-de\-pen\-den\-cia de su arquitectura
+para lo que actuará como un proxy inverso sobre una tecnología de contenedores de software tipo Docker.
+
+\subsection{Objetivos concretos}
+\par A la hora de abordar el proyecto se han identificado objetivos para el componente WAF y para el componente de TLS tal como se desglosa a continuación:
+\par Objetivos del componente WAF:
+\begin{enumerate}[\bfseries{WAF-}1. ]
+  \item La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
+    objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
+  \item La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a
+    los ataques más comunes.
+  \item La plataforma debe permitir implementar parches virtuales frente a ataques conocidos.
+  \item La solución debe permitir la elaboración de reglas personalizadas según las necesidades específicas de la plataforma del cliente.
+  \item La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo
+    Licencia Pública General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}) o Licencia Pública General Reducida
+    de GNU (en adelánte \acrshort{lgpl}, de  sus siglas en inglés \acrlong{lgpl}).
+  \item La plataforma debe generar logs de seguridad exportables a soluciones externas de gestión de información y eventos de seguridad (en
+    adelante \acrshort{siem} de sus siglas en inglés, \acrlong{siem}).
+\end{enumerate}
+
+\par A continuación se recogen los objetivos del componente de TLS:
+\begin{enumerate}[\bfseries{TLS-}1. ]
+  \item La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
+  \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
+  \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{TLSBestPractices}}.
+  \item Debe permitir aplicar soluciones de SSL offloading, entre el WAF y los frontales de la plataforma web, o permitir cifrado punto a punto.
+\end{enumerate}
+
+\subsection{Objetivos no contemplados}
+\par Queda fuera del alcance de la solución los siguientes objetivos:
+\begin{itemize}
+  \item Auto-escalado o auto-aprovisionamiento de recursos.
+  \item Aprendizaje automático de la estructura de las aplicaciones web.
+  \item Sistema de detección de ataques basado en el número de peticiones o desviaciones estadísticas.
+  \item Sistemas de aprovisionamiento en plataformas distintas a Docker.
+\end{itemize}
+Si bien estos objetivos no forman parte de la solución dentro del alcance del Proyecto de Fin de Grado, se utilizarán como referencia para evolucionar la solución posteriormente.
+
+\section{Compromisos y requisitos}
+\subsection{Compromisos del cliente o usuario}
+\par El cliente debe cumplir con los compromisos impuestos por la licencia de software libre que se escoja finalmente. Si bien no se ha elegido la licencia concreta sobre la que se licenciará la solución, esta pertenecerá
+a la {\em familia de licencias de software libre~\cite{licenciassoftlibre}}.
+
+\subsection{Requisitos del sistema}
+% \pfg{Especifica los requisitos que el sistema deberá cumplir exigidos por los usuarios.}
+% \pfg{Deberán especificarse las prestaciones y requisitos mínimos del sistema informático que se requerirá para soportar la solución informática que proporciona el proyecto ajustada a los márgenes de rendimiento que puedan exigirse.}
+
+\par La solución se construirá sobre un sistema operativo Debian GNU/Linux, el cual a su vez podrá ser desplegado
+sobre una plataforma de contenedores de software tipo Docker o instancias de la nube como AWS o Azure.
+\par Se requeriría que las entradas DNS de las aplicaciones web puedan apuntar al servicio WAF o bien se modifique el
+enrutamiento de red de forma que el WAF éste en un punto de la red externo a la aplicación web.
+\par La solución no implementará gestión de certificados o gestionará la arquitectura web que protege.
+
+\section{Plan de trabajo y objetivos del proyecto}
+\subsection{Plan de trabajo}
+\par A la hora de planificar la ejecución del proyecto se han identificado los siguientes hitos:
+\begin{itemize}
+  \item Análisis de las soluciones WAF actualmente disponibles y elaboración de un análisis del estado del arte actual.
+  \item Definición de los requisitos y de los casos de uso.
+  \item Construcción de un laboratorio en el que se evalúen las soluciones que cumplan los requisitos definidos.
+  \item Construcción prototípica sobre la que se implementarán las funcionalidades elegidas.
+  \item Ejecución de pruebas, detección de errores y afinamiento de la solución.
+  \item Entrega de la solución.
+  \item Elaboración de la presentación de la solución.
+  \item Defensa del Proyecto de Fin de Grado.
+\end{itemize}
+\par La documentación del proyecto se generará a medida que se completen los hitos, por lo que no se definen hitos específicos.
+\par A lo largo de la ejecución del proyecto se mantendrán reuniones regulares con la persona asignada con el fin de dar un seguimiento y evaluación continua de las decisiones tomadas y la evaluación de la solución.
+\par Se seguirán las guías y buenas prácticas promovidas por el {\em Center for Internet Security} y {\em OWASP}
+
+\subsection{Presupuesto del proyecto}
+\par No se contempla que sea necesario un presupuesto económico.
+
+\section{Beneficios para el cliente}
+% \pfg{cómo se beneficiaría el cliente de la realización del proyecto.}
+% \pfg{La Propuesta debe reflejar el aporte que el estudiante pretende dar a su Proyecto, basado en líneas de trabajo ya existentes pero aportando "algo extra" (más eficiencia, combinación de técnicas para mejorar los resultados, etc.).}
+% \pfg{Lo que propones cubre una necesidad o mejora algo existente.}
+
+\par El protocolo HTTP es usado y atacado masivamente. Las soluciones actuales son o bien de pago y cerradas -
+tradicionalmente un modelo de appliance o CDN) no protegen adecuadamente las a\-pli\-ca\-cio\-nes debido a la complejidad de
+integrarlas como parte de la aplicación web o tienen una alta complejidad de desplegar y mantener.
+\par La solución propuesta es gratuita, software libre y se despliega en su propio contenedor o servidor, lo
+que permitirá ahorrar costes, adaptarla a las necesidades del cliente y desplegarla de manera in\-de\-pen\-dien\-te a la
+plataforma web.
+
+\section{Experiencia previa en el tema}
+% \pfg{el cliente valore la capacidad del equipo del proyecto y de la organización proveedora para desarrollar exitosamente el proyecto}
+\par Desde hace más de 10 años he trabajado en múltiples proyectos en los que se he desplegado y administrado
+diversas tecnologías propietarias WAF, destacando las soluciones tipo appliances, como por ejemplo Secure Sphere
+Imperva, y soluciones CDN, como Akamai Kona.
+\par Antes de dedicarme a la seguridad era administrador de sistemas y siempre he sido un entusiasta del software
+libre y un gran defensor de sus bondades.
+\par Por lo tanto tengo experiencia en las tecnologías WAF privativas tradicionales así como en las plataformas
+Linux y creo que este proyecto puede cubrir una carencia que actualmente existe.
+
+\section{Viabilidad y plan de recursos}
+\subsection{Estudio de viabilidad técnica}
+% \pfg{estudio que determine si técnicamente el proyecto de sistema informático que se propone es viable con la tecnología actual. El cliente empleará este estudio para cuantificar los riesgos que corre al aceptar la Propuesta, y evaluar su componente de innovación.}
+% \pfg{abordando aspectos concretos del ámbito de trabajo seleccionado y orientado a ga\-ran\-ti\-zar el buen término del Proyecto}
+\par Durante la preparación de la presente propuesta se han evaluado las distintas soluciones que actualmente hay disponibles en el mercado, tanto soluciones privativas, como soluciones de software libre.
+\par Las soluciones privativas se caracterizan por una mayor potencia y su elevado coste, lo que las descarta como opción válida en entornos en los que no es posible o rentable realizar esta inversión.
+\par Las soluciones de software libre que se han evaluado por su parte tienen una fuerte dependencia con el software de la plataforma web, por lo que la operación y mantenimiento son complejos. Este es una de las
+principales causas de su escasa adopción en el mercado.
+\par Tras realizar un análisis no exhaustivo de los distintos componentes involucrados, se considera que se puede implementar una solución atómica que permita su implementación con un bajo impacto y una independencia de la
+plataforma web. Lo que facilitaría su adopción y mantenimiento.
+
+\subsection{Plan de recursos}
+% \pfg{esbozo preliminar. En dicho plan deberán reflejarse qué recursos se consumirán en cada etapa del proyecto, y cuál es su coste estimado}
+\par El proyecto se realizará individualmente.
+
+\subsection{Estudio de viabilidad económica}
+% \pfg{pequeño estudio sobre si los recursos económicos contemplados son suficientes para garantizar el desarrollo del proyecto}
+\par No se contempla que el proyecto requiera una inversión económica.
+
+\section{Comentarios}
+% \pfg{clarificar puntos que deban ser enfatizados acerca del proyecto. También es útil para clarificar aspectos que se prevea que puedan ser motivo de controversia a lo largo del desarrollo del proyecto (por ejemplo, la manera en la que una variación de los requisitos influirá en un sobrecoste del proyecto).}
+
+\par Conozco bien las soluciones privativas del mercado y, si bien tecnológicamente son soluciones potentes, no
+pueden ser modificadas y carecen de la adaptabilidad del software libre.
+\par Por otro lado, estas soluciones tienen unos precios muy elevados, lo que hace que no sean viables para
+aplicaciones web que no generan unos beneficios significados; y, por lo tanto, tradicionalmente estas aplicaciones no
+son protegidas adecuadamente.
+\par Con la solución propuesta el objetivo es crear un WAF con capacidad de aceleración SSL/TLS que permita proteger
+aplicaciones web sin requerir una inversión significativa y sin añadir complejidad a la arquitectura web existente.
+
+\section{Aceptación del proyecto}
+\par Pendiente de aceptación.
+
+% Print glossary
+\clearpage
+\printglossary[title=Acrónimos,type=\acronymtype]
+\printglossary[title=Glosario]
+ 
+% Print bibliography
+\printbibliography[heading=bibintoc]
+\label{biblio}
+
+\end{document}
