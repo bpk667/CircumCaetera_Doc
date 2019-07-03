@@ -1,15 +1,9 @@
 \chapter{Estado del arte}
-\par En los últimos años, la mayoría de los ataques en Internet se realizan contra aplicaciones web, con lo que es cada vez más importante
-contar con una solución que sea capaz de analizar el tráfico web y proteger las aplicaciones.
-\par Las soluciones de firewall tradicional son capaces de analizar el tráfico de red en capa 3 del modelo TCP/IP (equivalentas a las capas 3 y
-4 del {\em modelo OSI\cite{osi}}). Sin embargo, carecen de la funcionalidad necesaria para analizar el tráfico en capa 7. Esto implica que,
-una vez se publica un servicio web, dichos firewalls permitirán todo el tráfico dirigido a estos servicios, con independencia de que se trate
-de una petición legítima, una petición malformada o un ataque.
-\par Para proteger estos servicios y poder diferencias entre estas peticiones es necesario disponer de tecnologías que entiendan analicen el tráfico en la capa de aplicación siguiendo la lógica propia del servicio a proteger.
-\par Actualmente existen diversas soluciones de firewall de aplicación web (en adelante \acrshort{waf}, de sus siglas en inglés, \acrlong{waf}).
-\par Se ha utilizado el documento de buenas prácticas de OWASP\cite{owaspbestpractices} como referencia para elegir las soluciones a analizar.
-El criterio seguido es que la solución debe ser capaz de proteger la plataforma web implementando una mayoría de los controles de seguridad
-(referenciados como {\em Countermeasure} en la página de OWASP\cite[apartado A3.2]{owaspbestpractices}).
+\label{subsec:estadoarte}
+\par Tal como se ha comentado en el capítulo anterior, un elemento clave para proteger las aplicaciones web es el WAF.
+
+\par En primer lugar se ha procedido a realizar una análisis comparativo de las diferentes soluciones WAF disponibles en el mercado. Para ello, se ha utilizado el documento de buenas prácticas de OWASP\cite{owaspbestpractices} como referencia.
+\par forma específica, el criterio seguido es que la solución debe ser capaz de proteger la plataforma web implementando una mayoría de los controles de seguridad (referenciados como {\em Countermeasure} en la página de OWASP\cite[apartado A3.2]{owaspbestpractices}).
 
 \par Dentro de las soluciones disponibles, podemos distinguir principalmente entre soluciones privativas y soluciones de software libre. Este
 criterio no se circunscribe exclusivamente al modelo de licencias si no que está íntimamente ligado al coste asociado tal como veremos.

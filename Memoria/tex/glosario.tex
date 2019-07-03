@@ -1,3 +1,8 @@
+\newacronym{http}{HTTP}{Hypertext Transfer Protocol}
+\newacronym{https}{HTTPS}{Hypertext Transfer Protocol Secure}
+\newacronym{dlp}{DLP}{Data loss prevention}
+\newacronym{utm}{UTM}{Unified Threat Management}
+\newacronym{nids}{NIDS}{Network Intrusion Detection System}
 \newacronym{gcd}{GCD}{Greatest Common Divisor}
 \newacronym{lcm}{LCM}{Least Common Multiple}
 \newacronym{waf}{WAF}{Web Application Firewall}
@@ -18,7 +23,21 @@
 \newacronym{siem}{SIEM}{Security information and event management}
 \newacronym{ca}{CA}{Certification Authority}
 \newacronym{acme}{ACME}{Automatic Certificate Management Environment\cite[Estándar ACME]{rfc8555}}
+\newacronym{cicd}{CI/CD}{Continuous Integration and Continuous Deployment or Continuous Delivery \cite[What is CI/CD]{cicd}}
 
+\newglossaryentry{DefensaProfundidad}
+{
+    name={Defensa en Profundidad},
+    description={El concepto de defensa en profundidad se basa en la premisa de que todo componente de un sistema puede ser vulnerado, y por tanto no se debe delegar la seguridad
+    de un sistema en un único método o componente de protección.}~\cite[Wikipedia]{wiki:DefensaProfundidad}
+}
+
+\newglossaryentry{cloud}
+{
+    name={La nube},
+    description={La computación en la nube (del inglés cloud computing), conocida también como servicios en la nube, informática en la nube, nube de cómputo, nube de conceptos o simplemente «la nube», es un paradigma que permite ofrecer
+    servicios de computación a través de una red, que usualmente es Internet.}~\cite[Wikipedia]{wiki:cloud}
+}
 
 \newglossaryentry{throughput}
 {
@@ -32,13 +51,27 @@
     name=CA,
     description={En criptografía, las expresiones autoridad de certificación, o certificadora, o certificante, o las siglas AC o CA (por la
     denominación en idioma inglés Certification Authority), señalan a una entidad de confianza, responsable de emitir y revocar los certificados,
-    utilizando en ellos la firma electrónica, para lo cual se emplea la criptografía de clave pública.}~\cite[Wikipedia]{wiki:ca}
+    utilizando en ellos la firma electrónica, para lo cual se emplea la criptografía de clave pública.~\cite[Wikipedia]{wiki:ca}}
 }
 
 \newglossaryentry{Atacante}
 {
     name=Atacante,
     description={El atacante es un individuo u organización que intenta obtener el control de un sistema informático para utilizarlo con fines
-    maliciosos, robo de información o de hacer daño a su objetivo.}~\cite[Wikipedia]{wiki:atacante}
+    maliciosos, robo de información o de hacer daño a su objetivo.~\cite[Wikipedia]{wiki:atacante}}
 }
+
+\longnewglossaryentry{ManifiestoAgil}
+{
+    name={Manifiesto por el Desarrollo Ágil de Software},
+  }
+{
+    \par Estamos descubriendo formas mejores de desarrollar software tanto por nuestra propia experiencia como ayudando a terceros. A través de este trabajo hemos aprendido a valorar:
+    \par {\Large Individuos e interacciones} sobre procesos y herramientas\\
+    {\Large Software funcionando} sobre documentación extensiva\\
+    {\Large Colaboración con el cliente} sobre negociación contractual\\
+    {\Large Respuesta ante el cambio} sobre seguir un plan
+    \par Esto es, aunque valoramos los elementos de la derecha, valoramos más los de la izquierda.~\cite{ManifiestoAgil}
+}
+
 

@@ -1,0 +1,34 @@
+\chapter{Diseño de la solución}
+\par Como es habitual en los Proyectos de Fin de Grado, uno de los retos más interesantes que se encuentran consiste en afrontar, abrazar y controlar la incertidumbre sobre cómo será la solución final; dicha incertidumbre es inherente a todo
+proyecto de software, pero en un PFG es mayor debido a que la investigación tiene a su vez un mayor peso y es más determinante.
+\par En el presente proyecto, a la hora de afrontar inicialmente el diseño de la solución se desconoce qué tecnologías se van a utilizar específicamente y éstas se deciden tras evaluarlas tanto individualmente como su capacidad de integración
+entre ellas y con elementos externos.
+\par Para ello se sigue un modelo de desarrollo evolutivo similar al modelo de prototipos. Para lo cual se parte de la definición de un diseño a alto nivel en el que se definen los componentes y sus funciones más
+representativas. A continuación se empieza a realizar un proceso iterativo en el que se van probando los componentes y añadiendo nuevos elementos. El resultado de dicha fase es una solución funcional inicial que cumpla
+los requisitos definidos. Sobre dicho modelo se realiza una revisión de calidad que permita contar con una solución suficientemente madura y estable.
+\par No obstante, dado que se espera que la solución sea algo en constante cambio, se ha elegido una metodología de desarrollo ágil~\cite{wiki:agil}, tal como se describe más adelante.
+
+\section{Componentes principales}
+\par El primer componente que se ha identificado es un WAF con licencia de software libre. Este elemento es el componente más importante de la solución y marca en gran medida los demás componentes que participen en la capa de aplicación.
+\par Durante la fase de construcción se evalúan qué componentes WAF cumplen los requisitos y se elige un candidato.
+
+\par El segundo componente de la solución es el software responsable de gestionar las comunicaciones HTTPS. Este software es el encargado de cifrar y descifrar el tráfico SSL / TLS.
+
+\par El tercer componente es el software de virtualización o de contenedores. Uno de los puntos clave de la solución es garantizar la facilidad para implementarla de forma poco intrusiva. Para ello se considera
+que un software de contenedores como Docker~\cite{docker}. Este tipo de soluciones está ampliamente asentada en el mercado y existe un movimiento significativo de migración de los entornos tradicionales a entornos de containers.
+
+\par Otro componente estrechamente relacionado con el componente anterior es el software automatización de despliegue y gestión de la solución. Este componente es opcional y por lo tanto se tendrá en cuenta que la opción deber ser sustituible
+en diferentes implementaciones con el fin de garantizar la máxima portabilidad de la solución.
+
+\par Otro componente del que depende la solución es el conector con los elementos de almacenamiento persistente. Este componente es el encargado de proporcional un servicio de compartir información entre recursos, como pueden ser servicios
+tradicionales como Samba ~\cite{samba} o  NFS (estándar RFC7530~\cite{nfs}) o servicios del cloud como Amazon S3\cite{s3} o Google Storage\cite{GoogleStorage}.
+
+\par Por último, tenemos dos componentes directamente relacionados con la personalización de la herramienta por el usuario final. Se trata de las reglas de auditoría o bloqueo del WAF, así como las reglas de configuración
+del software de TLS. Estos componentes serán los ficheros o parámetros de configuración de los dos primeros componentes que se han identificado.
+
+\chapter{Construcción de la solución}
+
+\par Tal como se comentaba anteriormente, debido al alto grado de incertidumbre que se tiene del aspecto final de la solución, junto con la necesidad de poder realizar cambios sobre el modelo de forma rápida, se ha optado por seguir una metodología de desarrollo ágil~\cite{wiki:agil}.
+\par Durante el proceso de desarrollo del proyecto se utilizará como referencia o mantra el \Gls{ManifiestoAgil} y como modelo de liberación de versiones se siguen los principios
+de integración continua, entrega continua (en adelante \acrshort{cicd}, de sus siglas en inglés, \acrlong{cicd}).
+
