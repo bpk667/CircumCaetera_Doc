@@ -30,21 +30,24 @@
       \end{enumerate}
     \par En caso de cifrado punto a punto:
       \begin{enumerate}[label=\emph{\alph*})]
-        \item Esta opción es recomendable en las soluciones en las que prime la seguridad o en aquellos escenarios en los que no se tenga el control de elementos intermedios, como por ejemplo en entornos cloud o multi-datacenter.
+        \item Esta opción es recomendable en las soluciones en las que prime la seguridad o en aquellos escenarios en los que no se tenga el control de
+          elementos intermedios, como por ejemplo en entornos Cloud o multi-datacenter.
         \item Las comunicación entre el WAF y la plataforma web debe permitir tráfico HTTPS.
         \item El WAF debe confiar en la CA que firma los certificados de la plataforma web o, alternativamente, en los certificados hoja.
       \end{enumerate}
 \end{enumerate}
 
 \section{Identificación de actores}
-\par Se han identificado los siguientes actores.
+\par Se han identificado los siguientes actores (algunos de ellos se identifican también en inglés debido a que múltiples referencias los mencionan en inglés).
 \begin{itemize}
-  \item {\bf Cliente}. Se utiliza este término para referirse al cliente web que consume los servicios HTTP o HTTPS.
-  \item {\bf \Gls{Atacante}}. Se trata de un tipo de cliente malintencionado.
-  \item {\bf Plataforma web}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no se incluyen los elementos desarrollados en el presente proyecto.
+  \item {\bf Cliente (Client en inglés)}. Se utiliza este término para referirse al cliente web que consume los servicios HTTP o HTTPS.
+  \item {\bf \Gls{Atacante} (Black Hat Hacker en inglés)}. Se trata de un tipo de cliente malintencionado.
+  \item {\bf Plataforma web (Web Servers en inglés)}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no
+    se incluyen los elementos desarrollados en el presente proyecto.
   \item {\bf Autoridad de certificación} (en adelante \GLS{CA}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
   \item {\bf Sistema de virtualización o gestión de contenedores}. Es la infrastructura sobre la que se desplegará la solución WAF. Inicialmente se
     considera una solución de gestión de contenedores como {\em Docker~\cite{docker}}.
+  \item {\bf Plataforma WAF+TLS}. Se trata de la plataforma propuesta en el presente proyecto.
 \end{itemize}
 
 \clearpage
@@ -53,13 +56,13 @@
 \begin{enumerate}
   \item Caso de uso: Petición identificada como legítima de recurso web.
     \begin{itemize}
-      \item Actores: Cliente, plataforma web.
-      \item Descripción: Se trata del caso de uso que sucede con mayor frecuencia, pues representa las peticiones legítimas de clientes a la plataforma web. Podemos desglosar las comunicaciones en los siguientes pasos:
+      \item Actores: Cliente, plataforma web, plataforma WAF+TLS.
+      \item Descripción: Se trata del caso de uso que sucede con mayor frecuencia, pues representa las peticiones legítimas de clientes a la plataforma web. Se pueden representar las comunicaciones en los siguientes pasos:
         \begin{enumerate}
-          \item El cliente realiza una petición web a nuestra solución.
-          \item Nuestra solución evalúa la petición, la considera legítima y la envía a la plataforma web.
-          \item La plataforma web recibe la petición y envía una respuesta a la plataforma WAF.
-          \item La plataforma WAF recibe la respuesta y se la envía al cliente.
+          \item El cliente realiza una petición web a la solución propuesta en el presente proyecto.
+          \item La plataforma WAF+TLS evalúa la petición, la considera legítima y la envía a la plataforma web.
+          \item La plataforma web recibe la petición y envía una respuesta a la plataforma WAF+TLS.
+          \item La plataforma WAF+TLS recibe la respuesta y se la envía al cliente.
         \end{enumerate}
         \par Se debe tener en cuenta que en este caso de uso se incluyen peticiones legítimas y falsos negativos cuando el WAF falla al detectar un ataque.
       \item Diagrama:
@@ -71,13 +74,13 @@
 \clearpage
   \item Caso de uso: Petición identificada como no legítima de recurso web.
     \begin{itemize}
-      \item Actores: \Gls{Atacante}.
-      \item Descripción: Este caso de uso se dará siempre que nuestra plataforma reciba una petición y la considere un ataque. En este caso podemos identificar los siguientes pasos:
+      \item Actores: \Gls{Atacante}, plataforma WAF+TLS.
+      \item Descripción: Este caso de uso se dará siempre que la plataforma WAF+TLS reciba una petición y la considere un ataque. En este caso se pueden identificar los siguientes pasos:
         \begin{enumerate}
-          \item El atacante realiza una petición web a nuestra solución.
-          \item Nuestra solución recibe la petición, la evalúa y, considerándola como ataque, envía un mensaje de error al atacante.
+          \item El atacante realiza una petición web a la plataforma WAF+TLS.
+          \item La plataforma WAF+TLS recibe la petición, la evalúa y, considerándola como ataque, envía un mensaje de error al atacante.
         \end{enumerate}
-        \par A tener en cuenta que nuestra plataforma ha considerado que el cliente es un atacante y este caso de uso se dará tanto en ataque reales como con falsos positivos (cuando se diagnostica como ataque a una
+        \par A tener en cuenta que la plataforma WAF+TLS ha considerado que el cliente es un atacante y este caso de uso se dará tanto en ataque reales como con falsos positivos (cuando se diagnostica como ataque a una
         petición legítima).
       \item Diagrama:
         \begin{center}
@@ -88,7 +91,7 @@
 \clearpage
   \item Caso de uso: Petición HTTPS en un entorno con TLS offloading.
     \begin{itemize}
-      \item Actores: Cliente, plataforma web.
+      \item Actores: Cliente, plataforma web, plataforma WAF+TLS.
       \item Descripción: Se trata de una derivada del Caso de primer caso de uso. En este escenario las peticiones HTTPS realizadas por el cliente se envían sin cifrar (o en texto plano) a la plataforma web.
         \par Con ello se consigue reducir la carga que debe soportar la plataforma web y optimizar sus recursos.
         \par Sin embargo, también se aumenta el riesgo a un ataque en caso de que un potencial atacante tuviese acceso a la infraestructura situada entre la solución WAF y la plataforma web. Es por ello que esta solución
@@ -102,7 +105,7 @@
 \clearpage
   \item Caso de uso: Petición HTTPS con cifrado punto a punto.
     \begin{itemize}
-      \item Actores: Cliente, plataforma web.
+      \item Actores: Cliente, plataforma web, plataforma WAF+TLS.
       \item Descripción: Se trata de un caso de uso alternativo al anterior. En este escenario se mantienen las comunicaciones cifradas también entre el WAF y la plataforma web, con lo que se consigue el cifrado punto a punto.
         \par Para ello se establecen dos túneles TLS: El primero entre el cliente y la plataforma WAF y un segundo túnel entre el WAF y la plataforma web.
       \item Diagrama:
@@ -114,7 +117,7 @@
 \clearpage
   \item Caso de uso: Petición de validación y firma de certificado TLS a una CA de confianza.
     \begin{itemize}
-      \item Actores: \acrlong{ca}.
+      \item Actores: \acrlong{ca}, plataforma WAF+TLS.
       \item Descripción: Este caso de uso tiene como objetivo obtener un certificado digitalmente por una \acrshort{ca} que sea de confianza para el cliente. Se puede dividir en dos flujos similares.
         \par El primer flujo se da entre el WAF y la CA siguiendo los siguientes pasos:
         \begin{enumerate}
@@ -122,14 +125,14 @@
           \item Se envía el certificado a la CA solicitando que ésta lo firme.
           \item La CA valida que la petición es legítima y firma el certificado con su clave raíz o, alternativamente, una clave intermedia.
           \item La CA envía el certificado firmado digitalmente el WAF.
-          \item Una vez el WAF disponga de dicho certificado, este puede presentar sus servicios web a los clientes y estos podrán validar al WAF durante la negociación TLS si cuentan confían en el certificado raíz de la CA o en la
+          \item Una vez el WAF disponga de dicho certificado, este puede presentar sus servicios web a los clientes y estos podrán validar al WAF durante la negociación TLS si confían en el certificado raíz de la CA o en la
             jerarquía de certificados.
         \end{enumerate}
         \par El segundo flujo es opcional. Se trataría de un flujo similar al descrito para el WAF pero el solicitante de certificado sería la plataforma web en este caso.
         \par Se considera que es opcional debido a que la plataforma web sólo estará expuesta al WAF y se podría crear una relación de confianza sin necesidad de hacer uso de una CA externa.
         \par No obstante, dado que actualmente obtener este tipo de certificados no tiene un coste económico, y que tampoco debería tener un impacto operacional significativo, se recomienda seguir el mismo proceso que para el WAF y
         hacer uso de certificados firmados digitalmente por un CA.
-        \par En nuestro caso, para la gestión de certificados del WAF se intentará hacer uso del protocolo \acrshort{acme} (\acrlong{acme}) mediante {\em Let’s Encrypt~\cite{letsencrypt}} con el objetivo de automatizar las
+        \par En este proyecto, para la gestión de certificados del WAF se intentará hacer uso del protocolo \acrshort{acme} (\acrlong{acme}) mediante {\em Let’s Encrypt~\cite{letsencrypt}} con el objetivo de automatizar las
         actividades de creación y renovado de certificados.
       \item Diagrama:
         \begin{center}

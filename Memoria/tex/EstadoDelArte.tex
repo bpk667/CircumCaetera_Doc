@@ -2,21 +2,21 @@
 \label{subsec:estadoarte}
 \par Tal como se ha comentado en el capítulo anterior, un elemento clave para proteger las aplicaciones web es el WAF.
 
-\par En primer lugar se ha procedido a realizar una análisis comparativo de las diferentes soluciones WAF disponibles en el mercado. Para ello, se ha utilizado el documento de buenas prácticas de OWASP\cite{owaspbestpractices} como referencia.
-\par forma específica, el criterio seguido es que la solución debe ser capaz de proteger la plataforma web implementando una mayoría de los controles de seguridad (referenciados como {\em Countermeasure} en la página de OWASP\cite[apartado A3.2]{owaspbestpractices}).
+\par En primer lugar se ha procedido a realizar una análisis comparativo de las diferentes soluciones disponibles en el mercado. Para ello, se ha utilizado el documento de buenas prácticas de OWASP\cite{owaspbestpractices} como referencia.
+\par De forma específica, el criterio seguido es que la solución debe ser capaz de proteger la plataforma web implementando una mayoría de los controles de seguridad (referenciados como {\em Countermeasure} en la página de OWASP\cite[apartado
+A3.2]{owaspbestpractices}).
 
-\par Dentro de las soluciones disponibles, podemos distinguir principalmente entre soluciones privativas y soluciones de software libre. Este
-criterio no se circunscribe exclusivamente al modelo de licencias si no que está íntimamente ligado al coste asociado tal como veremos.
+\par Dentro de las soluciones disponibles, se pueden distinguir principalmente entre soluciones privativas y soluciones de software libre. Este
+criterio no se circunscribe exclusivamente al modelo de licencias si no que está íntimamente ligado al coste asociado tal como se verá.
 
 \section{Soluciones WAF privativas}
 \par Las soluciones de WAF privativas se caracterizan por emplear un modelo de {\em licenciamiento privativo\cite{privativo}}. Se trata de
 soluciones con un elevado coste y con la imposibilidad de acceder al código o modificarlo. Así mismo, ofrecen una serie de funcionalidades
 adicionales y una mayor capacidad de procesamiento.
 \par Existen dos arquitecturas principales en este tipo de WAF:
-\par Por un lado tenemos modelos WAF desplegados en las instalaciones del fabricante y gestionados por él. Este tipo de soluciones suelen estás
-alojadas en el Cloud (en el modelo de distribución de software conocido como {\em software como servicio} (en adelante \acrshort{saas}, de sus
-siglas en inglés, \acrlong{saas}).
-\par En segundo lugar, tenemos WAF de tipo appliance o máquina virtual. Se trata de máquinas dedicadas en las que el software requiere de una
+\par Por un lado existen modelos WAF desplegados en las instalaciones del fabricante y gestionados por él. Este tipo de soluciones suelen estás
+alojadas en el Cloud (en el modelo de distribución \acrshort{saas}.
+\par En segundo lugar, están los WAF de tipo appliance o máquina virtual. Se trata de máquinas dedicadas en las que el software requiere de una
 máquina específica proporcionada por el fabricante. Si bien hardware y software se adquieren conjuntamente, es posible acceder a nuevas
 funcionalidades adquiriendo nuevas licencias.
 
@@ -28,7 +28,8 @@ funcionalidades adquiriendo nuevas licencias.
   \item Protección contra ataques de denegación de servicio (en adelante \acrshort{dos}, de sus siglas en inglés, \acrlong{dos}) en capa de
     aplicación.
   \item Habilitar el caché de contenido estático.
-  \item Suscripción a listas de reputación de IP, dominios o URL.
+  \item Suscripción a listas de reputación de IP, dominios o Localizador de recursos uniforme (en adelante \acrshort{url}, de sus siglas en inglés
+    \acrlong{url}).
   \item Bloqueo de bots maliciosos.
   \item Sistema de creación de informes.
 \end{itemize}
@@ -40,7 +41,7 @@ al volumen de tráfico que se genere, ya sea en caudal de datos (en adelante \gl
 
 \subsubsection{Modo de licenciamiento y coste}
 \label{subsec:wafsaaslic}
-\par En la mayoría de las soluciones no existe un precio oficial de mercado proporcionado por los proveedores. En estos casos se ha optado por
+\par En la mayoría de las soluciones no existe un precio oficial de mercado proporcionado por los proveedores y, en estos casos, se ha optado por
 incluir referencias externas con el fin de disponer información del coste aproximado de estas soluciones.
 \par A modo de referencia, se puede consultar los precios de Akamai y Cloudflare en la {~\hyperref[tab:precioscdn]{tabla de precios CDN}}.
 Estos precios se corresponden con sus servicios de CDN y podrá ser superior si se añaden funcionalidades como WAF. Adicionalmente, se debe
@@ -82,45 +83,44 @@ mes\cite{incapsulaprices}.
   \item Preparación de un entorno de pruebas - {\em staging} - en el que se puedan probar las aplicaciones web de manera interna sin impactar
     a los clientes. Para ello, habitualmente, se redireccionan los dominios a probar en el fichero {\em hosts} de la máquina cliente.
   \item Cambio del direccionamiento DNS.
-    \par Una ya se ha validado que la solución web y el WAF funcionan adecuadamente, se procede a cambiar el direccionamiento ofrecido a nivel
+    \par Una vez se ha validado que la solución web y el WAF funcionan adecuadamente, se procede a cambiar el direccionamiento ofrecido a nivel
     DNS para que los clientes se conecten a la plataforma WAF en lugar de a la aplicación web.
 \end{enumerate}
 
-\par La operación de estas plataformas es realizada por el proveedor, por lo que como clientes no necesitamos disponer del conocimiento o el
+\par La operación de estas plataformas es realizada por el proveedor, por lo que los clientes no necesitan disponer del conocimiento o el
 tiempo necesario para mantener o actualizar la plataforma WAF.
 
 \subsubsection{Ventajas}
 \par Una de las principales ventajas que tiene este tipo de soluciones consiste en su independencia respecto a la infraestructura de la
 aplicación web.
-\par Esta independencia nos permite realizar cambios en cualquier de las soluciones - WAF o plataforma Web - sin que afecte a la otra. Ya sean
+\par Esta independencia permite realizar cambios en cualquier de las soluciones - WAF o plataforma Web - sin que afecte a la otra. Ya sean
 cambios en la operación diaria, migraciones de software o rediseño de la arquitectura.
 \par La mencionada independencia no se limita a independencia tecnológica; el hecho de que el WAF y la plataforma web sean completamente
 independientes también permite asignar roles independientes a cada entorno, lo cual permite implementar seguridad basada en roles (en adelante
-\acrshort{rbac}, de sus siglas en inglés, \acrlong{rbac}). Esto no sólo nos permite mejorar la seguridad del entorno, si no que además evita
+\acrshort{rbac}, de sus siglas en inglés, \acrlong{rbac}). Esto no sólo permite mejorar la seguridad del entorno, si no que además evita
 que el desarrollador web o el administrador de la plataforma web tenga que conocer en detalle la configuración del WAF y viceversa.
 
-\par Por otro lado, este tipo de soluciones son las muy sencillas de implementar, tal como se ha visto en la sección anterior.
-\par Otra ventaja radica en la aplicación de nuevas reglas de seguridad de forma transparente para el cliente. No necesitaremos dar seguimiento
+\par Por otro lado, este tipo de soluciones son muy sencillas de implementar, tal como se ha visto en la sección anterior.
+\par Otra ventaja radica en la aplicación de nuevas reglas de seguridad de forma transparente para el cliente. No es necesario dar seguimiento
 a las últimas vulnerabilidades web que se publican o idear qué reglas o firmas son necesarias, pues el proveedor se hará cargo de su
 implementación y mantenimiento.
-\par Las soluciones WAF SaaS también nos permiten contratar diversas modalidades de soporte que garanticen respuesta 24/7 en caso de que se
+\par Las soluciones WAF SaaS también permiten contratar diversas modalidades de soporte que garanticen respuesta 24/7 en caso de que se
 produzca un incidente con el servicio.
-\par Por último, nos podemos beneficiar de las funcionalidades adicionales ya mencionadas para mejorar el estado de la seguridad de nuestra
-plataforma o mejorar la experiencia del usuario.
+\par Por último, es posible beneficiarse de las funcionalidades adicionales ya mencionadas para mejorar el estado de la seguridad de la plataforma o mejorar la experiencia del usuario.
 
 
 \subsubsection{Desventajas}
 \par Una de las principales desventajas radica en el coste económico. Este tipo de soluciones tienen un elevado coste. Esto implica que este tipo de WAF sólo son viables económicamente en portales que generen un beneficio económico importante o aquellos en los que la empresa/entidad responsable de la aplicación pueda asumir su inversión.
-\par Aunque este tipo de soluciones disponen de modalidades relativamente económicas (ver ~\nameref{subsec:wafsaaslic}), lo cierto es que estas soluciones
+\par Aunque este tipo de soluciones disponen de modalidades relativamente económicas (ver ~\nameref{subsec:wafsaaslic}), lo cierto es que estas modalidades
 están muy limitadas y es necesario contratar funcionalidades adicionales en la mayoría de los casos. Es un modelo económico muy dirigido a las
 ofertas personalizadas y suele ser habitual requerir el modelo de licenciamiento {\em Enterprise} junto con ciertas licencias adicionales, lo
 cual encarece todavía más el servicio.
 \par En cualquier caso, este tipo de soluciones no están al alcance de pequeñas o medianas empresas o de particulares.
 
-\par Otra desventaja que tienen este tipo de soluciones consiste en la pocas posibilidades que tenemos de personalizar las reglas o las firmas
+\par Otra desventaja que tienen este tipo de soluciones consiste en la pocas posibilidades de personalizar las reglas o las firmas
 a nuestras necesidades. La arquitectura de este tipo de plataformas SaaS consiste en que múltiples clientes comparten la misma plataforma, para
 lo cual el proveedor requiere mantener un sistema homogéneo para todos los clientes y esto evita que se pueda personalizar el WAF según
-nuestras necesidades. A modo de ejemplo, en los servicios estándar de este tipo de soluciones no podremos configurar reglas para filtrar las
+nuestras necesidades. A modo de ejemplo, en los servicios estándar de este tipo de soluciones no es posible configurar reglas para filtrar las
 cabeceras HTTP o los parámetros de tipo query en las URL si nuestra aplicación utilizada {\em Path Parameters} o {\em URL Routing}, lo que
 dejaría expuesta la aplicación web a ataques de inyección de código.
 
@@ -128,7 +128,7 @@ dejaría expuesta la aplicación web a ataques de inyección de código.
 \subsection{Soluciones WAF tipo Appliance}
 \par Otra modalidad de soluciones WAF son los de tipo appliance. Dentro de las opciones disponibles en el mercado se han analizado {\em Imperva
 WAF Gateway\cite{imperva}} ({\em Imperva} en adelante) y {\em Fortiweb\cite{fortiweb}} de la empresa {\em Fortinet\cite{fortinet}}.
-\par El modelo de negocio tradicional consiste en adquirir máquina física junto con un paquete de licencias, aunque en los últimos años se han
+\par El modelo de negocio tradicional consiste en adquirir una máquina física junto con un paquete de licencias, aunque en los últimos años se han
 incorporado soluciones virtuales en los catálogos de los principales proveedores de Cloud.
 \par Al igual que sucede con las soluciones SaaS, los proveedores de este tipo de WAF también incluyen mecanismos de seguridad adicionales que
 no son propiamente funcionalidades WAF. Si bien estas funcionalidades dependen en gran medida del proveedor, a continuación se enumeran algunas
@@ -186,13 +186,13 @@ Fortinet.
 \par La solución AWS de Fortiweb tiene un coste de 5374 USD\cite{fortiwebcost4} al año.
 
 \subsubsection{Implementación y operación}
-\par La implementación de las soluciones tipo appliance es más compleja que en el modelo SaaS debido a que el WAF será parte de nuestra
-arquitectura y es necesario analizarla y adaptarla con el fin de incluir este nuevo elemento.
+\par La implementación de las soluciones tipo appliance es más compleja que en el modelo SaaS debido a que el WAF será parte de la arquitectura del cliente 
+y es necesario analizarla y adaptarla con el fin de incluir este nuevo elemento.
 \par Los pasos que se deben realizar para implantar un WAF de tipo appliance en una arquitectura son los siguientes:
 
 \begin{enumerate}
   \item Evaluar la arquitectura actual e identificar los potenciales puntos en los que se podría desplegar el WAF.
-    \par Algunos de los punto de conexión donde se suelen desplegar WAF de este tipo son inmediatamente después del firewall red o
+    \par Algunos de los puntos de conexión donde se suelen desplegar WAF de este tipo son inmediatamente después del firewall de red o
     inmediatamente antes de los balanceadores de carga de aplicación, pero puede variar significativamente según la arquitectura. Especialmente se debe
     tener en cuenta los siguientes elementos:
     \begin{itemize}
@@ -226,21 +226,21 @@ arquitectura y es necesario analizarla y adaptarla con el fin de incluir este nu
       \item Instalación de los certificados SSL y configuración inicial de las funcionalidades WAF.
       \item Preparación de un entorno de pruebas de forma similar a la indicada para WAF de tipo SaaS.
       \item Cambio del direccionamiento de DNS o de IP según proceda.
-        \par Una ya se ha validado que la solución web y el WAF funcionan adecuadamente, se procede a cambiar el direccionamiento ofrecido a nivel
+        \par Una vez se ha validado que la solución web y el WAF funcionan adecuadamente, se procede a cambiar el direccionamiento ofrecido a nivel
         de red para que el tráfico de la aplicación web se enrute a través del WAF.
     \end{enumerate}
 \end{enumerate}
 
 \par Si se comparan estas actividades con las equivalente de la solución WAF SaaS, esta solución es más compleja de desplegar y se deben tener
-en cuenta más factores. Esto es así debido a que al elegir esta solución se debe modificar la arquitectura de red y debemos tener en cuenta
-cómo WAF va a impactar a la plataforma web.
-\par Por otro lado, dado que la administración y mantenimiento no están delegados en una empresa externa, debemos disponer de las personas
+en cuenta más factores. Esto es así debido a que al elegir esta solución se debe modificar la arquitectura de red y se debe tener en cuenta
+cómo el WAF va a impactar a la plataforma web.
+\par Por otro lado, dado que la administración y mantenimiento no están delegados en una empresa externa, se debe disponer de las personas
 adecuadas - con conocimiento, experiencia y tiempo - para administrar y operar el WAF.
 
 \subsubsection{Ventajas}
-\par Las soluciones WAF de tipo appliance son más personalizables que las soluciones WAF SaaS. Esto es así debido a que disponemos de unos
-dispositivos dedicados para nuestra plataforma web, y por lo tanto podemos crear reglas específicas que se adapten a nuestras necesidades.
-\par Estas soluciones también cuenta como ventaja que toda la información está en nuestras instalaciones, lo cual nos permite tener mayor
+\par Las soluciones WAF de tipo appliance son más personalizables que las soluciones WAF SaaS. Esto es así debido a que son 
+dispositivos dedicados para nuestra plataforma web, y por lo tanto es posible crear reglas específicas que se adapten a nuestras necesidades.
+\par Estas soluciones también cuentan con la ventaja de que toda la información está en nuestras instalaciones, lo cual permite tener mayor
 control de la información y puede simplificar el cumplimiento de ciertas regulaciones, como son el reglamento europeo \acrshort{rgdp} o el
 Estándar de Seguridad de Datos para la Industria de Tarjeta de Pago (en adelante \acrshort{pcidss}, de sus siglas en inglés, \acrlong{pcidss}).
 \par Una ventaja que comparten con las soluciones SaaS es su independencia del software utilizado en la plataforma web. Esto es así debido a
@@ -248,9 +248,9 @@ que se despliegan como un elemento perimetral y no está conectado con la plataf
 \par Igualmente, comparten las ventajas de independencia operacional; aunque en el caso de los WAF de appliance esta independencia es
 prácticamente obligatoria debido a que requiere un mayor conocimiento especializado tal como se verá en la siguiente sección.
 \par Al igual que los WAF SaaS, en este tipo de soluciones requiere un servicio de mantenimiento o de suscripción; esto permite que no sea
-necesario mantenerse al día de las últimas vulnerabilidades y podamos abstraernos parcialmente de cómo proteger la plataforma, pues lo
+necesario mantenerse al día de las últimas vulnerabilidades y es posible abstraerse parcialmente de cómo proteger la plataforma, pues lo
 proveedores mantienen las reglas actualizadas como parte del servicio contratado.
-\par Por último, las soluciones WAF de tipo appliance también nos permiten añadir algunos de los mecanismos de seguridad que no son propiamente
+\par Por último, las soluciones WAF de tipo appliance también permiten añadir algunos de los mecanismos de seguridad que no son propiamente
 de WAF que se han comentado anteriormente.
 
 \subsubsection{Desventajas}
@@ -261,7 +261,7 @@ permiten mayor versatilidad que las soluciones SaaS, hay que tener en cuenta que
 software privativas, con las restricciones que este tipo de licencias implica:  No es posible acceder al código fuente o modificarlo para
 implantar nuevas funcionalidades o solucionar fallos y el ciclo de vida del appliance es el que el fabricante impone.
 \par Este problema se agrava en las soluciones de tipo appliance debido a que no es infrecuente que el fabricante imponga la renovación de
-hardware o software de forma agresiva y nos veamos obligados a realizar inversiones adicionales no planificadas.
+hardware o software de forma agresiva que implique realizar inversiones adicionales no planificadas.
 
 \par Otra desventaja de este tipo de soluciones es su elevado coste económico. Si bien el coste recurrente suele ser inferior a las soluciones
 SaaS equivalentes, sigue siendo un coste elevado; por otro lado, las soluciones WAF de tipo appliance requieren la compra de los dispositivos,
@@ -292,7 +292,7 @@ funcionalidades muy interesantes.
 
 
 \subsubsection{Modo de licenciamiento y coste}
-En la {~\hyperref[tab:waflibre]{tabla resumen de WAF de software libre}} podemos comparar las diferentes soluciones:
+En la {~\hyperref[tab:waflibre]{tabla resumen de WAF de software libre}} se muestra una comparativa de las diferentes soluciones:
 
 \begin{table}[h!]
   \centering
@@ -347,16 +347,15 @@ afectar a su rendimiento.
 \end{enumerate}
 
 \par Aunque en este tipo de soluciones se han enumerado menos pasos que en las soluciones anteriores, esto es debido a que las tareas dependen
-en gran medida del software y la plataforma elegidos, por lo que las actividades se han identificado de forma más general.
+en gran medida del software y la plataforma elegidos, por lo que las actividades se han identificado a más alto nivel.
 
 \subsubsection{Ventajas}
 \par Los WAF de software libre son más económicos que las alternativas privativas. Si bien es cierto que esto no quiere decir que sean gratis,
 pues requieren personas que los administren y consumen una serie de recursos de la plataforma web.
-\par Pero, aun eligiendo alguna de las opciones de pago y con soporte como por ejemplo ModSecurity, el coste en licencias es muy inferior a las
-otros modelos privativos.
+\par Pero, aun eligiendo alguna de las opciones de pago y con soporte como ModSecurity, el coste en licencias es muy inferior a las otros modelos privativos.
 \par Debido al tipo de licenciamiento, estas soluciones se distribuyen como software libre, con todas las ventajas inherentes a este
 tipo de software entre las que destaca desde un punto de vista funcional el acceso al código fuente y la capacidad de modificarlo de acuerdo a
-nuestras necesidades entre otras. Está fuera del alcance del documento evaluar las ventajas generales del software libre frente a otro tipo de
+nuestras necesidades entre otras. Está fuera del alcance del proyecto evaluar las ventajas generales del software libre frente a otro tipo de
 licencias.
 \par No en todos los casos, pero en la mayoría de las soluciones analizadas el equipo de desarrollo es un conjunto de individuos pertenecientes
 a distintos ámbitos o empresas, por lo que se elimina la estricta dependencia del proveedor. Si bien este modelo tiene sus ventajas e
@@ -367,7 +366,7 @@ para alinear dicha migración según una planificación propia en lugar de una p
 \subsubsection{Desventajas}
 \par Este tipo de soluciones son más difíciles de implementar y de mantener. El hecho de que estén integradas como parte de la plataforma web
 hace que sea complejo diferenciar los roles del administrador de la plataforma web del administrador del WAF. Por lo tanto, la misma persona
-debe tener conocimiento de ambas plataformas y ambos campos del conocimiento, lo cual no es común y puede provocar en errores de configuración
+debe tener conocimiento de ambas plataformas y ambos campos del conocimiento, lo cual no es común y puede provocar errores de configuración
 de alguna de las plataformas.
 \par Precisamente debido a la gran dependencia existente entre el software WAF y de la plataforma web, es necesario analizar en detalle las
 configuraciones y las reglas que se habilitarán, pues el proceso de depuración de errores es más complejo y los fallos son más difíciles de
