@@ -4,24 +4,40 @@
 \par Se agrupan los requisitos según estén más orientados al componente WAF o al componente de TLS.
 \par Requisitos orientados principalmente al componente WAF:
 \begin{enumerate}[\bfseries{WAF-}Req1. ]
-  \item La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
+  \item \label{req:independence} La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
     objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
-  \item La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a
-    los ataques más comunes.
+
+  \item \label{req:commonattacks} La solución debe disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web
+    frente a los ataques más comunes.
+
   \item La plataforma debe permitir implementar parches virtuales frente a ataques conocidos.
+
   \item La solución debe permitir la elaboración de reglas personalizadas según las necesidades específicas de la plataforma del cliente.
-  \item La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo
-    Licencia Pública General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}) o Licencia Pública General Reducida
-    de GNU (en adelánte \acrshort{lgpl}, de  sus siglas en inglés \acrlong{lgpl}).
+
+  \item \label{req:softwarelibre} La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo Licencia Pública
+    General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}) o Licencia Pública General Reducida de GNU (en adelánte \acrshort{lgpl},
+    de sus siglas en inglés \acrlong{lgpl}).
+
+  \item \label{req:facilidad} La plataforma debe ser fácilmente integrable en la plataforma web del cliente.
+    \par Tal como se ha detallado en la sección ~\nameref{subsec:estadoarte}, el despliegue y la operación de los WAF de software libre es complejo, y esta complejidad es uno de las causas de su escasa adopción. Es por ello que se considera de
+    vital importancia para su adopción que la solución ofrecida sea fácil de desplegar u operar. Para ello, un factor determinante es minimizar los cambios necesarios en la infraestructura previa y  las actividades de administración de la
+    plataforma.
+
+  \item \label{req:escalado} Escalabilidad. La plataforma debe permitir la ampliación o reducción de recursos de forma dinámica. Debido a que la solución está situada entre la plataforma web y las peticiones de los clientes, es clave que la
+    solución WAF pueda ampliarse o reducirse según sea necesario.
+
   \item La plataforma debe generar logs de seguridad exportables a soluciones externas de gestión de información y eventos de seguridad (en
     adelante \acrshort{siem} de sus siglas en inglés, \acrlong{siem}).
 \end{enumerate}
 
 \par A continuación se recogen los requisitos asociados al componente de TLS:
 \begin{enumerate}[\bfseries{TLS-}Req1. ]
-  \item La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
+  \item \label{req:tls} La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
+
   \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
+
   \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{TLSBestPractices}}.
+
   \item Debe permitir aplicar soluciones de SSL offloading, entre el WAF y los frontales de la plataforma web, o permitir cifrado punto a punto.
     \par En caso de utilizar la funcionalidad de SSL offloading:
       \begin{enumerate}[label=\emph{\alph*})]
@@ -45,8 +61,6 @@
   \item {\bf Plataforma web (Web Servers en inglés)}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no
     se incluyen los elementos desarrollados en el presente proyecto.
   \item {\bf Autoridad de certificación} (en adelante \GLS{CA}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
-  \item {\bf Sistema de virtualización o gestión de contenedores}. Es la infrastructura sobre la que se desplegará la solución WAF. Inicialmente se
-    considera una solución de gestión de contenedores como {\em Docker~\cite{docker}}.
   \item {\bf Plataforma WAF+TLS}. Se trata de la plataforma propuesta en el presente proyecto.
 \end{itemize}
 
