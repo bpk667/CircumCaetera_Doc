@@ -1,0 +1,65 @@
+\documentclass[xcolor=table]{beamer}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{colortbl}
+\mode<presentation> {
+  \usetheme{Warsaw}
+  %\beamerdefaultoverlayspecification{<+->} %Every new bullet includes \pause
+}
+
+\newcommand{\autor}{Pedro Pozuelo Rodríguez}
+\newcommand{\titulo}{Reverse Proxy con capacidades de\\Firewall de aplicación web y aceleración TLS}
+\newcommand{\profesor}{Ana del Valle Corrales Paredes}
+\newcommand{\PFGID}{Pendiente}
+\newcommand{\fechaversion}{\today}
+
+\title[Reverse Proxy + WAF + aceleración TLS]{\titulo}
+\author[\autor]{Alumno: \autor \and \and \and \and \and \and \and \and \and \and \and% Really crappy approach for getting authors in different lines:(
+Directora: \profesor}
+\institute{Universidad Europea\\Proyecto de Fin de Grado}
+\date{\fechaversion}
+\logo{\includegraphics[height=1cm]{fig/universidad_logo}}
+
+%\setbeamersize{text margin left=1cm, text margin right=1cm}
+
+% Remove navigation icons
+\beamertemplatenavigationsymbolsempty
+
+
+\begin{document}
+\AtBeginSection[] {
+  \begin{frame}[shrink]
+    \frametitle{\titulo}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Logo for the Titlepage
+\logo{\includegraphics[height=0.5cm]{fig/universidad_logo_notext}}
+
+% Logo for all the other pages
+\titlegraphic{\includegraphics[width=2cm]{universidad_logo}\hspace*{4.75cm}~%
+  \includegraphics[width=2cm]{universidad_logo}
+}
+
+\include{tex/Introduccion}
+\include{tex/EstadoDelArte}
+\include{tex/Solucion}
+\include{tex/Conclusiones}
+\include{tex/TestYResultados}
+
+\begin{frame}
+  \begin{center}
+    \frametitle{Ruegos y preguntas}
+    \huge ¿Preguntas?
+  \end{center}
+\end{frame} 
+
+\end{document}
