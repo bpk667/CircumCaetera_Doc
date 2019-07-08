@@ -5,34 +5,45 @@
 \usepackage[table]{xcolor}
 \usepackage{multicol}
 \usepackage{colortbl}
+\usepackage[autostyle]{csquotes} 
+\usepackage[acronyms,toc]{glossaries}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none
+]{biblatex}
+
+\newcommand{\autor}{Pedro Pozuelo Rodríguez}
+\newcommand{\titulo}{Reverse Proxy con capacidades de\\Firewall de aplicación web y aceleración TLS}
+\newcommand{\titulocorto}{Reverse Proxy + WAF + aceleración TLS}
+\newcommand{\profesor}{Ana del Valle Corrales Paredes}
+\newcommand{\PFGID}{Pendiente}
+\newcommand{\fechaversion}{\today}
+
 \mode<presentation> {
   \usetheme{Warsaw}
   %\beamerdefaultoverlayspecification{<+->} %Every new bullet includes \pause
 }
 
-\newcommand{\autor}{Pedro Pozuelo Rodríguez}
-\newcommand{\titulo}{Reverse Proxy con capacidades de\\Firewall de aplicación web y aceleración TLS}
-\newcommand{\profesor}{Ana del Valle Corrales Paredes}
-\newcommand{\PFGID}{Pendiente}
-\newcommand{\fechaversion}{\today}
-
-\title[Reverse Proxy + WAF + aceleración TLS]{\titulo}
+\title[\titulocorto]{\titulo}
 \author[\autor]{Alumno: \autor \and \and \and \and \and \and \and \and \and \and \and% Really crappy approach for getting authors in different lines:(
 Directora: \profesor}
 \institute{Universidad Europea\\Proyecto de Fin de Grado}
 \date{\fechaversion}
 \logo{\includegraphics[height=1cm]{fig/universidad_logo}}
 
-%\setbeamersize{text margin left=1cm, text margin right=1cm}
-
 % Remove navigation icons
 \beamertemplatenavigationsymbolsempty
 
+% Bibliography and glossaries.
+\addbibresource{bib/Referencias.bib}
+\makeglossaries
+\input{tex/glosario}
 
 \begin{document}
 \AtBeginSection[] {
   \begin{frame}[shrink]
-    \frametitle{\titulo}
+    \frametitle{\titulocorto}
     \tableofcontents[currentsection]
   \end{frame}
 }
@@ -61,5 +72,15 @@ Directora: \profesor}
     \huge ¿Preguntas?
   \end{center}
 \end{frame} 
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Referencias}
+	\printbibliography[title=References]
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Glosario}
+	\printglossaries
+\end{frame}
 
 \end{document}

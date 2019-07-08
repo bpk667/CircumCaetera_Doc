@@ -1,13 +1,3 @@
-\theoremstyle{remark} \newtheorem*{NICDomain}{NIC Domain}
-\theoremstyle{remark} \newtheorem*{Site}{Site}
-\theoremstyle{remark} \newtheorem*{IPDB}{Internet Protocol Databse (IPDB)}
-\theoremstyle{remark} \newtheorem*{Node}{Node}
-\theoremstyle{remark} \newtheorem*{DS}{Database Server (DS, D-SRV)}
-\theoremstyle{remark} \newtheorem*{AS}{Application Server (AS, A-SRV)}
-\theoremstyle{remark} \newtheorem*{LC}{Local Collector (LC)}
-\theoremstyle{remark} \newtheorem*{RC}{Remote Collector (RC)}
-
-\section{Introducción}
 \begin{frame}[shrink]
   \frametitle{Agenda}
   \begin{itemize}
@@ -34,432 +24,54 @@
   \end{itemize}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Situación actual}
-%   \begin{itemize}
-%     \item 
-%     \item Applicaciones
-%       \begin{itemize}
-%         \item Event Viewer (Módulo {\em Analysis})
-%           \begin{itemize}
-%             \item Muestra los eventos en un estado de pre-proceso.
-%             \item Eventos tal y como son almacenados en la IPDB.
-%           \end{itemize}
-%         \item Query (Módulo {\em Analysis})
-%           \begin{itemize}
-%             \item Eventos procesados y categorizados en diferentes tablas.
-%             \item Variables asignadas a campos.
-%             \item Se dejan de ver ``todos los eventos''.
-%           \end{itemize}
-%         \item Reports (Módulo {\em Reports})
-%       \end{itemize}
-%   \end{itemize}
-% \end{frame}
-% 
-% 
-% \begin{frame}[shrink]
-%   \frametitle{Conceptos RSA enVision}
-%   \begin{Site}
-%    Un cluster de servidores de la serie LS conectados a un servidor de almacenamiento de datos ({\em NAS}).
-%   \end{Site}
-% 
-%   \begin{NICDomain}
-%   Dos o más Sites interconectados. Se denomina {\em NIC} si existe un único {\em NIC Domain}.
-%   \end{NICDomain}
-%    
-% \begin{IPDB}
-%   Todos los eventos pertenecientes a un NIC Domain. Se accede a través de 1 o más Data Servers.
-% \end{IPDB}
-% 
-%   \begin{Node}
-%     Es un servidor que pertenece a un Site.
-%   \end{Node}
-% \end{frame}
-% 
-% \begin{frame}[shrink]
-%   \frametitle{Apliances RSA enVision}
-%   \begin{DS}
-%       Se encarga de las comunicaciones entre los demás servidores pertenecientes al Site y se comunica con los demás Sites.\\
-%       Controla las peticiones a la IPDB. \\
-%       Recibe las peticiones del Application Server y realiza las peticiones a Local Collectors, Remote Collectors y otros Database Servers.
-%   \end{DS}
-% 
-%   \begin{AS}
-%       Appliance encargado de analizar los datos.
-%       Se conecta al DS y proporciona acceso a la Interfaz web de enVision (GUI del cliente).
-%   \end{AS}
-% 
-%   \begin{LC}
-%       Recolecta y almacena los eventos. \\
-%       Mantiene una comunicación permanente con el DS.
-%   \end{LC}
-% 
-%   \begin{RC}
-%       Recolecta y almacena los eventos y los reenvía a los Sites remotos.
-%       Es un tipo especial de colector que periódicamente envía los datos al master DS.
-%       Contiene un DS propio, por lo que es un Site independiente.
-%   \end{RC}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Arquitectura RSA enVision}
-%   \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]
-%       {Introduccion/img/enVision_Functional.png}
-%   \end{figure}
-% \end{frame}
-% 
-% \begin{frame}[plain]
-%   \frametitle{Arquitectura RSA enVision}
-%   \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=1\textwidth]
-%       {Introduccion/img/enVision_Architecture.pdf}
-%   \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Diseño enVision ONO}
-%   \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.7\textwidth]
-%       {Introduccion/img/enVision_Functional-ONO.png}
-%   \end{figure}
-% \end{frame}
-% 
-% \begin{frame}[plain]
-%   \frametitle{Arquitectura RSA enVision ONO}
-%   \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]
-%       {Introduccion/img/enVision_ONO.png}
-%   \end{figure}
-% \end{frame}
-% \section{Acceso a la información}
-% \begin{frame}
-%   \frametitle{Acceso a la información}
-%   \begin{itemize}
-%     \item Analisis de los datos históricos y tareas forenses.
-%     \item Applicaciones
-%       \begin{itemize}
-%         \item Event Viewer (Módulo {\em Analysis})
-%           \begin{itemize}
-%             \item Muestra los eventos en un estado de pre-proceso.
-%             \item Eventos tal y como son almacenados en la IPDB.
-%           \end{itemize}
-%         \item Query (Módulo {\em Analysis})
-%           \begin{itemize}
-%             \item Eventos procesados y categorizados en diferentes tablas.
-%             \item Variables asignadas a campos.
-%             \item Se dejan de ver ``todos los eventos''.
-%           \end{itemize}
-%         \item Reports (Módulo {\em Reports})
-%       \end{itemize}
-%   \end{itemize}
-% \end{frame}
-% 
-% \setbeamercovered{dynamic}
-% \subsection{Event Viewer}
-% \begin{frame}
-%   \frametitle{Event Viewer}
-% 
-%   \only<1-2>{
-%   \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]
-%       {Introduccion/img/User_EventViewer.png}
-%   \end{figure}}
-% 
-%   \onslide<2->
-%   Permite mostrar los mensajes:
-%   \begin{itemize}
-%     \onslide<2,3>\item En tiempo real, especificar un rango temporal y filtrar por tipo de dispositivo y tipo de evento.
-%     \onslide<2,4>\item Filtrar por nivel de severidad o por cadena de texto en las opciones avanzadas. 
-%     \onslide<2,5>\item Mostrar gráficas de los eventos.
-%   \end{itemize}
-% 
-%   \begin{center}
-%       \only<3>{\includegraphics[width=0.8\textwidth]{Introduccion/img/ScreenShot_EventViewer.png}}
-%       \only<4>{\includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_EventViewer_Adv.png}}
-%       \only<5>{\includegraphics[width=0.6\textwidth]{Introduccion/img/ScreenShot_EventViewer_Graph.png}}
-%   \end{center}
-% \end{frame}
-% 
-% \setbeamercovered{invisible}
-% \subsection{Queries / Consultas}
-% \begin{frame}
-%   \frametitle{Queries / Consultas}
-%   \begin{center}
-%     \includegraphics[width=0.5\textwidth]{Introduccion/img/User_Queries.png}
-%   \end{center}
-% 
-%   \pause
-%   \begin{itemize}[<+->]
-%     \item Permite analizar los contenidos de una tabla de la base de datos de manera rápida.
-%     \item Se pueden configurar filtros y ejecutarse queries de manera ad-hoc.
-%     \item Se pueden almacenar queries personalizadas.
-%     \item Los resultados pueden exportarse a un fichero {\em .csv}. El cual puede abrirse y manipularse desde aplicaciones tipo Excel.
-%     \item Se utiliza para definir informes y gráficos.
-%     \item Se utiliza para localizar y resolver problemas con informes y gráficos.
-%   \end{itemize}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{GUI: Queries / Consultas}
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_Queries.png}
-%   \end{center}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Sintaxis: Queries / Consultas}
-%   \begin{itemize}
-%     \item Para encontrar una coincidencia, se introduce la cadena concreta.
-%     \item Soporta LIKE y carácteres especiales para comparar cadenas:
-%       \begin{itemize}
-%         \item ``\%'' representa cualquier grupo de carácteres (0 o más).
-%         \item ``\_'' representa un caracter cualquiera.
-%       \end{itemize}
-%     \item Los filtros relacionados horizontalmente se unen mediante un AND lógico.
-%     \item Los filtros relacionados verticalmente se unen mediante un OR lógico.
-%   \end{itemize}
-% \end{frame}
-% 
-% \subsection{Reports / Informes}
-% \begin{frame}[shrink]
-%   \frametitle{Reports / Informes}
-%   \begin{itemize}[<+->]
-%     \item En cuanto al formato, hay 2 tipos de informes:
-%       \begin{itemize}
-%         \item {\em Tabular}: Tienen formato de tabla y está compuesto por filas y columnas.
-%         \item {\em Graph}: Son de tipo gráfico y a su vez pueden ser de tipo bar, line o pie
-%       \end{itemize}
-%     \item Se pueden ejecutar de manera puntual ({\em ad-hoc}) o de manera programada ({\em scheduled})
-%     \item El resultado se puede dar en formato {\em html}, {\em csv} o {\em pdf}.
-%     \item Hay una gran variadad de informes predefinidos.
-%     \item {\em Custom Report}: Informes personalizado.
-%     \item {\em Bind reports}: Es un metainforme que agrupa la ejecución de varios informes para agilizar su ejecución y minimizar la carga del sistema.
-%     \item {\em Reports folder}: Carpeta en la que se pueden agrupar los informes programados.
-%   \end{itemize}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Report Groups}
-%   Dentro de los informes que viene de manera predefinida en enVision, éstos viene categorizados según las siguientes categorías de dispositivos ({\em Device class}):
-%   \begin{itemize}
-%     \item Compliance
-%     \item Correlated Alerts
-%     \item Host Devices
-%     \item Network Devices
-%     \item Security Devices
-%     \item Storage Devices
-%     \item Task Triage
-%     \item VAM
-%   \end{itemize}
-% \end{frame}
-% 
-% \subsubsection{Ad Hoc Reports}
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports}
-%   \begin{itemize}
-%     \item Se pueden ejecutar en cualquier momento.
-%     \item Diseñados para ejecutarse inmediatamente.
-%     \item Pueden tardar bastante tiempo en generarse, dependiendo de la cantidad de datos a procesar y los recursos disponibles.
-%     \item Puede programarse su ejecución en un momento concreto.
-%   \end{itemize}
-% \end{frame}
-% 
-% \subsubsection{Bind Reports}
-% \begin{frame}
-%   \frametitle{Bind Reports}
-%   \begin{itemize}
-%     \item Agrupa la ejecución de varios informes para agilizar su ejecución y minimizar la carga del sistema.
-%     \item Son útiles cuando se agrupan informes que acceden a la misma información.
-%   \end{itemize} \pause
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_BindReport.png}
-%   \end{center}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Bind Reports}
-%   \begin{itemize}
-%     \item Para mejorar el rendimiento, marcar la opción {\em Reuse the data source when possible}
-%   \end{itemize} \pause
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_BindReport_Reuse.png}
-%   \end{center}
-% \end{frame}
-% 
-% \subsubsection{Schedulled Reports - Informes programados}
-% \begin{frame}
-%   \frametitle{Schedulled Reports - Informes programados}
-%   Se utilizan para generar informes de tipo {\em Tabular}, {\em Graph} o {\em Bind}.
-%   \begin{itemize}
-%     \item Útiles para acceder a múltiples informes.
-%     \item Útiles para ejecutar informes en momentos de mínima carga de los sistemas.
-%   \end{itemize} \pause
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_SchedulledReports.png}
-%   \end{center}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Schedulled Reports: Set Recurrence}
-%   Se define la recurrencia con la que se ejecutarán los informes
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_SchedulledReports_Recurrence.png}
-%   \end{center}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Schedulled Reports: Report Directory}
-%   \begin{itemize}
-%     \item {\em Report Directory}: Indica el directorio donde se guardan los resultados de los informes.
-%     \item Se pueden almacenar en formato {\em csv} y {\em pdf}
-%   \end{itemize} \pause
-%   \begin{center}
-%       \includegraphics[width=0.9\textwidth]{Introduccion/img/ScreenShot_ReportDirectory.png}
-%   \end{center}
-% \end{frame}
-% 
-% \section{Personalización de informes}
-% \begin{frame}
-%   \frametitle{Personalización de informes Ad Hoc}
-%   La personalización de informes permite:
-%   \begin{itemize}
-%     \item Modificar informes ya existentes, ya sean de tipo tabla {\em Tabular} o gráfico {\em Graph}.
-%     \item Crear informes nuevos utilizando informes pervios como plantilla.
-%     \item Crear informes nuevos desde cero.
-%   \end{itemize}
-%   Los elementos a definir en el proceso son:
-%   \begin{itemize}
-%     \item Seleccionar de la tabla donde están alojados los datos.
-%     \item Seleccionar los campos que se van a presentar en el informe.
-%     \item Definir las cláusura SQL y las variables.
-%     \item Modificar la presentación del informe.
-%   \end{itemize}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%           {Introduccion/img/ScreenShot_AdHoc_Report_Name.png}
-%           \caption{Definimos el nombre del informe}
-%       \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración, continuación}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%         {Introduccion/img/ScreenShot_AdHoc_Report_Table.png}
-%         \caption{Seleccionamos la tabla y los campos sobre los que queremos configurar el informe}
-%       \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración, continuación}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%         {Introduccion/img/ScreenShot_AdHoc_Report_Order.png}
-%         \caption{Definimos los campos de ordenación}
-%       \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración, continuación}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%         {Introduccion/img/ScreenShot_AdHoc_Report_Where.png}
-%         \caption{Definimos los parámetros que se pedirán en momento de ejecución y los filtros de la cláusula WHERE}
-%       \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración, continuación}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%         {Introduccion/img/ScreenShot_AdHoc_Report_Param.png}
-%         \caption{Definición de parámetros}
-%       \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Ad Hoc Reports: Configuración, continuación}
-%       \begin{figure}[htb]
-%         \centering
-%         \includegraphics[width=0.7\textwidth]
-%           {Introduccion/img/ScreenShot_AdHoc_Report_SQLWhere.png}
-%           \caption{Definición de la clausula WHERE}
-%       \end{figure}
-% \end{frame}
-% 
-% \defverbatim[colored]\stringcode{%
-%   \begin{lstlisting}[frame=single,emph={ga},emphstyle=\color{olive}]
-% DeviceAddress = '123.123.1.1'
-% ForeignAddress = '192.168.%'
-%   \end{lstlisting}}
-% 
-% \defverbatim[colored]\datecode{%
-%   \begin{lstlisting}[frame=single,emph={ga},emphstyle=\color{olive}]
-% Date/Time >= '10-24-06 9:00'
-% AND 
-% Date/Time <= '10-24-06 13:00'
-%   \end{lstlisting}}
-% 
-% \begin{frame}
-%   \frametitle{Sentencias SQL}
-%   \begin{itemize}[<+->]
-%     \item Cadenas de texto dentro de una sentencia SQL: Pueden ser una dirección IP, un fecha, hora...
-%       \begin{itemize}
-%         \item Acotadas por comillas simples
-%         \item Son sensibles a las mayúsculas/minúsculas (case-sensitive)
-%         \item Se pueden utilizar operadores lógicos {\em AND}, {\em OR} y {\em NOT}. \\
-%           Nota: Los valores que son números no se consideran cadenas de texto. (p.e. un puerto).
-%       \end{itemize}
-%     \item {\em DeviceAddress} e {\em IP Address} son cadenas. \\
-%       Ejemplo de uso:
-%         \stringcode
-%   \end{itemize}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Sentencias SQL, continuación}
-%   \begin{itemize}
-%     \item Formato de fechas:
-%       \begin{itemize}
-%         \item Acotadas por comillas simples
-%         \item Los formatos que enVision admite son: \\
-%           mm-dd-yy \\
-%           mm-dd-yyyy \\
-%           mm/dd/yy \\
-%           mm/dd/yyyy \\
-%           Month dd, yy \\
-%           Month dd, yyyy 
-%          \item Ejemplo de uso:
-%             \datecode
-%       \end{itemize}
-%   \end{itemize}
-% \end{frame}
-% 
-% \begin{frame}
-%   \frametitle{Global Tables}
-%   \begin{itemize}
-%     \item Los informes y las consultas basados en una Global Table muestran la información de múltiples dispositivos en un único informe.
-%     \item Algunas de estas tablas son:
-%       \begin{itemize}
-%         \item {\em Global Table}: Agrupan los datos de múltiples dispositivos con los campos cuyo uso es más frecuente.
-%         \item {\em Global Summary table}: Agrupa todos los datos de las tablas de tipo {\em summary}
-%         \item {\em Baseline Table}: Contiene información del número de mensajes recibidos por {\em Alert category}, {\em Alert level} y {\em NIC Category}.
-%         \item {Alerts table, Baseline table, Syslog Rate table, Accounting Address Summary table, Access Control Accounting table, Alert Trends table}...
-%       \end{itemize}
-%   \end{itemize}
-% \end{frame}
+\section{Introducción}
+\subsection{Aplicaciones web y la seguridad}
+\begin{frame}[shrink]
+  \frametitle{Aplicaciones web y la seguridad}
+  \begin{block}{Premisa}
+     La seguridad 100\% no existe.
+  \end{block}
+  Las aplicaciones web están siendo atacadas continuamente.
+  \begin{figure}
+    \includegraphics[width=0.35\textwidth]{fig/application-attacks-2}%
+    \includegraphics[width=0.35\textwidth]{fig/application-attacks-1}
+    \label{fig:applicationattacks}
+    \caption{Ataques en capa de aplicación (fuente Arbor~\cite{articleArbor})}
+  \end{figure}
+  \begin{block}{Conclusión}
+    Se debe realizar un esfuerzo continuo para mejor la seguridad de las plataformas web.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[shrink]
+  \frametitle{Vulnerabilidades y evolución de los canales cifrados}
+  En los últimos años se ha descubierto múltiples vulnerabilidades críticas en los canales TLS.
+  \begin{center}
+    \rowcolors[]{1}{blue!20}{blue!5}
+    \begin{tabular}{|l|l|}
+      \hline
+      {\bf Vulnerabilidad}   			& {\bf Componente afectado}\\
+      \hline
+      POODLE											&   SSL ver. 3.0        \\
+      \hline
+      BEAST												&   TLS ver. 1.0        \\
+      \hline
+      CRIME                       &   TLS compression     \\
+      \hline
+      BREACH                      &   HTTP compression    \\
+      \hline
+      Heartbleed                  &   OpenSSL ver. 1.0.1  \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \begin{block}{Conclusión}
+    La solución, en la mayoría de de los casos, consiste en desactivar las versiones o el componente afectados y el riesgo de afectar la funcionalidad de la plataforma es bajo (dependiendo del entorno).
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[shrink]
+  \frametitle{Uso de canales cifrados}
+  El uso de 
+\end{frame}
