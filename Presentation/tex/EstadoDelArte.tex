@@ -4,39 +4,99 @@
 \subsection{Soluciones WAF privativas}
 \begin{frame}[shrink]
   \frametitle{Soluciones WAF privativas}
+  Destacan las siguientes soluciones:
   \begin{itemize}
-    \item Tecnología 1.
-    \item Tecnología 1.
-    \item Tecnología 1.
+    \item {\bf Soluciones WAF SaaS}. Desplegados en las instalaciones del fabricante - o el Cloud - y gestionados por el mismo.
+      \begin{itemize}
+        \item {\em Cloud Web Application Firewall} \cite{cloudflarewaf} de Cloudflare\cite{cloudflare}.
+        \item {\em Kona WAF\cite{kona}} de {\em Akamai\cite{akamai}}.
+        \item {\em Incapsula\cite{Incapsula}}.
+      \end{itemize}
+    \item {\bf Soluciones WAF tipo appliance o máquina virtual}. Máquinas o instancias dedicadas en las que se tiene un acceso exclusivamente a la configuración de la aplicación.
+      \begin{itemize}
+        \item {\em Imperva WAF Gateway\cite{imperva}}.
+        \item {\em Fortiweb\cite{fortiweb}} de la empresa {\em Fortinet\cite{fortinet}}.
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[shrink]
-  \frametitle{Ventajas e inconvenientes}
-  PRO: Facilidad de despliegue y gestión.
-  PRO: Funcionalidades adicionales (p.e. CDN).
-  CONS: Coste.
-  CONS: Falta de flexibilidad.
+  \frametitle{Soluciones WAF privativas SaaS}
+  Las soluciones WAF \acrshort{saas} ofrecen una serie de funcionalidades adicionales:
+  \begin{itemize}
+    \item Red de distribución de contenidos (\acrlong{cdn} del inglés).
+    \item Protección contra ataques de denegación de servicio (\acrshort{dos} del inglés) en capa de aplicación.
+    \item Caché de contenido estático.
+    \item Suscripción a listas de reputación de IP, dominios o Localizador de recursos uniforme (\acrshort{url} del inglés).
+    \item Bloqueo de bots maliciosos.
+    \item Sistema de creación de informes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+  \frametitle{Soluciones WAF privativas tipo appliance}
+  Las soluciones WAF de tipo appliance ofrecen a su vez las siguientes funcionalidades adicionales:
+  \begin{itemize}
+    \item Crear perfiles de las aplicaciones web y filtrar parámetros no permitidos.
+    \item Parcheo virtual de vulnerabilidades mediante la integración con escaneadores de vulnerabilidades.
+    \item Suscripción a listas de reputación de IP, dominios o URL.
+    \item Aceleración TLS.
+    \item Bloqueo de bots maliciosos.
+    \item Sistema de creación de informes.
+    \item Antivirus.
+  \end{itemize}
 \end{frame}
 
 \subsection{Soluciones WAF de software libre}
 \begin{frame}[shrink]
   \frametitle{Soluciones WAF de software libre}
+  Existen múltiples soluciones de software libre
   \begin{itemize}
-    \item Tecnología 1.
-    \item Tecnología 1.
-    \item Tecnología 1.
+    \item IronBee\cite{IronBee}.
+    \item WebCastellum\cite{WebCastellum}.
+    \item RAPTOR\cite{raptor}.
+    \item NAXSI\cite{NAXSI}.
+    \item OpenWAF\cite{openwaf}.
+    \item FreeWAF\cite{freewaf}.
+    \item Shadow Daemon\cite{ShadowDaemon}.
+    \item AQTRONiX WebKnight\cite{WebKnight}.
+    \item Vulture\cite{vulture}.
+    \item ModSecurity \cite{modsecurity}.
   \end{itemize}
+  \begin{block}{ModSecurity}
+  \par Entre ellas destaca ModSecurity por ser la solución de software libre más extendida y activa de la comunidad e implementa un número significativo de los controles de seguridad deseables en un WAF.
+  \end{block}
 \end{frame}
 
 \begin{frame}[shrink]
   \frametitle{Ventajas e inconvenientes}
-  PRO: Coste.
-  CONS: Complejidad.
+  {\bf Ventajas}:
+  \begin{itemize}
+    \item Más económicos.
+    \item Acceso al código fuente y la capacidad de modificarlo.
+    \item (en la mayoría de las soluciones) elimina la dependencia del proveedor.
+    \item Más adaptables a las necesidades de cada entorno.
+  \end{itemize}
+  {\bf Desventajas}:
+  \begin{itemize}
+    \item Dependencia de la plataforma web (tradicionalmente un módulo de ésta).
+    \item Más difíciles de implementar y de mantener.
+    \item Proceso de depuración de errores es más complejo.
+    \item Actualización o migración de la plataforma web y el WAF deben realizarse conjuntamente.
+  \end{itemize}
 \end{frame}
 
 \subsection{Comparativa soluciones actuales}
 \begin{frame}[shrink]
   \frametitle{Comparativa soluciones actuales}
-  TODO
+  Privativas SaaS:
+  PRO: Facilidad de despliegue y gestión.
+  PRO: Funcionalidades adicionales (p.e. CDN).
+  CONS: Coste.
+  CONS: Falta de flexibilidad.
+
+  Software libre:
+  PRO: Coste, flexibilidad, adaptabilidad.
+  CONS: Complejidad.
 \end{frame}
+
