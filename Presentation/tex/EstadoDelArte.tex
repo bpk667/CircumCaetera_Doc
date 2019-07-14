@@ -1,6 +1,5 @@
 \section{Estado del arte}
 
-
 \subsection{Soluciones WAF privativas}
 \begin{frame}[shrink]
   \frametitle{Soluciones WAF privativas}
@@ -47,6 +46,24 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[shrink]
+  \frametitle{Ventajas e inconvenientes}
+  {\bf Ventajas}:
+  \begin{itemize}
+    \item Sencillas de implementar (especialmente en las soluciones SaaS).
+    \item Relativa independencia de la infraestructura de la plataforma web.
+    \item Permite implementar seguridad basada en roles (\acrshort{rbac} del inglés).
+    \item Buen soporte técnico.
+    \item Funcionalidades adicionales.
+  \end{itemize}
+  {\bf Desventajas}:
+  \begin{itemize}
+    \item Elevado coste económico.
+    \item No es posible adaptar la solución a necesidades específicas.
+    \item Capacidad muy limitada de crear o modificar reglas (especialmente en las soluciones SaaS).
+  \end{itemize}
+\end{frame}
+
 \subsection{Soluciones WAF de software libre}
 \begin{frame}[shrink]
   \frametitle{Soluciones WAF de software libre}
@@ -86,17 +103,38 @@
   \end{itemize}
 \end{frame}
 
-\subsection{Comparativa soluciones actuales}
-\begin{frame}[shrink]
-  \frametitle{Comparativa soluciones actuales}
-  Privativas SaaS:
-  PRO: Facilidad de despliegue y gestión.
-  PRO: Funcionalidades adicionales (p.e. CDN).
-  CONS: Coste.
-  CONS: Falta de flexibilidad.
 
-  Software libre:
-  PRO: Coste, flexibilidad, adaptabilidad.
-  CONS: Complejidad.
+\subsection{Comparativa soluciones WAF}
+
+\begin{frame}[shrink,c]
+  \frametitle{Comparativa soluciones}
+  A continuación se muestra un resumen de las características de las distintas soluciones y la solución del presente proyecto:
+  \begin{center}
+  \rowcolors[]{1}{blue!20}{blue!5}
+  \resizebox{\linewidth}{!} {
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    {\bf Características}                       &	{\bf WAF SaaS}          & {\bf WAF Appliance} & {\bf WAF Software libre}  & {\bf Propuesta}       \\
+    \hline
+    Independencia de la plataforma web          & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    \hline
+    Independencia operacional (RBAC)            & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    \hline
+    Complejidad de despliegue y administración  & \greenarrow Muy baja    & \greenarrow Baja    & \redarrow Alta            & \yellowarrow Media    \\
+    \hline
+    Coste económico                             & \redarrow Alto          & \redarrow Alto      & \greenarrow Bajo          & \greenarrow Bajo      \\
+    \hline
+    Soporte técnico                             & \greenarrow Bueno       & \greenarrow Bueno   & \redarrow Limitado        & \redarrow Limitado    \\
+    \hline
+    Información accesible por terceros          & \redarrow Sí            & \greenarrow No      & \greenarrow No            & \greenarrow No        \\ 
+    \hline
+    Adaptabilidad / Personalización             & \redarrow Muy baja      & \redarrow Baja      & \greenarrow Alta          & \greenarrow Alta      \\ 
+    \hline
+    Acceso al código fuente                     & \redarrow No            & \redarrow No        & \greenarrow Sí            & \greenarrow Sí        \\ 
+    \hline
+    Funcionalidades adicionales (por defecto)   & \greenarrow Muy buenas  & \greenarrow Buenas  & \redarrow Limitadas       & \greenarrow Buenas    \\
+    \hline
+  \end{tabular}}
+  \end{center}
 \end{frame}
 

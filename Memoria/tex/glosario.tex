@@ -1,5 +1,9 @@
 \newacronym{http}{HTTP}{Hypertext Transfer Protocol}
+\newacronym{w3c}{W3C}{World Wide Web Consortium}
+\newacronym{csp}{CSP}{Content-Security-Policy}
 \newacronym{https}{HTTPS}{Hypertext Transfer Protocol Secure}
+\newacronym{hsts}{HSTS}{HTTP Strict Transport Security}
+\newacronym{mitm}{MitM}{Man-in-the-middle}
 \newacronym{url}{URL}{Uniform Resource Locator}
 \newacronym{dlp}{DLP}{Data loss prevention}
 \newacronym{utm}{UTM}{Unified Threat Management}
@@ -13,13 +17,16 @@
 \newacronym{cdn}{CDN}{Content Delivery Network}
 \newacronym{dos}{DoS}{Denial-of-service}
 \newacronym{SNI}{SNI}{Server Name Indication\cite[Wikipedia]{wiki:TLSSNI}}
+\newacronym{sdlc}{SDLC}{Systems Development Life Cycle\cite[Wikipedia]{wiki:SDLC}}
 \newacronym{ev}{EV}{Extended Validation}
 \newacronym{rbac}{RBAC}{role-based access control}
 \newacronym{dbf}{DBF}{Database Firewall}
 \newacronym{rgdp}{RGDP}{Reglamento General de Protección de Datos}
 \newacronym{pcidss}{PCI DSS}{Payment Card Industry Data Security Standard}
-\newacronym{xss}{XSS}{Cross-site scripting\cite[Artículo en OWASP]{owaspxss}}
-\newacronym{sqli}{SQLi}{SQL injection\cite[Artículo en OWASP]{owaspsqli}}
+\newacronym{owasp}{OWASP}{Open Web Application Security Project}
+\newacronym{xss}{XSS}{Cross-site scripting\cite{owaspxss}}
+\newacronym{sqli}{SQLi}{Inyección SQL\cite{owaspsqli}}
+\newacronym{xsrf}{XSRF}{Cross-site request forgery}
 \newacronym{poc}{PoC}{Proof of concept}
 \newacronym{gpl}{GPL}{GNU General Public License\cite[Licencia GPL]{gpl}}
 \newacronym{lgpl}{LGPL}{GNU Lesser General Public License\cite[Licencia LGPL]{lgpl}}
@@ -77,4 +84,51 @@
     \par Esto es, aunque valoramos los elementos de la derecha, valoramos más los de la izquierda.~\cite{ManifiestoAgil}
 }
 
+
+\newglossaryentry{Clickjacking}
+{
+    name=Clickjacking,
+    description={es una técnica maliciosa para engañar a usuarios de Internet con el fin de que revelen información confidencial o tomar control de su ordenador cuando hacen clic en
+    páginas web aparentemente inocentes.~\cite[Wikipedia]{wiki:Clickjacking}}
+}
+
+\newglossaryentry{MitM}
+{
+    name=MitM,
+    description={es un ataque en el que se adquiere la capacidad de leer, insertar y modificar a voluntad. El atacante debe ser capaz de observar e interceptar mensajes entre las dos víctimas y procurar que ninguna de las
+    víctimas conozca que el enlace entre ellos ha sido violado.~\cite[Wikipedia]{wiki:mitm}}.
+}
+
+\newglossaryentry{XSS}
+{
+    name=\acrlong{xss},
+    description={es un tipo de vulnerabilidad informática o agujero de seguridad típico de las aplicaciones Web, que puede permitir a una tercera persona inyectar en páginas web visitadas por el usuario código JavaScript o
+    en otro lenguaje similar (ej: VBScript).~\cite[Wikipedia]{wiki:xss}}.
+}
+
+\newglossaryentry{Phishing}
+{
+    name=Phishing,
+    description={denomina un modelo de abuso informático y que se comete mediante el uso de un tipo de ingeniería social, caracterizado por intentar adquirir información confidencial de forma
+    fraudulenta~\cite[Wikipedia]{wiki:Phishing}}.
+}
+
+\newglossaryentry{XSRF}
+{
+    name=\acrlong{xsrf},
+    description={es un tipo de exploit malicioso de un sitio web en el que comandos no autorizados son transmitidos por un usuario en el cual el sitio web confía.~\cite[Wikipedia]{wiki:XSRF}}.
+}
+
+\newglossaryentry{SQLI}
+{
+    name=\acrlong{sqli},
+    description={es un método de infiltración de código intruso que se vale de una vulnerabilidad informática presente en una aplicación en el nivel de validación de las entradas para realizar operaciones sobre una base de
+    datos~\cite[Wikipedia]{wiki:sqli}}
+}
+
+\newglossaryentry{Cookie}
+{
+    name=\acrlong{Cookie},
+    description={es una pequeña información enviada por un sitio web y almacenada en el navegador del usuario, de manera que el sitio web puede consultar la actividad previa del navegador~\cite[Wikipedia]{wiki:cookie}}
+}
 

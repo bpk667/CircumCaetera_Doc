@@ -12,6 +12,9 @@
 
 \addbibresource{bib/Referencias.bib}
 
+% Change the path accordingly
+\def \codePath {../../CircumCaetera}
+
 % Create a glossary for terms and definitions
 \makeglossaries
 \input{tex/glosario}
@@ -30,6 +33,7 @@
 
 \input{tex/Arquitectura}
 
+
 % Print glossary
 \printglossary[title=Acrónimos,type=\acronymtype]
 \printglossary[title=Glosario]
@@ -37,13 +41,8 @@
 % Print bibliography
 \printbibliography[heading=bibintoc]
 
-\begin{comment}
-  \clearpage
-  \appendixpage
-  \begin{appendices}
-  \chapter{Acuerdo firmado}
-  \end{appendices}
-\end{comment}
+
+\input{tex/Apendice}
 
 
 \end{document}

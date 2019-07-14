@@ -379,3 +379,69 @@ respuesta inmediata. Por supuesto, si se elige una solución con soporte o se co
 desventaja. Si se trata de un entorno de producción en el que el tiempo de caída del servicio es crítico, se recomienda contratar algún
 servicio de soporte o consultoría.
 
+
+\section{Comparativa de soluciones WAF}
+\par En la {~\hyperref[tab:wafcomparison]{tabla comparativa de las soluciones WAF}} se recoge un resumen de las características diferenciadoras de las soluciones evaluadas.
+
+\begin{figure}[h!]
+  \centering
+  \label{tab:wafcomparison}
+  \resizebox{\linewidth}{!} {
+  \begin{tabular}{| l | c | c | c |}
+    \hline
+    {\bf Características}                       &	{\bf WAF SaaS}          & {\bf WAF Appliance} & {\bf WAF Software libre}  \\
+    \hline
+    Independencia de la plataforma web          & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            \\
+    \hline
+    Independencia operacional (RBAC)            & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            \\
+    \hline
+    Complejidad de despliegue y administración  & \greenarrow Muy baja    & \greenarrow Baja    & \redarrow Alta            \\
+    \hline
+    Coste económico                             & \redarrow Alto          & \redarrow Alto      & \greenarrow Bajo          \\
+    \hline
+    Soporte técnico                             & \greenarrow Bueno       & \greenarrow Bueno   & \redarrow Limitado        \\
+    \hline
+    Información accesible por terceros          & \redarrow Sí            & \greenarrow No      & \greenarrow No            \\ 
+    \hline
+    Adaptabilidad / Personalización             & \redarrow Muy baja      & \redarrow Baja      & \greenarrow Alta          \\ 
+    \hline
+    Acceso al código fuente                     & \redarrow No            & \redarrow No        & \greenarrow Sí            \\ 
+    \hline
+    Funcionalidades adicionales (por defecto)   & \greenarrow Muy buenas  & \greenarrow Buenas  & \redarrow Limitadas       \\
+    \hline
+  \end{tabular}}
+  \caption{Comparativa de las soluciones WAF}
+\end{figure}
+
+\clearpage
+
+\par En la {~\hyperref[tab:wafcomparisonfull]{tabla comparativa con propuesta}} se muestra una comparativa incluyendo la solución propuesta en el presente proyecto.
+\begin{figure}[h!]
+  \centering
+  \label{tab:wafcomparisonfull}
+  \resizebox{\linewidth}{!} {
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    {\bf Características}                       &	{\bf WAF SaaS}          & {\bf WAF Appliance} & {\bf WAF Software libre}  & {\bf Propuesta}       \\
+    \hline
+    Independencia de la plataforma web          & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    \hline
+    Independencia operacional (RBAC)            & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    \hline
+    Complejidad de despliegue y administración  & \greenarrow Muy baja    & \greenarrow Baja    & \redarrow Alta            & \yellowarrow Media    \\
+    \hline
+    Coste económico                             & \redarrow Alto          & \redarrow Alto      & \greenarrow Bajo          & \greenarrow Bajo      \\
+    \hline
+    Soporte técnico                             & \greenarrow Bueno       & \greenarrow Bueno   & \redarrow Limitado        & \redarrow Limitado    \\
+    \hline
+    Información accesible por terceros          & \redarrow Sí            & \greenarrow No      & \greenarrow No            & \greenarrow No        \\ 
+    \hline
+    Adaptabilidad / Personalización             & \redarrow Muy baja      & \redarrow Baja      & \greenarrow Alta          & \greenarrow Alta      \\ 
+    \hline
+    Acceso al código fuente                     & \redarrow No            & \redarrow No        & \greenarrow Sí            & \greenarrow Sí        \\ 
+    \hline
+    Funcionalidades adicionales (por defecto)   & \greenarrow Muy buenas  & \greenarrow Buenas  & \redarrow Limitadas       & \greenarrow Buenas    \\
+    \hline
+  \end{tabular}}
+  \caption{Comparativa de las soluciones WAF incluyendo la solución propuesta}
+\end{figure}

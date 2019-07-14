@@ -29,13 +29,24 @@ se describe más adelante.
     proporcional un servicio de compartir información entre recursos y garantizar la perdurabilidad de la información necesaria. Se hará foco en reducir el uso
     o impacto de este componente al mínimo y que todo el entorno pueda ser reconstruido con el menor esfuerzo posible con el fin de ofrecer un entorno dinámico
     siguiendo los principios \acrshort{cicd} ya mencionados.
+  \item Un componente opcional a considerar es el gestor de certificados HTTPS. Este componente será el responsable de aprovisionar, renovar y revocar certificados que sean confiables para los clientes, por lo que deberá
+    comunicarse con una entidad certificadora.
   \item Por último, tenemos dos componentes directamente relacionados con la personalización de la herramienta por el usuario final. Se trata de las reglas de
     auditoría o bloqueo del WAF, así como las reglas de configuración del software de TLS. Estos componentes serán los ficheros o parámetros de configuración de
     los dos primeros componentes que se han identificado.
 \end{itemize}
 
-\section{Construcción de la solución}
+\section{Diseño de alto nivel}
+\par Partiendo de los requisitos definidos, se plantea el diseño a alto nivel tal como se muestra en el {~\hyperref[fig:hld]{Diagrama de alto nivel de la solución}} en el que se reflejan los componentes de la solución y
+los principales actores.
+\begin{figure}[h!]
+  \centering
+  \label{fig:hld}
+  \includegraphics[width=\textwidth]{fig/Diagram_HLD}
+  \caption{Diseño de alto nivel}
+\end{figure}
 
+\section{Construcción de la solución}
 \par Tal como se comentaba anteriormente, debido al alto grado de incertidumbre que se tiene del aspecto final de la solución, junto con la necesidad de poder
 realizar cambios sobre el modelo de forma rápida, se ha optado por seguir una metodología de desarrollo ágil~\cite{wiki:agil}.
 \par Durante el proceso de desarrollo del proyecto se utilizará como referencia o mantra el \Gls{ManifiestoAgil} y como modelo de liberación de versiones se
@@ -89,7 +100,7 @@ opción candidata no cumpla con las expectativas.
 \par Se ha elegido como tecnología candidata ModSecurity en su versión 3.x, pues cumple todos los requisitos y es un referente entre las tecnologías de
 WAF de software libre.
 
-\subsection{Servicio web}
+\subsubsection{Servicio web}
 \par Uno de los componentes sobre los que se debe apoyar el WAF es el servicio web. Este componente se comporta como un interfaz entre el WAF y las peticiones y respuestas del cliente y el servicio web.
 \par Se han identificado los siguientes servicios web compatibles con  ModSecurity en su versión 3:
 \begin{itemize}
@@ -150,6 +161,14 @@ expansión.
 \subsubsection{Tecnología candidata}
 \par La solución que se ha elegido es \cite{docker}.
 
+\par Dentro de cada instancia del contenedor Docker se desplegará Nginx y ModSecurity y OpenSSL:
+\begin{figure}[!h]
+  \centering
+  \label{fig:Diagram_WAF_TLS}
+  \includegraphics[width=0.7\textwidth]{fig/Diagram_WAF_TLS}
+  \caption{Componentes desplegados en cada instancia WAF}
+\end{figure}
+
 \subsection{Software de automatización u orquestación}
 \par Esta tecnología será la responsable de garantizar el cumplimiento de los siguientes requisitos:
 {~\hyperref[req:facilidad]{La plataforma debe ser fácilmente integrable en la plataforma web del cliente.}}
@@ -167,22 +186,25 @@ expansión.
 \par Para poder ofrecer que la solución sea fácilmente integrable, se ha evaluado el uso de estas soluciones y se ha comprobado como Kubernetes es la solución más ampliamente extendida (ver los gráficos
 {~\hyperref[fig:KubernetesSwarm]{Kubernetes y Docker Swarm}} y {~\hyperref[fig:KubernetesMesos]{Kubernetes y Apache Mesos}}).
 
-\begin{figure}[hp]
+\begin{figure}[!htb]
   \centering
-  \label{fig:KubernetesSwarm}
-  \includegraphics[width=0.7\textwidth]{fig/KubernetesSwarm}
-  \caption{Uso y popularidad de software de Kubernetes y Docker Swarm(fuente Platform9~\cite{KubernetesSwarm})}
-\end{figure}
-
-\begin{figure}[hp]
-  \centering
-  \label{fig:KubernetesMesos}
-  \includegraphics[width=0.7\textwidth]{fig/KubernetesMesos}
-  \caption{Uso y popularidad de software de Kubernetes y Apache Mesos(fuente Platform9~\cite{KubernetesMesos})}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \label{fig:KubernetesSwarm}
+    \includegraphics[width=\textwidth]{fig/KubernetesSwarm}
+    \caption{Uso y popularidad de software de Kubernetes y Docker Swarm(fuente Platform9~\cite{KubernetesSwarm})}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \label{fig:KubernetesMesos}
+    \includegraphics[width=\textwidth]{fig/KubernetesMesos}
+    \caption{Uso y popularidad de software de Kubernetes y Apache Mesos(fuente Platform9~\cite{KubernetesMesos})}
+  \end{subfigure}
 \end{figure}
 
 \par Si además comparamos la evolución que estas tecnologías han tenido históricamente, la diferencia es aun mayor como se puede comprobar en el gráfico de {~\hyperref[fig:orquestatorspopularity]{Popularidad de software de orquestación}}. 
-\begin{figure}[hp]
+\begin{figure}[!htb]
   \centering
   \label{fig:orquestatorspopularity}
   \includegraphics[width=0.7\textwidth]{fig/KubernetesSwarmMesos}
@@ -199,6 +221,8 @@ número de entornos posible.
 
 \subsubsection{Tecnología candidata}
 \par Se ha elegido Kubernetes~\cite{kubernetes} como tecnología candidata para implementar la automatización de la plataforma.
+
+\par Kubernetes será responsable de desplegar las instancias WAF que sean necesarias, garantizar su disponibilidad y volver a desplegarlas si hubiese algún problema con alguna de ellas.
 
 \subsection{Servicio de almacenamiento}
 \par El objetivo de este componente es garantizar un servicio de intercambio de información entre los distintos componentes de la misma y, en caso de que sea
@@ -219,5 +243,4 @@ protocolo NFS está más extendido.
 \subsection{Políticas o reglas de auditoría}
 
 \subsubsection{Tecnología candidata}
-
 

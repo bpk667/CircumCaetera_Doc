@@ -60,6 +60,7 @@
 \usepackage{mathtools}
 \usepackage{pdflscape}
 \usepackage[autostyle]{csquotes} 
+\usepackage{subcaption}
 
 \selectlanguage{spanish}
 
@@ -124,23 +125,39 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
-\lstset{numbers=none,
+\lstset{numbers=left,
         basicstyle=\scriptsize,
         frame=single,
         breaklines=true,
         %title=\lstname,
-        language=sql,
+        language=bash,
         keywordstyle=\color{blue},
         commentstyle=\color{dkgreen},
         stringstyle=\color{mauve},
+				showstringspaces=false,
         extendedchars=true,
-        texcl,
+        %texcl,
         tabsize=2}
-\def\inline{\lstinline[language=sql,
+\def\inline{\lstinline[language=bash,
+		basicstyle=\normalsize,
 		keywordstyle=\color{blue},
 		commentstyle=\color{dkgreen},
 		stringstyle=\color{mauve},
 		extendedchars=true,
-		texcl,
-		basicstyle=\normalsize]}
+		showstringspaces=false,
+    texcl]}
+
 \usepackage{dirtytalk}
+
+\newcommand*\greenarrow{%
+  \color{green!80!black}{$\Uparrow$}
+}
+
+\newcommand*\redarrow{%
+  \color{red!80!black}{$\Downarrow$}
+}
+
+\newcommand*\yellowarrow{%
+  \color{yellow!80!black}{$\Rightarrow$}
+}
+

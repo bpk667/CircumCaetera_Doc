@@ -4,7 +4,7 @@
     \item Introducción:
       \begin{itemize}
         \item Aplicaciones web y la seguridad.
-        \item Estándares y protocolos.
+        \item Mecanismos de protección.
       \end{itemize}
     \item Situación actual. Estado del arte:
       \begin{itemize}
@@ -86,8 +86,9 @@
   \end{block}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-  \frametitle{Soluciones.}
+\subsection{Mecanismos de protección}
+\begin{frame}[shrink]
+  \frametitle{Soluciones en el ciclo de desarrollo}
   Como respuesta a éstas y otras vulnerabilidades existen múltiples soluciones:
   \begin{itemize}
     \item {\bf Desarrollo de código seguro}: metodologías de desarrollo seguro de aplicaciones, herramientas de análisis de código.
@@ -104,6 +105,13 @@
         \item Una actualización puede afectar al entorno.
         \item {\em chmod 777} o {\em iptables -A INPUT -j ACCEPT} funcionan.
       \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+  \frametitle{Soluciones en la infraestructura}
+  Como respuesta a éstas y otras vulnerabilidades existen múltiples soluciones:
+  \begin{itemize}
     \item {\bf Herramientas de protección perimetral de red}: Firewall de red, Sistema de Prevención de Intrusos.
       \par Reto:
       \begin{itemize}
@@ -115,10 +123,8 @@
   \end{itemize}
 \end{frame}
 
-
-\subsection{Estándares y protocolos}
 \begin{frame}[shrink=20]
-  \frametitle{Estándares y protocolos}
+  \frametitle{Soluciones. Estándares y protocolos}
   Existen múltiples iniciativas cuyo objetivo es mejorar la seguridad de las aplicaciones web:
   \begin{itemize}
     \item Metodología del Ciclo de Vida de Desarrollo de Software (\acrshort{sdlc} del inglés).
@@ -129,7 +135,7 @@
     \item Security Headers.
   \end{itemize}
   \begin{block}{Uso e implementación}
-  Estas Herramientas están disponibles y ofrecen mecanismos válidos para mejorar la seguridad de las plataformas web pero su implementación puede ser compleja o tener un elevado coste.
+    Estas soluciones están disponibles y ofrecen mecanismos válidos para mejorar la seguridad de las plataformas web pero su implementación puede ser compleja.
   \end{block}
 \end{frame}
 
@@ -153,5 +159,33 @@
   \begin{block}{Uso e implementación}
   Se ha elegido la versión SSL/TLS como ejemplo de un vector de ataque conocido popularmente cuya mitigación es sencilla.
   \end{block}
+\end{frame}
+
+\begin{frame}[shrink=20,fragile]
+  \frametitle{\acrlong{waf} (\acrshort{waf})}
+  ¿Qué es un WAF?
+  \begin{exampleblock}{Definición}
+    Un WAF es una herramienta especializada en filtrar, monitorizar y bloquear las conexiones desde y hacia una aplicación web (Fuente: Instituto Nacional de Ciberseguridad~\cite{incibewaf}).
+  \end{exampleblock}
+  Características principales:
+  \begin{itemize}
+    \item Analiza el tráfico web.
+    \item Listas blancas o negras de User Agents, IP, caracteres aceptados en URL o formularios, etc.
+    \item Se aplican políticas y reglas de filtrado. Por ejemplo:
+        \begin{lstlisting}
+admin'--
+' or 1=1#
+' or 1=1-- -
+        \end{lstlisting}
+    \item Modelo de seguridad negativa.
+      \begin{itemize}
+        \item Busca patrones de ataques conocidos y bloquea las peticiones o respuestas.
+      \end{itemize}
+    \item Modelo de seguridad positiva.
+      \begin{itemize}
+        \item Proceso de aprendizaje.
+        \item Deniega las peticiones por defecto y sólo acepta aquellas que considera válidas.
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
