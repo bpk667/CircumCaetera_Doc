@@ -7,33 +7,32 @@
 A3.2]{owaspbestpractices}).
 
 \par Dentro de las soluciones disponibles, se pueden distinguir principalmente entre soluciones privativas y soluciones de software libre. Este
-criterio no se circunscribe exclusivamente al modelo de licencias si no que está íntimamente ligado al coste asociado tal como se verá.
+criterio no se circunscribe exclusivamente al modelo de licencias si no que está íntimamente ligado al coste asociado tal como se expone más adelante.
 
 \section{Soluciones WAF privativas}
 \par Las soluciones de WAF privativas se caracterizan por emplear un modelo de {\em licenciamiento privativo\cite{privativo}}. Se trata de
 soluciones con un elevado coste y con la imposibilidad de acceder al código o modificarlo. Así mismo, ofrecen una serie de funcionalidades
 adicionales y una mayor capacidad de procesamiento.
 \par Existen dos arquitecturas principales en este tipo de WAF:
-\par Por un lado existen modelos WAF desplegados en las instalaciones del fabricante y gestionados por él. Este tipo de soluciones suelen estás
-alojadas en el Cloud (en el modelo de distribución \acrshort{saas}.
+\par Por un lado existen modelos WAF desplegados en las instalaciones del fabricante y gestionados por él. Este tipo de soluciones suelen estar
+alojadas en el Cloud (en el modelo de distribución \acrshort{saas}).
 \par En segundo lugar, están los WAF de tipo appliance o máquina virtual. Se trata de máquinas dedicadas en las que el software requiere de una
 máquina específica proporcionada por el fabricante. Si bien hardware y software se adquieren conjuntamente, es posible acceder a nuevas
 funcionalidades adquiriendo nuevas licencias.
 
 \subsection{Soluciones WAF SaaS}
 \par Dentro de las soluciones WAF SaaS, destacan y se han analizado {\em Cloud Web Application Firewall} \cite{cloudflarewaf} de Cloudflare\cite{cloudflare} ({\em Cloudflare} en adelante), {\em Kona WAF\cite{kona}} de {\em Akamai\cite{akamai}} e {\em Incapsula\cite{Incapsula}}.
-\par Habitualmente, estos proveedores no se limitan a ofrecer servicios WAF, pues por su infraestructura permite añadir funcionalidades adicionales como son las siguientes.
+\par Habitualmente, estos proveedores no se limitan a vender servicios WAF, pues su infraestructura permite ofrecer funcionalidades adicionales como son las siguientes:
 \begin{itemize}
-  \item Red de distribución de contenidos (en adelante \acrshort{cdn}, de sus siglas en inglés, \acrlong{cdn}).
-  \item Protección contra ataques de denegación de servicio (en adelante \acrshort{dos}, de sus siglas en inglés, \acrlong{dos}) en capa de
+  \item Red de distribución de contenidos (en adelante \acrshort{cdn}, de sus siglas en inglés \acrlong{cdn}).
+  \item Protección contra ataques de denegación de servicio (en adelante \acrshort{dos}, de sus siglas en inglés \acrlong{dos}) en capa de
     aplicación.
   \item Habilitar el caché de contenido estático.
-  \item Suscripción a listas de reputación de IP, dominios o Localizador de recursos uniforme (en adelante \acrshort{url}, de sus siglas en inglés
-    \acrlong{url}).
+  \item Suscripción a listas de reputación de IP, dominios o Localizador de recursos uniforme (en adelante \acrshort{url}, de sus siglas en inglés \acrlong{url}).
   \item Bloqueo de bots maliciosos.
   \item Sistema de creación de informes.
 \end{itemize}
-\par De hecho, la funcionalidad CDN es el servicio mínimo que se puede contratar a Akamai y Cloudflare; pues es su nicho mercado y su producto
+\par De hecho, la funcionalidad CDN es el servicio mínimo que se puede contratar a Akamai y Cloudflare; pues es su nicho de mercado y su producto
 principal, siendo el servicio WAF una funcionalidad que ofrecen a sus cliente para dar un valor añadido. Incapsula, por el contrario, proviene
 de soluciones WAF tipo appliance y su modelo de negocio está más enfocado a estos servicios.
 \par Uno de las principales características que comparten estos proveedores es el modelo de negocio. En todos los casos el coste está asociado
@@ -44,7 +43,7 @@ al volumen de tráfico que se genere, ya sea en caudal de datos (en adelante \gl
 \par En la mayoría de las soluciones no existe un precio oficial de mercado proporcionado por los proveedores y, en estos casos, se ha optado por
 incluir referencias externas con el fin de disponer información del coste aproximado de estas soluciones.
 \par A modo de referencia, se puede consultar los precios de Akamai y Cloudflare en la {~\hyperref[tab:precioscdn]{tabla de precios CDN}}.
-Estos precios se corresponden con sus servicios de CDN y podrá ser superior si se añaden funcionalidades como WAF. Adicionalmente, se debe
+Estos precios se corresponden con sus servicios de CDN y podrán ser superiores si se añaden funcionalidades como WAF. Por otra parte, se debe
 tener en cuenta que se trata de precios estimativos proporcionados por terceros, pues en el caso de Akamai la lista de precios no es pública y
 ofrecen un coste ajustado a cada cliente.
 \begin{table}[h!]
@@ -69,7 +68,7 @@ ofrecen un coste ajustado a cada cliente.
 
 \par En el caso de Incapsula, su solución más económica - el plan {\em PRO} -  tiene un coste de 59 USD por web al mes\cite{incapsulaprices}.
 Dicha solución soporta SSL de manera limitada y es necesario contratar un plan superior en caso de que se requiera dar servicio a clientes que
-no soporten la extensión TLS \acrshort{SNI} o se requieran certificados con validación extendida (en adelante \acrshort{ev}, de sus siglas en
+no soporten la extensión \acrshort{tls} \acrshort{SNI} o se requieran certificados con validación extendida (en adelante \acrshort{ev}, de sus siglas en
 inglés, \acrlong{ev}). En esta situación habría que contratar el plan {\em business} que tiene un coste de 299 USD por web al
 mes\cite{incapsulaprices}.
 
@@ -80,7 +79,7 @@ mes\cite{incapsulaprices}.
     \par Dado que la mayoría de las aplicaciones web deben soportar SSL, es necesario generar nuevos certificados para que el proveedor pueda
     publicar los servicios web de manera confiable. En la mayoría de los casos el fabricante será responsable del mantenimiento y la operación
     de dichos certificados.
-  \item Preparación de un entorno de pruebas - {\em staging} - en el que se puedan probar las aplicaciones web de manera interna sin impactar
+  \item Preparación de un entorno de pruebas ({\em staging}) en el que se puedan probar las aplicaciones web de manera interna sin impactar
     a los clientes. Para ello, habitualmente, se redireccionan los dominios a probar en el fichero {\em hosts} de la máquina cliente.
   \item Cambio del direccionamiento DNS.
     \par Una vez se ha validado que la solución web y el WAF funcionan adecuadamente, se procede a cambiar el direccionamiento ofrecido a nivel
@@ -93,11 +92,11 @@ tiempo necesario para mantener o actualizar la plataforma WAF.
 \subsubsection{Ventajas}
 \par Una de las principales ventajas que tiene este tipo de soluciones consiste en su independencia respecto a la infraestructura de la
 aplicación web.
-\par Esta independencia permite realizar cambios en cualquier de las soluciones - WAF o plataforma Web - sin que afecte a la otra. Ya sean
+\par Esta independencia permite realizar cambios en cualquier de las soluciones, WAF o plataforma Web, sin que afecte a la otra. Ya sean
 cambios en la operación diaria, migraciones de software o rediseño de la arquitectura.
 \par La mencionada independencia no se limita a independencia tecnológica; el hecho de que el WAF y la plataforma web sean completamente
 independientes también permite asignar roles independientes a cada entorno, lo cual permite implementar seguridad basada en roles (en adelante
-\acrshort{rbac}, de sus siglas en inglés, \acrlong{rbac}). Esto no sólo permite mejorar la seguridad del entorno, si no que además evita
+\acrshort{rbac}, de sus siglas en inglés \acrlong{rbac}). Esto no sólo permite mejorar la seguridad del entorno, sino que además evita
 que el desarrollador web o el administrador de la plataforma web tenga que conocer en detalle la configuración del WAF y viceversa.
 
 \par Por otro lado, este tipo de soluciones son muy sencillas de implementar, tal como se ha visto en la sección anterior.
@@ -113,20 +112,19 @@ produzca un incidente con el servicio.
 \par Una de las principales desventajas radica en el coste económico. Este tipo de soluciones tienen un elevado coste. Esto implica que este tipo de WAF sólo son viables económicamente en portales que generen un beneficio económico importante o aquellos en los que la empresa/entidad responsable de la aplicación pueda asumir su inversión.
 \par Aunque este tipo de soluciones disponen de modalidades relativamente económicas (ver ~\nameref{subsec:wafsaaslic}), lo cierto es que estas modalidades
 están muy limitadas y es necesario contratar funcionalidades adicionales en la mayoría de los casos. Es un modelo económico muy dirigido a las
-ofertas personalizadas y suele ser habitual requerir el modelo de licenciamiento {\em Enterprise} junto con ciertas licencias adicionales, lo
-cual encarece todavía más el servicio.
+ofertas personalizadas y suele ser habitual requerir el modelo de licenciamiento {\em Enterprise} junto con ciertas licencias adicionales, lo que encarece todavía más el servicio.
 \par En cualquier caso, este tipo de soluciones no están al alcance de pequeñas o medianas empresas o de particulares.
 
-\par Otra desventaja que tienen este tipo de soluciones consiste en la pocas posibilidades de personalizar las reglas o las firmas
+\par Otra desventaja que tienen este tipo de soluciones consiste en las pocas posibilidades de personalizar las reglas o las firmas
 a nuestras necesidades. La arquitectura de este tipo de plataformas SaaS consiste en que múltiples clientes comparten la misma plataforma, para
 lo cual el proveedor requiere mantener un sistema homogéneo para todos los clientes y esto evita que se pueda personalizar el WAF según
 nuestras necesidades. A modo de ejemplo, en los servicios estándar de este tipo de soluciones no es posible configurar reglas para filtrar las
-cabeceras HTTP o los parámetros de tipo query en las URL si nuestra aplicación utilizada {\em Path Parameters} o {\em URL Routing}, lo que
+cabeceras HTTP o los parámetros de tipo query en las URL si nuestra aplicación utiliza {\em Path Parameters} o {\em URL Routing}, lo que
 dejaría expuesta la aplicación web a ataques de inyección de código.
 
 
 \subsection{Soluciones WAF tipo Appliance}
-\par Otra modalidad de soluciones WAF son los de tipo appliance. Dentro de las opciones disponibles en el mercado se han analizado {\em Imperva
+\par Otra modalidad de soluciones WAF son las de tipo appliance. Dentro de las opciones disponibles en el mercado se han analizado {\em Imperva
 WAF Gateway\cite{imperva}} ({\em Imperva} en adelante) y {\em Fortiweb\cite{fortiweb}} de la empresa {\em Fortinet\cite{fortinet}}.
 \par El modelo de negocio tradicional consiste en adquirir una máquina física junto con un paquete de licencias, aunque en los últimos años se han
 incorporado soluciones virtuales en los catálogos de los principales proveedores de Cloud.
@@ -154,7 +152,7 @@ modelo SaaS se ha optado por incluir referencias externas con el fin de mostrar 
 \par En el caso de Imperva, su oferta está enfocada a soluciones WAF y firewall de base de datos (en adelante \acrshort{dbf}, de sus siglas en
 inglés, \acrlong{dbf}). Se trata de la misma compañía que ha desarrollado y comercializa Incapsula, siendo ésta la alternativa SaaS a Imperva.
 \par Imperva ofrece diversos modelos de appliances según el throughput que son capaces de gestionar, desde 500 Mbps en el modelo más
-básico - X2010 o X2020 - hasta los 10 Gbps en el modelo X10K. \par El coste del appliance de 500 Mbps es de 4200 USD (según \cite{impervacost1} y
+básico ( X2010 ó X2020 ) hasta los 10 Gbps en el modelo X10K. \par El coste del appliance de 500 Mbps es de 4200 USD (según \cite{impervacost1} y
 \cite{impervacost2}), a lo que hay que sumar el coste anual de licencias y mantenimiento. La licencia necesaria para este modelo tiene un
 coste que puede ir desde 4800 USD\cite{impervacost3} hasta 9600 USD\cite{impervacost4}. Por lo tanto, la opción más económica requiere una
 inversión inicial de 9000 USD y un coste anual mínimo de 4800 USD.
@@ -212,13 +210,13 @@ y es necesario analizarla y adaptarla con el fin de incluir este nuevo elemento.
       \item Aplicación alojada en un único centro de datos (en adelante CPD) o en varios.
     \end{itemize}
 
-  \item Analizar dichos puntos y evaluar el modo de despliegue en el que se desplegará el WAF. Los modos más comunes son modo transparente, en
+  \item Analizar dichos puntos y evaluar el modo en el que se desplegará el WAF. Los modos más comunes son modo transparente, en
     el que el WAF no participa en las capas 3 a 7 del modelo OSI, o como proxy web explícito, en cuyo caso el WAF participa en las capas 3 y 4
     y opcionalmente en la capa de aplicación.
   \item Evaluar el impacto que este cambio tendrá en el desempeño de la aplicación web, entre otros se debe evaluar la latencia que añade a la
     red y a la aplicación o cómo afecta al throughput que deben soportar los distintos componentes.
   \item Adaptar el diseño de red incluyendo los nuevos elementos.
-  \item Elegir el o los modelos de appliance que mejor cumple las necesidades del nuevo diseño.
+  \item Elegir el o los modelos de appliance que mejor cumplen las necesidades del nuevo diseño.
   \item Desplegar los nuevos elementos. Típicamente este punto comprende las siguientes actividades:
     \begin{enumerate}
       \item Instalación de la solución en el bastidor del CPD (en adelante rack).
@@ -233,7 +231,7 @@ y es necesario analizarla y adaptarla con el fin de incluir este nuevo elemento.
 
 \par Si se comparan estas actividades con las equivalente de la solución WAF SaaS, esta solución es más compleja de desplegar y se deben tener
 en cuenta más factores. Esto es así debido a que al elegir esta solución se debe modificar la arquitectura de red y se debe tener en cuenta
-cómo el WAF va a impactar a la plataforma web.
+cómo el WAF va a impactar sobre la plataforma web.
 \par Por otro lado, dado que la administración y mantenimiento no están delegados en una empresa externa, se debe disponer de las personas
 adecuadas - con conocimiento, experiencia y tiempo - para administrar y operar el WAF.
 
@@ -242,7 +240,7 @@ adecuadas - con conocimiento, experiencia y tiempo - para administrar y operar e
 dispositivos dedicados para nuestra plataforma web, y por lo tanto es posible crear reglas específicas que se adapten a nuestras necesidades.
 \par Estas soluciones también cuentan con la ventaja de que toda la información está en nuestras instalaciones, lo cual permite tener mayor
 control de la información y puede simplificar el cumplimiento de ciertas regulaciones, como son el reglamento europeo \acrshort{rgdp} o el
-Estándar de Seguridad de Datos para la Industria de Tarjeta de Pago (en adelante \acrshort{pcidss}, de sus siglas en inglés, \acrlong{pcidss}).
+Estándar de Seguridad de Datos para la Industria de Tarjeta de Pago (en adelante \acrshort{pcidss}, de sus siglas en inglés \acrlong{pcidss}).
 \par Una ventaja que comparten con las soluciones SaaS es su independencia del software utilizado en la plataforma web. Esto es así debido a
 que se despliegan como un elemento perimetral y no está conectado con la plataforma web a nivel de aplicación.
 \par Igualmente, comparten las ventajas de independencia operacional; aunque en el caso de los WAF de appliance esta independencia es
@@ -335,7 +333,7 @@ afectar a su rendimiento.
 \begin{enumerate}
   \item Evaluar la plataforma web actual e identificar qué soluciones WAF son compatibles con el servicio web.
   \item Desplegar un un entorno de pruebas equivalente a la plataforma web actual o prueba de concepto (en adelante \acrshort{poc}, de sus
-    siglas en inglés, \acrlong{poc}).
+    siglas en inglés \acrlong{poc}).
   \item Desplegar el WAF en el entorno de pruebas.
   \item Realizar pruebas exhaustivas sobre el nuevo entorno, especialmente pruebas funcionales y de rendimiento.
   \item Evaluar el impacto del WAF, entre otros se debe evaluar errores en la lógica de aplicación, latencia que añade, aumento en el consumo

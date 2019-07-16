@@ -1,0 +1,105 @@
+\section{Viabilidad Económica}
+\par Una de los principales motivos por los que las soluciones WAF no son más frecuentes, es su elevado coste, tal como se ha detallado en la sección de ~\nameref{subsec:estadoarte}.
+\par Es por ello que se ha priorizado utilizar tecnologías sin coste de licenciamiento y minimizar otros costes lo máximo posible.
+\par No obstante, la solución tiene una serie de costes que se deben considerar:
+\begin{itemize}
+  \item Plataforma hardware o de Cloud sobre la que se desplegará la solución.
+  \item Horas de técnico administrador de la plataforma.
+  \item Soporte técnico del proveedor. Opcional.
+\end{itemize}
+
+\par Estos costes pueden variar considerablemente dependiendo de la plataforma sobre la que se despliegue la solución.
+\par La opción más económica será aquella en la que la plataforma hardware y los técnicos disponibles pueden asumir la carga adicional que la solución requiere; en este escenario sólo se deberá contemplar el coste del
+soporte técnico, el cual es así mismo opcional. Por lo tanto en este escenario la solución no tendría un {\bf coste económico directo}.
+
+\par Otro posible escenario, consistiría en desplegar la solución en algún proveedor del Cloud. Esta arquitectura es cada vez más frecuente y es importante evaluar su coste.
+\par En primer lugar se debe estimar el coste de la plataforma en sí. Para ello se ha utilizado la herramienta online proporcionada por Azure~\cite{azurecalculator}.
+
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tabular}{|p{0.15\textwidth}|p{0.13\textwidth}|p{0.35\textwidth}|p{0.2\textwidth}|}
+  \hline
+  {\bf Service type}              & {\bf Region}  & {\bf Description}                                                                           & {\bf Estimated Cost}                \\
+  \hline
+  Azure Kubernetes Service (AKS)  & West Europe   & 5 D2 v3 (2 vCPU(s), 8 GB RAM) nodes x 730 Hours; Pay as you go; 1 managed OS disks – S4     & 370.66€                             \\
+  \hline
+  Storage Accounts                & West Europe   & File Storage, Standard Performance Tier, General Purpose V2, LRS Redundancy, 100 GB \
+                          Capacity, 1 Put or Create Container operations, 1 List operations, 1 Other operations, 0 Additional Sync servers      & 5.09€                               \\
+  \hline
+  Container Registry              & West Europe   & Basic Tier, 1 units x 30 days, 100 GB Bandwidth                                             & 11.18€                              \\
+  \hline
+  Support                         &               & Support                                                                                     & 0.00€                               \\
+  \hline
+                                  &               & Licensing Program                                                                           & Microsoft Online Services Agreement \\
+  \hline
+                                  &               & Monthly Total                                                                               & 386.93€                             \\
+  \hline
+                                  &               & Annual Total                                                                                & 4643.18€                            \\
+  \hline
+  \end{tabular}
+  \label{tabla:azurecalculatoraks}
+  \caption{Estimación económica de la plataforma de contenedores en Microsoft Azure AKS~\cite{aks} (fuente~\cite{azurecalculator})}
+\end{figure}
+
+\par A este coste hay que añadir el tiempo en horas del administrador de la plataforma. Según la misma plataforma de Azure, esta plataforma requiere una media de 15.5 horas anuales con un coste de 50€/hora. Lo que nos da
+la siguiente estimación:
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tabular}{|p{0.3\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|p{0.2\textwidth}|}
+  \hline
+  {\bf Recurso}               & {\bf Tiempo}  & {\bf Coste/hora}    & {\bf Coste Total}           \\
+  \hline
+    Administrador DevOps      & 15.5 horas  & 50€                 & 775€ \\
+  \hline
+                              &             & Total anual         & 775€ \\
+  \hline
+  \end{tabular}
+  \label{tabla:azurecalculatorsalary}
+  \caption{Estimación económica de Microsoft Azure (fuente~\cite{azurecalculator})}
+\end{figure}
+
+\par Por último, para calcular el coste de soporte técnico, dado que la solución está compuesta de múltiples tecnologías, no se considera viable añadir el coste del soporte técnico de todas ellas.
+\par A modo de referencia se ha evaluado el coste del soporte 24/7 de Nginx para cuatro instancias y el coste es el siguiente:
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tabular}{| c | c | c | c |}
+  \hline
+  {\bf Tipo de soporte}           & {\bf Número de instancias}    & {\bf Coste/instancia}   & {\bf Coste Total}   \\
+  \hline
+    Professional (soporte 24/7)   & 4                             & 3109.02 / año           & 12436.06€           \\
+  \hline
+                                  &                               & Total anual             & 12436.06€           \\
+  \hline
+  \end{tabular}
+  \label{tabla:nginxplus}
+  \caption{Coste del soporte técnico de Nginx (fuente~\cite{nginxplus})}
+\end{figure}
+
+\par Se pueden ver los costes consolidados en la \hyperref[tabla:costesresumen]{Tabla resumen de la viabilidad económica} \\
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tabular}{| p{0.3\textwidth} | c | c | c | c |}
+  \hline
+    {\bf Entorno}                                             & {\bf Plataforma}  & {\bf Administración}  & {\bf Soporte} & {\bf Coste total}   \\
+  \hline
+    Entorno Cloud con soporte Nginx                           & 4643€                   & 775€                        & 12436.06 €           & 17854.06 €         \\
+  \hline
+    Entorno Cloud sin soporte Nginx                           & 4643€                   & 775€                        & 0 €                  & 5418 €             \\
+  \hline
+    Entorno on-premise sin HW adicional con soporte Nginx  & 0€                      & 775€                        & 12436.06 €           & 13211.06 €         \\
+  \hline
+    Entorno on-premise sin HW adicional sin soporte Nginx  & 0€                      & 775€                        & 0 €                  & 775 €              \\
+  \hline
+  \end{tabular}
+  \label{tabla:costesresumen}
+  \caption{Resumen de costes estimados}
+\end{figure}
+
+\par Es importante reseñar que se ha considerado el soporte Nginx como un caso representativo del elevado coste que tienen este tipo de servicios. Habitualmente no es necesario
+contratar este tipo de soluciones en entornos que no sean críticos o muy sensibles y, en estos entornos se requiere un soporte equivalente de todos los componentes.
+\par En los entornos en los que no se requiere un servicio de este tipo, es habitual optar por servicios profesionales y de consultoría, sea bajo demanda o con la contratación de
+una bolsa de horas.

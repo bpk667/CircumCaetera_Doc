@@ -24,16 +24,16 @@
 \newacronym{rgdp}{RGDP}{Reglamento General de Protección de Datos}
 \newacronym{pcidss}{PCI DSS}{Payment Card Industry Data Security Standard}
 \newacronym{owasp}{OWASP}{Open Web Application Security Project}
-\newacronym{xss}{XSS}{Cross-site scripting\cite{owaspxss}}
-\newacronym{sqli}{SQLi}{Inyección SQL\cite{owaspsqli}}
+\newacronym{xss}{XSS}{Cross-site scripting}
+\newacronym{sqli}{SQLi}{Inyección SQL}
 \newacronym{xsrf}{XSRF}{Cross-site request forgery}
 \newacronym{poc}{PoC}{Proof of concept}
-\newacronym{gpl}{GPL}{GNU General Public License\cite[Licencia GPL]{gpl}}
-\newacronym{lgpl}{LGPL}{GNU Lesser General Public License\cite[Licencia LGPL]{lgpl}}
+\newacronym{gpl}{GPL}{GNU General Public License}
+\newacronym{lgpl}{LGPL}{GNU Lesser General Public License}
 \newacronym{siem}{SIEM}{Security information and event management}
 \newacronym{ca}{CA}{Certification Authority}
-\newacronym{acme}{ACME}{Automatic Certificate Management Environment\cite[Estándar ACME]{rfc8555}}
-\newacronym{cicd}{CI/CD}{Continuous Integration and Continuous Deployment or Continuous Delivery \cite[What is CI/CD]{cicd}}
+\newacronym{acme}{ACME}{Automatic Certificate Management Environment (ver estándar ACME \cite{rfc8555})}
+\newacronym{cicd}{CI/CD}{Continuous Integration and Continuous Deployment or Continuous Delivery}
 
 \newglossaryentry{DefensaProfundidad}
 {
@@ -58,7 +58,7 @@
 
 \newglossaryentry{CA}
 {
-    name=CA,
+    name=\acrlong{ca},
     description={En criptografía, las expresiones autoridad de certificación, o certificadora, o certificante, o las siglas AC o CA (por la
     denominación en idioma inglés Certification Authority), señalan a una entidad de confianza, responsable de emitir y revocar los certificados,
     utilizando en ellos la firma electrónica, para lo cual se emplea la criptografía de clave pública.~\cite[Wikipedia]{wiki:ca}}
@@ -94,7 +94,7 @@
 
 \newglossaryentry{MitM}
 {
-    name=MitM,
+  name=\acrlong{mitm},
     description={es un ataque en el que se adquiere la capacidad de leer, insertar y modificar a voluntad. El atacante debe ser capaz de observar e interceptar mensajes entre las dos víctimas y procurar que ninguna de las
     víctimas conozca que el enlace entre ellos ha sido violado.~\cite[Wikipedia]{wiki:mitm}}.
 }
@@ -103,7 +103,7 @@
 {
     name=\acrlong{xss},
     description={es un tipo de vulnerabilidad informática o agujero de seguridad típico de las aplicaciones Web, que puede permitir a una tercera persona inyectar en páginas web visitadas por el usuario código JavaScript o
-    en otro lenguaje similar (ej: VBScript).~\cite[Wikipedia]{wiki:xss}}.
+    en otro lenguaje similar (ej: VBScript).~\cite[Wikipedia]{wiki:xss}. Ver también referencia en OWASP \cite{owaspxss}.}
 }
 
 \newglossaryentry{Phishing}
@@ -123,12 +123,12 @@
 {
     name=\acrlong{sqli},
     description={es un método de infiltración de código intruso que se vale de una vulnerabilidad informática presente en una aplicación en el nivel de validación de las entradas para realizar operaciones sobre una base de
-    datos~\cite[Wikipedia]{wiki:sqli}}
+    datos~\cite[Wikipedia]{wiki:sqli}. Ver también referencia en OWASP \cite{owaspsqli}.}
 }
 
 \newglossaryentry{Cookie}
 {
-    name=\acrlong{Cookie},
-    description={es una pequeña información enviada por un sitio web y almacenada en el navegador del usuario, de manera que el sitio web puede consultar la actividad previa del navegador~\cite[Wikipedia]{wiki:cookie}}
+    name=Cookie,
+    description={Cookie es una pequeña información enviada por un sitio web y almacenada en el navegador del usuario, de manera que el sitio web puede consultar la actividad previa del navegador~\cite[Wikipedia]{wiki:cookie}}
 }
 

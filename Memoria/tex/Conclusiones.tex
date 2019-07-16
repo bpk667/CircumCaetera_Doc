@@ -1,0 +1,43 @@
+\chapter{Conclusiones}
+\par Se considera que se ha conseguido el objetivo principal de la solución: Crear una herramienta de software libre que permita mejorar la
+seguridad en las plataformas web en entornos en los que no se dispone de los medios necesarios.
+
+\par La solución que se ha construido implanta un WAF libre con las reglas recomendadas por OWASP \cite{owaspcrs}, un frontal TLS con una configuración que sigue las mejores
+prácticas de la industria \cite{TLSBestPractices} y una serie de controles de seguridad adicionales como son las cabeceras HTTP, el control de cookies o HTTP/2.
+
+\par Estos y otros controles se encuentran disponibles de forma gratuita si el administrador de la plataforma web tiene el conocimiento y tiempo para configurar su plataforma
+adecuadamente, pero esta actividad requiere lidiar con dependencias de software, mantenerse actualizado en materia de seguridad y añade complejidad al entorno. O,
+alternativamente, se puede invertir en una solución privativa que cubra algunas de las funcionalidades y que tiene un coste económico considerable.
+
+\par Con esta solución se espera unir lo mejor de ambas opciones: Facilidad de despliegue y mantenimiento con un coste ajustado que puedan permitirse plataformas con medios
+limitados.
+
+\par Adicionalmente, se garantiza la adaptabilidad de la solución, debido por un lado a la licencia  \acrlong{gpl} y por otro al bajo solapamiento entre los distintos componentes,
+lo que facilitará su uso en distintos entornos en los que las necesidades sean dispares.
+
+\par No obstante, si el entorno es crítico o se requiere un soporte 24/7, el coste de soporte es inevitable en el futuro cercano.
+
+\par El reto que se plantea una vez entregada esta primera versión es empezar a desplegar la solución en entornos heterogéneos para aprender y solucionar los potenciales errores o
+limitaciones que puedan surgir tal como se verá con mayor detalle en la siguiente sección.
+
+\section{Trabajo a futuro}
+\par Como en cualquier solución de software existen dos actividades sobre las que se deben trabajar: Por un lado se debe consolidar y
+estabilizar la plataforma para garantizar su funcionamiento y, por otro lado, se deben implementar nuevas funcionalidades.
+\subsection{Consolidar y estabilizar la solución}
+\par Para mejorar la estabilidad de la plataforma y depurar posibles errores, se procederá a implantar la solución en varias plataformas web
+de empresas con las que colaboro y de las que ya he conseguido un acuerdo.
+\par Algunas de estas plataformas tienen un tráfico considerable y cientos de dominios, lo que permitirá realizar pruebas de humo en
+profundidad y se espera que la solución sea suficientemente madura una vez esté desplegada en producción en estos entornos.
+
+\subsection{Nuevas funcionalidades}
+\par Dado que los ataques y los controles de seguridad están en continua evolución, se espera que se vayan añadiendo controles de seguridad
+de for continua.
+\par Adicionalmente, se han identificado una serie de hitos que permitirán mejorar la adopción de la solución una vez ésta esté disponible
+públicamente:
+\begin{itemize}
+  \item Definir ficheros de configuración que faciliten los despliegues en entornos más complejos.
+  \item Definir un modo Simulación / Bloqueo que permita activar y desactivar los mecanismos de seguridad de forma sencilla.
+  \item Implementar controles adicionales: {\em Rate limit}, bots autorizados, control de reputación, etc.
+  \item Implementar pruebas automáticas: pruebas funcionales, pruebas de seguridad, etc.
+\end{itemize}
+
