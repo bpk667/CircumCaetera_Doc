@@ -1,6 +1,6 @@
 \section{Viabilidad Económica}
-\par Una de los principales motivos por los que las soluciones WAF no son más frecuentes, es su elevado coste, tal como se ha detallado en la sección de ~\nameref{subsec:estadoarte}.
-\par Es por ello que se ha priorizado utilizar tecnologías sin coste de licenciamiento y minimizar otros costes lo máximo posible.
+\par Uno de los principales motivos por los que las soluciones WAF no son más frecuentes, es su elevado valor económico, tal como se ha detallado en la sección de ~\nameref{subsec:estadoarte}.
+\par Es por ello que se ha priorizado utilizar tecnologías sin coste de licenciamiento y minimizar otros gastos lo máximo posible.
 \par No obstante, la solución tiene una serie de costes que se deben considerar:
 \begin{itemize}
   \item Plataforma hardware o de Cloud sobre la que se desplegará la solución.
@@ -42,8 +42,8 @@ soporte técnico, el cual es así mismo opcional. Por lo tanto en este escenario
   \caption{Estimación económica de la plataforma de contenedores en Microsoft Azure AKS~\cite{aks} (fuente~\cite{azurecalculator})}
 \end{figure}
 
-\par A este coste hay que añadir el tiempo en horas del administrador de la plataforma. Según la misma plataforma de Azure, esta plataforma requiere una media de 15.5 horas anuales con un coste de 50€/hora. Lo que nos da
-la siguiente estimación:
+\par A este importe hay que añadir el tiempo en horas del administrador de la plataforma. Según la misma plataforma de Azure, esta plataforma requiere una media de quince horas y media anuales con un coste de cincuenta
+euros por hora. Lo que nos da la siguiente estimación:
 
 \begin{figure}[!ht]
   \centering
@@ -79,20 +79,19 @@ la siguiente estimación:
 \end{figure}
 
 \par Se pueden ver los costes consolidados en la \hyperref[tabla:costesresumen]{Tabla resumen de la viabilidad económica} \\
-
 \begin{figure}[!ht]
   \centering
-  \begin{tabular}{| p{0.3\textwidth} | c | c | c | c |}
+  \begin{tabular}{| p{0.40\textwidth} | c | c | c | c |}
   \hline
-    {\bf Entorno}                                             & {\bf Plataforma}  & {\bf Administración}  & {\bf Soporte} & {\bf Coste total}   \\
+    {\bf Entorno}                                              & {\bf Plataforma}  & {\bf Administración}  & {\bf Soporte} & {\bf Coste total}   \\
   \hline
-    Entorno Cloud con soporte Nginx                           & 4643€                   & 775€                        & 12436.06 €           & 17854.06 €         \\
+    Entorno Cloud con soporte Nginx                            & 4643€                   & 775€                        & 12436.06 €           & 17854.06 €         \\
   \hline
-    Entorno Cloud sin soporte Nginx                           & 4643€                   & 775€                        & 0 €                  & 5418 €             \\
+    Entorno Cloud sin soporte Nginx                            & 4643€                   & 775€                        & 0 €                  & 5418 €             \\
   \hline
-    Entorno on-premise sin HW adicional con soporte Nginx  & 0€                      & 775€                        & 12436.06 €           & 13211.06 €         \\
+    Entorno on-premise sin HW adicional con soporte Nginx      & 0€                      & 775€                        & 12436.06 €           & 13211.06 €         \\
   \hline
-    Entorno on-premise sin HW adicional sin soporte Nginx  & 0€                      & 775€                        & 0 €                  & 775 €              \\
+    Entorno on-premise sin HW adicional sin soporte Nginx      & 0€                      & 775€                        & 0 €                  & 775 €              \\
   \hline
   \end{tabular}
   \label{tabla:costesresumen}

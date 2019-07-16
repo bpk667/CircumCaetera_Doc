@@ -65,7 +65,7 @@ make install \
 \end{figure}
 
 \subsubsection{Soporte HTTP/2}
-\par El siguiente componente que se debe añadir soporte en Nginx mediante el parámetro \\ \lstinline{--with-http_v2_module}.
+\par El siguiente componente que se debe añadir es el soporte en Nginx mediante el parámetro \\ \lstinline{--with-http_v2_module}.
 
 \par Por lo que se debe compilar Nginx con los siguientes parámetros:\\
 \begin{minipage}{\linewidth}
@@ -83,7 +83,7 @@ listen        [::]:443 ssl http2 default_server;
 
 \subsubsection{Cabecera HTTP Strict Transport Security}
 \par La cabecera \acrlong{hsts}~\cite{wiki:hsts}(\acrshort{hsts} en adelante) permite implantar una política de seguridad que obliga al cliente a comunicarse mediante canales cifrados SSL/TLS.
-\par Esto permite proteger el tráfico frente a ataques que puedan interceptar las comunicaciones como por ejemplo un {\em ataque de intermediario}\gls{MitM} (en adelante \acrshort{mitm}, del inglés \acrlong{mitm}).
+\par Esto permite proteger el tráfico frente a ataques que puedan interceptar las comunicaciones como por ejemplo un {\em ataque de intermediario} o \gls{MitM} (en adelante \acrshort{mitm}).
 \par Para habilitar esta política, se añade la siguiente cabecera a la configuración:
 \begin{lstlisting}[language=bash]
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
@@ -224,9 +224,9 @@ de ataques \gls{XSS} o \gls{SQLI}.
 \par Otro elemento que se deben proteger son las cookies de la plataforma web (\gls{Cookie}), para ello el WAF modificará las cookies de la plataforma web añadiendo los siguientes atributos si no estuviesen previamente:
 \begin{itemize}
   \item Secure. Previene que la cookie sea enviada mediante canales no cifrados.
-  \item HttpOnly. Previene que la cookie sea accesible por una medio que no sea HTTP/HTTPS. Por lo tanto la cookie no puede ser accesible por un script en el navegador, lo que proporciona protección contra ataques de
+  \item HttpOnly. Previene que la cookie sea accesible por un medio que no sea HTTP/HTTPS. Por lo tanto la cookie no puede ser accesible por un script en el navegador, lo que proporciona protección contra ataques de
     \acrshort{xss}.
-  \item SameSite. Previene que la cookie se envíe a un dominio diferente, por lo que ayuda a proteger la plataforma frente a ataques \gls{XSRF}
+  \item SameSite. Previene que la cookie se envíe a un dominio diferente, por lo que ayuda a proteger la plataforma frente a ataques \gls{XSRF}.
     \par Debido a que es una práctica habitual el uso de la misma cookie en distintos dominios se ha optado por aplicar este filtro en una modalidad más permisiva: \lstinline{SameSite=Lax}. Esta opción evita que se envíe
     la cookie en peticiones POST entre otras.
 \end{itemize}
@@ -256,7 +256,7 @@ de ataques \gls{XSS} o \gls{SQLI}.
 \end{minipage}
 \par Siendo:
 \begin{itemize}
-  \item \lstinline{listen}. Indica el puerto donde el servicio está escuchando sobre IPv4 e IPv6, usando canales cifrados SSL, HTTP/2 y siendo el servicio por defecto en caso.
+  \item \lstinline{listen}. Indica el puerto donde el servicio está escuchando sobre IPv4 e IPv6, usando canales cifrados SSL, HTTP/2 y siendo el servicio por defecto.
   \item \lstinline{ssl_certificate}. Indica la clave privada y el certificado que se han creado anteriormente.
   \item \lstinline{ssl_session_cache}. Indica cómo gestionar la caché de las sesiones SSL.
   \item \lstinline{ssl_session_timeout}. Indica el tiempo de vida de la sesión SSL en caso de inactividad. Dado que la negociación SSL tiene un coste computacional elevado, es preferible mantener las sesiones inactivas en
@@ -301,8 +301,8 @@ ofrecido por el proveedor.
   \item La instancia de Docker crea una clave privada.
   \item La instancia de Docker realiza una petición de certificado al servicio SaaS.
   \item El servicio SaaS le comunica una variable temporal no predecible (tipo NONCE) al cliente Let's Encrypt.
-  \item La instancia de Docker crea un fichero en la dirección URL propuesta con el valor propuesto.
-  \item La instancia Docker responde al servicio SaaS con el fichero temporal firmado con su clave privada.
+  \item La instancia de Docker crea un fichero accesible por el servicio SaaS mediante petición HTTP con el valor propuesto como nombre de fichero.
+  \item La instancia de Docker responde al servicio SaaS con el fichero temporal firmado con su clave privada.
   \item El servicio SaaS realiza una petición HTTP para comprobar que la instancia de Docker tiene control sobre el dominio sobre el que se pide el certificado.
     \par La taxonomía de la petición es \lstinline{http://<dominio>:80/.well-known/acme-challenge/<variable-NONCE>}.
   \item El servicio SaaS valida la respuesta HTTP y, a continuación, valida al agente Let's Encrypt.
@@ -337,11 +337,11 @@ ofrecido por el proveedor.
   \lstinputlisting[language=bash,caption=\lstname,linerange={27-64}]{\codePath/Kubernetes/kub_waf-server.yaml.template}
 \end{minipage}
 \par Se destacan los siguientes elementos:
-\par \lstinline{replicas: 2}. Indica el número de instancias que se despliegan. En las pruebas se han desplegado entre dos y cinco instancias con el fin de validar que la plataforma.
+\par \lstinline{replicas: 2}. Indica el número de instancias que se despliegan. En las pruebas se han desplegado entre dos y cinco instancias con el fin de validar múltiples instancias en la plataforma.
 \par \lstinline{image: <SET_REGISTRY>/<SET_OWNER>/ccwaf:<SET_RELEASE>}. Indica el repositorio desde el que
 se descargarán las imágenes. En la elaboración del proyecto se ha utilizado un repositorio propio, pero se
 compartirá a un repositorio público tras realizar la entrega.
-\par \lstinline{volumeMounts}. Indica el servicio de ficheros que se utilizará para compatir certificados.
+\par \lstinline{volumeMounts}. Indica el servicio de ficheros que se utilizará para compartir certificados.
 Este recurso debe ser inmutable y tolerante a reconstrucciones del entorno, por lo que se ha utilizado un
 servicio NFS externo a la plataforma de Kubernetes.
 
@@ -366,7 +366,7 @@ funciona correctamente.
   \lstinputlisting[language=bash,caption=\lstname,linerange={1-20}]{\codePath/Kubernetes/kub_basicwebserver-server.yaml.template}
 \end{minipage}
 \par Se puede comprobar como en este servicio se ha configurado el siguiente parámetro: \lstinline{type: ClusterIP}.
-\par El utilizar el valor {\em ClusterIP} se define que las instancias gestionadas por este servicio sólo
+\par Al utilizar el valor {\em ClusterIP} se define que las instancias gestionadas por este servicio sólo
 son accesibles internamentes al cluster de Kunernetes y, por lo tanto, no son accesibles desde Internet.
 \par Con esto se garantiza que las peticiones que se realicen a la plataforma web deben provenir
 forzosamente del WAF, con lo que {\bf se garantiza que los mecanismos de protección del WAF serán

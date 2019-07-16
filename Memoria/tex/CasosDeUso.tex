@@ -2,7 +2,7 @@
 \section{Requisitos candidatos}
 \par En primer lugar se identifican los requisitos que se intentarán cumplir con la solución propuesta.
 \par Se agrupan los requisitos según estén más orientados al componente WAF o al componente de TLS.
-\par Requisitos orientados principalmente al componente WAF:
+\par Los requisitos orientados principalmente al componente WAF son:
 \begin{enumerate}[\bfseries{WAF-}Req1. ]
   \item \label{req:independence} La solución debe poder ejecutarse en un sistema operativo o máquina independiente de la plataforma de la aplicación web con el
     objetivo de garantizar independencia en las tareas de administración y permitir aplicar un modelo RBAC.
@@ -15,11 +15,11 @@
   \item La solución debe permitir la elaboración de reglas personalizadas según las necesidades específicas de la plataforma del cliente.
 
   \item \label{req:softwarelibre} La plataforma debe ser compatible con el modelo de licencias de {\em software libre\cite{softwarelibre}} tipo Licencia Pública
-    General de GNU (en adelánte \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}, licencia \cite{gpl}) o Licencia Pública General Reducida de GNU (en adelánte \acrshort{lgpl},
+    General de GNU (en adelante \acrshort{gpl}, de  sus siglas en inglés \acrlong{gpl}, licencia \cite{gpl}) o Licencia Pública General Reducida de GNU (en adelante \acrshort{lgpl},
     de sus siglas en inglés \acrlong{lgpl}, licencia \cite{lgpl}).
 
   \item \label{req:facilidad} La plataforma debe ser fácilmente integrable en la plataforma web del cliente.
-    \par Tal como se ha detallado en la sección ~\nameref{subsec:estadoarte}, el despliegue y la operación de los WAF de software libre es complejo, y esta complejidad es uno de las causas de su escasa adopción. Es por ello que se considera de
+    \par Tal como se ha detallado en la sección ~\nameref{subsec:estadoarte}, el despliegue y la operación de los WAF de software libre es complejo, y esta complejidad es una de las causas de su escasa adopción. Es por ello que se considera de
     vital importancia para su adopción que la solución ofrecida sea fácil de desplegar u operar. Para ello, un factor determinante es minimizar los cambios necesarios en la infraestructura previa y  las actividades de administración de la
     plataforma.
 
@@ -27,14 +27,14 @@
     solución WAF pueda ampliarse o reducirse según sea necesario.
 
   \item La plataforma debe generar logs de seguridad exportables a soluciones externas de gestión de información y eventos de seguridad (en
-    adelante \acrshort{siem} de sus siglas en inglés, \acrlong{siem}).
+    adelante \acrshort{siem} de sus siglas en inglés \acrlong{siem}).
 \end{enumerate}
 
 \par A continuación se recogen los requisitos asociados al componente de TLS:
 \begin{enumerate}[\bfseries{TLS-}Req1. ]
   \item \label{req:tls} La solución debe poder participar en la negociación TLS, presentando certificados confiables a los clientes.
 
-  \item La solución deber poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
+  \item La solución debe poder gestionar los certificados presentados a los clientes incluyendo soporte a la extensión \acrshort{SNI} de TLS.
 
   \item La plataforma debe soportar TLS versión 1.3, HTTP/2 y otros elementos incluidos en las {\em buenas prácticas de TLS\cite{TLSBestPractices}}.
 
@@ -46,7 +46,7 @@
       \end{enumerate}
     \par En caso de cifrado punto a punto:
       \begin{enumerate}[label=\emph{\alph*})]
-        \item Esta opción es recomendable en las soluciones en las que prime la seguridad o en aquellos escenarios en los que no se tenga el control de
+        \item Esta opción es recomendable en las soluciones en las que prima la seguridad o en aquellos escenarios en los que no se tiene el control de
           elementos intermedios, como por ejemplo en entornos Cloud o multi-datacenter.
         \item Las comunicación entre el WAF y la plataforma web debe permitir tráfico HTTPS.
         \item El WAF debe confiar en la CA que firma los certificados de la plataforma web o, alternativamente, en los certificados hoja.
@@ -60,7 +60,7 @@
   \item {\bf \Gls{Atacante} (Black Hat Hacker en inglés)}. Se trata de un tipo de cliente malintencionado.
   \item {\bf Plataforma web (Web Servers en inglés)}. Se considera toda la infraestructura necesaria para servir los contenidos web. En esta infraestructura no
     se incluyen los elementos desarrollados en el presente proyecto.
-  \item {\bf Autoridad de certificación} (en adelante \GLS{CA}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
+  \item {\bf Autoridad de certificación} (en adelante \GLS{ca}). Es el elemento encargado de firmar los certificados TLS. El cliente debe confiar en la CA o en los certificados hoja alternativamente. En caso de cifrado punto a punto el WAF deberá confiar en los certificados presentados por la plataforma web.
   \item {\bf Plataforma WAF+TLS}. Se trata de la plataforma propuesta en el presente proyecto.
 \end{itemize}
 
@@ -138,7 +138,7 @@
           \item El WAF - o un administrador del WAF - genera un certificado CSR~\cite[Wikipedia]{wiki:csr} asociado a su clave privada que siga el {\em estándar X.509 v3~\cite[IETF 5280]{rfc5280}}.
           \item Se envía el certificado a la CA solicitando que ésta lo firme.
           \item La CA valida que la petición es legítima y firma el certificado con su clave raíz o, alternativamente, una clave intermedia.
-          \item La CA envía el certificado firmado digitalmente el WAF.
+          \item La CA envía el certificado firmado digitalmente al WAF.
           \item Una vez el WAF disponga de dicho certificado, este puede presentar sus servicios web a los clientes y estos podrán validar al WAF durante la negociación TLS si confían en el certificado raíz de la CA o en la
             jerarquía de certificados.
         \end{enumerate}

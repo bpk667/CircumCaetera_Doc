@@ -40,11 +40,13 @@ No obstante, este despliegue tiene como requisitos que los registros DNS y el re
 \end{itemize}
 
 \section{Controles adicionales}
-\par 
+\par Se han implementado una serie de controles adicionales que no son estrictamente competencia de un WAF, como son la mejora de en la seguridad de las cookies, las cabeceras de seguridad o forzar el uso de canales
+cifrados mediante la cabecera \cite{hsts}.
+\par Adicionalmente, se ha configurado un gestor de certificados que permite implementar HTTPS de forma sencilla para el usuario.
 
 \section{Validación de la seguridad}
 Para poder validar la seguridad ofrecida por la solución, se ha escaneado la plataforma con las siguientes herramientas:
-\par {\em Qualys. SSL Labs~\cite{ssllabs}}. Se trata de una herramienta online que ehecuta una batería de pruebas con el objetivo de verificar la seguridad de la página web.
+\par {\em Qualys. SSL Labs~\cite{ssllabs}}. Se trata de una herramienta online que ejecuta una batería de pruebas con el objetivo de verificar la seguridad de la página web.
 \par En la figura ~\hyperref[tabla:resumenqualys]{Resumen ejecutivo de Qualys SSL Labs} se puede ver un resumen del resultado de las pruebas. En el apéndice
 (~\hyperref[tabla:informequalys]{Informe completo de Qualys} ) se puede leer el informe completo.
 

@@ -3,9 +3,9 @@
 incertidumbre sobre cómo será la solución final; dicha incertidumbre es inherente a todo proyecto de software, pero en un PFG es mayor debido a que la
 investigación tiene a su vez un mayor peso y es determinante.
 \par En el presente proyecto, a la hora de afrontar inicialmente el diseño de la solución se desconoce qué tecnologías se van a utilizar específicamente y éstas
-se deciden tras evaluarlas tanto individualmente como su capacidad de integración entre ellas y con elementos externos.
+se deciden tras evaluarlas tanto individualmente como la integración con otros elementos.
 \par Para ello se sigue un modelo de desarrollo evolutivo similar al modelo de prototipos. Para lo cual se parte de la definición de un diseño a alto nivel en
-el que se definen los componentes y sus funciones más representativas. A continuación se empieza a realizar un proceso iterativo en el que se van probando los
+el que se definen los componentes y sus funciones más representativas. A continuación, se empieza a realizar un proceso iterativo en el que se van probando los
 componentes y añadiendo nuevos elementos. El resultado de dicha fase es una solución funcional inicial que cumpla los requisitos definidos. Sobre dicho modelo
 se realiza una revisión de calidad que permita contar con una solución suficientemente madura y estable.
 \par No obstante, dado que se espera que la solución sea algo en constante cambio, se ha elegido una metodología de desarrollo ágil~\cite{wiki:agil}, tal como
@@ -20,13 +20,13 @@ se describe más adelante.
   \item El segundo componente de la solución es el software responsable de gestionar las comunicaciones HTTPS. Este software es el encargado de cifrar y
     descifrar el tráfico SSL / TLS.
   \item El tercer componente es el software de virtualización o de contenedores. Uno de los puntos clave de la solución es garantizar la facilidad para
-    implementarla de forma poco intrusiva. Para ello se considera que un software de contenedores como Docker~\cite{docker}. Este tipo de soluciones está
+    implementarla de forma poco intrusiva. Para ello se considera un software de contenedores como Docker~\cite{docker}. Este tipo de soluciones está
     ampliamente asentada en el mercado y existe un movimiento significativo de migración de los entornos tradicionales a entornos de contenedores.
   \item Otro componente estrechamente relacionado con el componente anterior es el software automatización de despliegue y gestión de la solución. Este
     componente es opcional y por lo tanto se tendrá en cuenta que la opción deber ser sustituible en diferentes implementaciones con el fin de garantizar la
     máxima portabilidad de la solución.
   \item Otro componente del que depende la solución es el conector con los elementos de almacenamiento persistente. Este componente es el encargado de
-    proporcional un servicio de compartir información entre recursos y garantizar la perdurabilidad de la información necesaria. Se hará foco en reducir el uso
+    proporcionar un servicio de compartir información entre recursos y garantizar la perdurabilidad de la información necesaria. Se hará foco en reducir el uso
     o impacto de este componente al mínimo y que todo el entorno pueda ser reconstruido con el menor esfuerzo posible con el fin de ofrecer un entorno dinámico
     siguiendo los principios \acrshort{cicd} ya mencionados.
   \item Un componente opcional a considerar es el gestor de certificados HTTPS. Este componente será el responsable de aprovisionar, renovar y revocar certificados que sean confiables para los clientes, por lo que deberá
@@ -55,7 +55,7 @@ siguen los principios de integración continua, entrega continua (en adelante \a
 \section{Análisis y selección de tecnologías}
 \par En esta sección se evalúan las distintas opciones disponibles y se elige una tecnología candidata sobre la que construir la solución.
 \subsection{Web Application Firewall}
-\par En primer lugar, de acuerdo a los requerimientos establecidos - {~\hyperref[req:softwarelibre]{La plataforma debe ser compatible con el modelo de
+\par En primer lugar, de acuerdo a los requerimientos establecidos - {\hyperref[req:softwarelibre]{La plataforma debe ser compatible con el modelo de
 licencias de software libre}} - se han descartado las soluciones WAF privativas y aquellas que no estén licenciadas bajo una licencia del tipo GPL.  En
 este segundo grupo se encuentran WebKnight - sólo compatible con el software de aplicación web Internet Information Services\cite{iis} sobre plataformas
 Microsoft Windows - y Vulture, con licenciamiento BSD y que requiere un sistema operativo FreeBSD.
@@ -63,10 +63,10 @@ Microsoft Windows - y Vulture, con licenciamiento BSD y que requiere un sistema 
 \par Otras soluciones se han descartado debido a que están discontinuadas desde hace tiempo, como IronBee que no se ha actualizado desde hace más de 3 años
 y WebCastellum desde hace 5 años.
 
-\par Otra tecnología candidata que se ha descartado ha sido RAPTOR debido a que no soporta tráfico SSL/TLS ({~\hyperref[req:tls]{La solución debe poder
+\par Otra tecnología candidata que se ha descartado ha sido RAPTOR debido a que no soporta tráfico SSL/TLS ({\hyperref[req:tls]{La solución debe poder
 participar en la negociación TLS}}).
 
-\par NAXSI se ha considerado que no cumple los requisitos básicos que debe tener un WAF actualmente ({~\hyperref[req:commonattacks]{La solución debe
+\par NAXSI se ha considerado que no cumple los requisitos básicos que debe tener un WAF actualmente ({\hyperref[req:commonattacks]{La solución debe
 disponer de un conjunto básico de políticas de auditoría o bloqueo que permitan proteger la aplicación web frente a los ataques más comunes}}), pues
 sólo implementa dos controles de seguridad - de los referenciados en el documento de buenas prácticas de OWASP\cite[apartado A3.2]{owaspbestpractices});
 concretamente, sólo protege ataques de tipo {\em Cross-site scripting} (en adelante \acrshort{xss}\cite{owaspxss}) e inyecciones SQL (en adelante
@@ -79,14 +79,14 @@ publicada es la 0.0.4).
 \par Respecto a FreeWAF (también conocido como {\em lua-resty-waf}) está en una situación muy similar a OpenWAF, pues su última versión tiene más de 2
 años y se trata de la versión 0.11.1\cite{freewafchangelog}.
 
-\par En el caso de Shadow Daemon, no se cumple el requisito de independencia ({~\hyperref[req:independence]{La solución debe poder ejecutarse en un
+\par En el caso de Shadow Daemon, no se cumple el requisito de independencia ({\hyperref[req:independence]{La solución debe poder ejecutarse en un
 sistema operativo o máquina independiente de la plataforma de la aplicación web}}), pues se trata de un conector de aplicación web con una
 funcionalidades interesantes, pero por diseño requiere de su integración con el framework de desarrollo y sólo es compatible con PHP, Perl y Python. Por
-lo tanto no es posible implementarlo como elemento externo e independiente de la plataforma web.
+lo tanto, no es posible implementarlo como elemento externo e independiente de la plataforma web.
 
 \par Por último, se ha considerado ModSecurity. Esta tecnología está disponible en dos ramas de desarrollo, la rama 2.x (versión 2.9.3 en el momento en
 el que se escribe este documento) y la rama 3.x (versión 3.0.3 actualmente).
-\par La rama no cumple los requisitos de independencia ({~\hyperref[req:independence]{La solución debe poder ejecutarse en un sistema operativo o
+\par La rama 2.x no cumple los requisitos de independencia ({\hyperref[req:independence]{La solución debe poder ejecutarse en un sistema operativo o
 máquina independiente de la plataforma de la aplicación web}}), debido a que se despliega como un módulo de Apache y no permite que su despliegue sea
 agnóstico de la plataforma web; por lo tanto se descarta esta versión de ModSecurity.
 
@@ -114,8 +114,7 @@ WAF de software libre.
 
 \par Respecto al licenciamiento, Nginx utiliza {\em Licencia BSD simplificada o licencia FreeBSD (de 2 cláusulas)}~\cite{wiki:SimplifiedBSDLicense}, la cual es compatible con GPL.
 
-\subsubsection{Tecnología candidata}
-\par Se ha elegido como servicio web Nginx.
+\par Se elige Nginx como servicio web.
 
 \subsection{Software criptográfico}
 \par Uno de los puntos clave para proporcionar un canal cifrado y seguro alineado con las mencionadas mejores prácticas de TLS ~\cite{TLSBestPractices} o de PCI DSS~\cite{pcidssrequirements} es el uso de TLS en su versión 1.3 y HTTP/2.
@@ -159,7 +158,7 @@ versiones proporcionadas por la versión {\em Buster} de Debian GNU/Linux.
 expansión.
 
 \subsubsection{Tecnología candidata}
-\par La solución que se ha elegido es \cite{docker}.
+\par La solución que se ha elegido es Docker \cite{docker}.
 
 \par Dentro de cada instancia del contenedor Docker se desplegará Nginx y ModSecurity y OpenSSL:
 \begin{figure}[!h]
@@ -231,16 +230,23 @@ utilizará alguna solución ya presente en la infraestructura.
 \par Entre las soluciones a evaluar existen dos aproximaciones posibles: Servicios tradiciones como Samba ~\cite{samba} o  NFS (estándar RFC7530~\cite{nfs}) o
 servicios del Cloud como Amazon S3\cite{s3} o Google Storage\cite{GoogleStorage}.
 
-\par Tal como se ha identificado a la hora de identificar la tecnología de automatización, las soluciones proporcionadas por los fabricantes del Cloud limitan
+\par Tal como se ha detallado a la hora de identificar la tecnología de automatización, las soluciones proporcionadas por los fabricantes del Cloud limitan
 las posibles plataformas que adopten la solución, por lo que se prefiere utilizar servicios de almacenamiento e intercambio de archivos independientes del
 proveedor.
 \par Tanto Samba como NFS cubren los requisitos, por lo que cualquiera de estas tecnologías son válidas. Sin embargo, dentro de los entornos de contenedores el
 protocolo NFS está más extendido.
 
 \subsubsection{Tecnología candidata}
-\par Se utilizará por tanto un servicio de almacenamiento basado en ~\cite{nfs}, preferiblemente un recurso externo a la solución propuesta.
+\par Se utilizará por tanto un servicio de almacenamiento basado en NFS \cite{nfs}, preferiblemente un recurso externo a la solución propuesta.
 
 \subsection{Políticas o reglas de auditoría}
+\par Existen múltiples reglas de WAF de ModSecurity, pero dado que se está utilizando como referencia las mejores prácticas de OWASP \cite{owaspbestpractices}, se implementarán las reglas que esta organización proporciona:
+{\em OWASP ModSecurity Core Rule Set (en adelante OWASP CRS) \cite{owaspcrs}.
+
+\par Este conjunto de reglas ofrece diversas posibilidades de configuración que van desde las reglas más estrictas con un alto porcentaje de falsos positivos, hasta un modo más permisivo en el que los falsos positivos se
+reportan a OWASP para que sean tratados de forma global.
+\par Dado que uno de los aspectos más importantes de la solución es la portabilidad y facilitar las tareas de administración y mantenimiento, se ha optado por configurar las reglas en su modalidad más permisiva.
 
 \subsubsection{Tecnología candidata}
+\par Se han elegido las reglas OWASP CRS en su versión 2 con una configuración suficientemente permisiva como para minimizar el número de potenciales falsos positivos.
 
