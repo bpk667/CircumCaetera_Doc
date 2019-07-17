@@ -1,0 +1,35 @@
+\clearpage
+\section*{Agradecimientos}
+\par Me gustaría darle las gracias a Richard Stallman \cite{stallman} y todas las personas que han colaborado con la {\em Free Software Foundation} \cite{fsf}.
+\par También le doy las gracias a Donald Knuth \cite{knuth} y a todas las personas que han ayudado a crear TeX \cite{tex} y sus increíbles macros.
+
+
+\section*{Resumen ejecutivo}
+\par Las aplicaciones web son atacadas continuamente. Tanto si se trata de ataques dirigidos contra una empresa como objetivo específico, como ataques no dirigidos.
+\par Para ilustrar la virulencia de este comportamiento, se levantó un servicio web falso en el que no hubiese ningún contenido, ni referenciado en ninguna página web, ni indexado en ningún buscador, y estos fueron los resultados en menos de 2
+minutos: \\
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=bash,basicstyle=\scriptsize]
+bpk@emiko /tmp $ while true ; do echo "New conn:" &&  echo -e "HTTP/1.1 200 OK\n\n $(date)" | sudo nc -l -p 80  ; done
+New conn:
+[sudo] password for bpk:
+GET /typo3/phpmyadmin/index.php HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36
+Host: 37.11.104.227
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+New conn:
+GET /typo3/phpmyadmin/index.php HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36
+Host: 37.11.104.227
+Connection: Keep-Alive
+Cache-Control: no-cache
+\end{lstlisting}
+\end{minipage}
+\par Como se puede ver, las peticiones no especifican ningún dominio y sólo buscan páginas en la que el módulo de administración de PHP esté accesible para dirigir su ataque.
+\par Este tipo de ataques son frecuentes, porque también son exitosos.
+\par Existen múltiples herramientas de seguridad, pero la mayoría tienen, o bien un coste elevado que sólo pueden permitirse proyectos con un presupuesto considerable, o son complejas de implementar y mantener debido a que deben integrarse en la plataforma web o en el código.
+
+\par Como respuesta a esta situación, se plantea crear una solución de seguridad de software libre que pueda ser desplegada como un elemento independiente a la plataforma web y que incluya múltiples controles de seguridad: \acrlong{waf}, protección de cookies, gestión de certificados SSL, etc.
+
