@@ -1,20 +1,3 @@
-\documentclass[xcolor=table]{beamer}
-\usepackage[spanish]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{listings}
-\usepackage[table]{xcolor}
-\usepackage{multicol}
-\usepackage{colortbl}
-\usepackage{amssymb}
-\usepackage{pifont}
-\usepackage[autostyle]{csquotes} 
-\usepackage[toc,acronyms]{glossaries}
-\usepackage[
-  backend=biber,
-  style=numeric,
-  sorting=none
-]{biblatex}
-
 \newcommand{\autor}{Pedro Pozuelo Rodríguez}
 \newcommand{\titulo}{Reverse Proxy con capacidades de\\Firewall de aplicación web y aceleración TLS}
 \newcommand{\titulocorto}{Reverse Proxy + WAF + aceleración TLS}
@@ -22,23 +5,7 @@
 \newcommand{\PFGID}{Pendiente}
 \newcommand{\fechaversion}{\today}
 
-\newcommand*\greenarrow{%
-  \color{green!80!black}{$\Uparrow$}
-}
-
-\newcommand*\redarrow{%
-  \color{red!80!black}{$\Downarrow$}
-}
-
-\newcommand*\yellowarrow{%
-  \color{yellow!80!black}{$\Rightarrow$}
-}
-
-\mode<presentation> {
-  \usetheme{Warsaw}
-  %\beamerdefaultoverlayspecification{<+->} %Every new bullet includes \pause
-}
-% \setbeamersize{text margin left=1cm, text margin right=1cm}
+\input{tex/Template}
 
 \title[\titulocorto]{\titulo}
 \author[\autor]{Alumno: \autor \and \and \and \and \and \and \and \and \and \and \and% Really crappy approach for getting authors in different lines:(
@@ -46,15 +13,6 @@ Directora: \profesor}
 \institute{Universidad Europea\\Proyecto de Fin de Grado}
 \date{\fechaversion}
 \logo{\includegraphics[height=1cm]{fig/universidad_logo}}
-
-% Remove navigation icons
-\beamertemplatenavigationsymbolsempty
-
-% Bibliography and glossaries.
-\addbibresource{bib/Referencias.bib}
-\makeglossaries
-\input{tex/glosario}
-\glstocfalse
 
 \begin{document}
 \AtBeginSection[] {
@@ -77,10 +35,14 @@ Directora: \profesor}
 }
 
 \include{tex/Introduccion}
+
 \include{tex/EstadoDelArte}
+
 \include{tex/Solucion}
-\include{tex/Conclusiones}
+
 \include{tex/TestYResultados}
+
+\include{tex/Conclusiones}
 
 \begin{frame}
   \begin{center}

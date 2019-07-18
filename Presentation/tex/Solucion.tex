@@ -20,23 +20,39 @@
 \end{frame}
 
 \begin{frame}[shrink]
-  \frametitle{Componentes}
-  \begin{itemize}
-    \item WAF.
-    \item Software criptográfico.
-    \item Software de virtualización.
-    \item Software de orquestación.
-    \item Software de aprovisionamiento y gestión de certificados.
-    \item Servicio de almacenamiento.
-    \item Políticas de auditoría y controles de seguridad.
-  \end{itemize}
+  \frametitle{Componentes del WAF}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{fig/Diagram_HLD}
+    \caption{\small{Diseño a alto nivel de la solución}}
+  \end{figure}
 \end{frame}
+
+\begin{frame}[shrink]
+  \frametitle{Componentes}
+  \par Componentes de la solución:
+  \begin{tabular}{ l c }
+      \acrlong{waf}                                               & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{fig/ModSecurityLogo}} \\
+      Software criptográfico                                      & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{OpenSSL_logo}} \\
+      virtualización (contenedores)                               & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{fig/DockerLogo}} \\
+      Automatización y orquestación.                              & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{fig/KubernetesLogo}} \\
+      Gestión de certificados.                                    & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{fig/LetsEncryptLogo}} \\
+      Políticas y controles de seguridad.                         & \parbox[c]{5em}{\includegraphics[width=.30\textwidth,height=3cm,keepaspectratio]{fig/OWASPCRSLogo}} \\
+    \end{tabular}
+\end{frame}
+
 
 \subsection{Arquitectura}
 \begin{frame}[shrink]
-  \frametitle{Arquitectura}
+  \frametitle{Arquitectura. Gestión de certificados}
   \begin{figure}
-    \includegraphics[width=0.9\textwidth]{fig/Diagram_Complete_LLD}
+    \includegraphics[width=0.9\textwidth]{fig/Diagram_HTTP_Services}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[shrink]
+  \frametitle{Arquitectura. Peticiones HTTP/HTTPS}
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{fig/Diagram_HTTP_Services}
   \end{figure}
 \end{frame}
 

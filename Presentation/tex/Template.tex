@@ -1,0 +1,46 @@
+\documentclass[xcolor=table]{beamer}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage[autostyle]{csquotes} 
+\usepackage[toc,acronyms]{glossaries}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none
+]{biblatex}
+
+
+\newcommand*\greenarrow{%
+  \color{green!80!black}{$\Uparrow$}
+}
+
+\newcommand*\redarrow{%
+  \color{red!80!black}{$\Downarrow$}
+}
+
+\newcommand*\yellowarrow{%
+  \color{yellow!80!black}{$\Rightarrow$}
+}
+
+\mode<presentation> {
+  \usetheme{Warsaw}
+  %\beamerdefaultoverlayspecification{<+->} %Every new bullet includes \pause
+}
+% \setbeamersize{text margin left=1cm, text margin right=1cm}
+
+
+% Remove navigation icons
+\beamertemplatenavigationsymbolsempty
+
+% Bibliography and glossaries.
+\addbibresource{bib/Referencias.bib}
+\makeglossaries
+\input{tex/glosario}
+\glstocfalse
+
