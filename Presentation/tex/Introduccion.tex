@@ -5,6 +5,7 @@
       \begin{itemize}
         \item Aplicaciones web y la seguridad.
         \item Mecanismos de protección.
+        \item ¿Qué es un WAF?
       \end{itemize}
     \item Situación actual. Estado del arte:
       \begin{itemize}
@@ -18,8 +19,8 @@
         \item Diseño.
         \item Arquitectura.
       \end{itemize}
-    \item Conclusiones.
     \item Test y resultados.
+    \item Conclusiones.
   \end{itemize}
 \end{frame}
 
@@ -33,14 +34,14 @@
     \item Aplicaciones móviles.
     \item {\em Internet of things} (IoT):edificios inteligentes, {\em wearables}, etc.
     \item Arquitectura de microservicios.
-    \item \acrlong{doh} (\acrshort{doh} \cite{doh}.
+    \item \acrlong{doh} (\acrshort{doh} \cite{doh}).
   \end{itemize}
   \begin{block}{HTTP + TLS}
     HTTPS es cada vez más utilizado en todo tipo de aplicaciones y no se limita a las aplicaciones web como venía siendo tradicionalmente.
   \end{block}
 \end{frame}
 
-\begin{frame}[shrink=20]
+\begin{frame}[shrink=10]
   \frametitle{Aplicaciones web y la seguridad}
   \begin{block}{Premisa}
      La seguridad 100\% no existe.
@@ -48,31 +49,13 @@
   Las aplicaciones web están siendo atacadas continuamente.
   \begin{figure}
     \includegraphics[width=0.35\textwidth]{fig/application-attacks-2}%
-    \includegraphics[width=0.35\textwidth]{fig/application-attacks-1}
+    \qquad \includegraphics[width=0.35\textwidth]{fig/Vulnerabilidades_OWASP}
+    \caption{\small{Ataques en capa de aplicación (fuentes Arbor \cite{articleArbor}, \acrshort{owasp} \cite{owasptop10})}}
     \label{fig:applicationattacks}
-    \caption{\small{Ataques en capa de aplicación (fuente Arbor~\cite{articleArbor})}}
   \end{figure}
   \begin{alertblock}{Conclusión}
-    Se debe realizar un esfuerzo continuo para mejor la seguridad de las plataformas web.
+      Se debe realizar un esfuerzo continuo para mejor la seguridad de las plataformas web.
   \end{alertblock}
-\end{frame}
-
-\begin{frame}[shrink=20]
-  \frametitle{Vulnerabilidades en plataformas web}
-	\begin{columns}
-	\begin{column}{0.5\textwidth}
-		Existen múltiples vulnerabilidades en las plataformas web (referencia {\em \acrlong{owasp}}, \acrshort{owasp}~\cite{owasptop10}).
-	\end{column}
-	\begin{column}{0.5\textwidth}  %%<--- here
-		\begin{figure}
-			\includegraphics[width=0.9\textwidth]{fig/Vulnerabilidades_OWASP}
-      \caption{\small{Tipo de Vulnerabilidades por Impacto~\cite{vulnimpact}}}
-		\end{figure}
-	\end{column}
-	\end{columns}
-  \begin{block}{Histórico del riesgo}
-    Muchas de estas vulnerabilidades están presentes en el Top 10 de vulnerabilidades OWASP desde 2007 y existen controles que permiten mitigar el riesgo.
-  \end{block}
 \end{frame}
 
 \begin{frame}[shrink=20]
@@ -96,44 +79,24 @@
       \hline
     \end{tabular}
   \end{center}
-  \begin{block}{Conclusión}
-    La solución, en la mayoría de de los casos, consiste en desactivar las versiones o el componente afectados y el riesgo de afectar la funcionalidad de la plataforma es bajo (dependiendo del entorno).
+  \begin{block}{Solución - Mitigación}
+    Actualizar software y desactivar las versiones o el componente afectados.
+    \par El riesgo de afectar la funcionalidad de la plataforma es bajo (dependiendo del entorno).
   \end{block}
 \end{frame}
 
 \subsection{Mecanismos de protección}
 \begin{frame}[shrink]
-  \frametitle{Soluciones en el ciclo de desarrollo}
-  Como respuesta a éstas y otras vulnerabilidades existen múltiples soluciones:
+  \frametitle{Soluciones, controles de seguridad}
   \begin{itemize}
-    \item {\bf Desarrollo de código seguro}: metodologías de desarrollo seguro de aplicaciones, herramientas de análisis de código.
-      \par Retos:
-      \begin{itemize}
-        \item Costes en tiempo y recursos
-        \item Conocimiento y herramientas.
-        \item Nuevas vulnerabilidades no están consideradas.
-      \end{itemize}
-    \item {\bf Aplicar un ciclo de vida de aplicaciones}: Aplicar actualizaciones y configuración segura de aplicaciones.
-      \par Retos:
-      \begin{itemize}
-        \item El objetivo es que la aplicación dé servicio. Los demás aspectos son secundarios.
-        \item Una actualización puede afectar al entorno.
-        \item {\em chmod 777} o {\em iptables -A INPUT -j ACCEPT} funcionan.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[shrink]
-  \frametitle{Soluciones en la infraestructura}
-  Como respuesta a éstas y otras vulnerabilidades existen múltiples soluciones:
-  \begin{itemize}
-    \item {\bf Herramientas de protección perimetral de red}: Firewall de red, Sistema de Prevención de Intrusos.
-      \par Reto:
-      \begin{itemize}
-        \item Desconoce la lógica de aplicación. Lógica limitada a las capas 3 y 4 de red o firmas (cadenas de texto).
-        \item Mínima visibilidad con el tráfico cifrado.
-      \end{itemize}
-    \item {\bf Herramientas de protección perimetral de aplicación.}
+    \item {\bf Desarrollo de código seguro}: metodologías y herramientas.
+      \par Retos: Tiempo y recursos.
+    \item {\bf Aplicar un ciclo de vida de aplicaciones}: Gestión de actualizaciones y configuración segura.
+      \par Retos: Una actualización puede afectar al entorno, el objetivo es que la {\em aplicación funcione}.
+      \par {\em chmod 777} o {\em iptables -A INPUT -j ACCEPT} funcionan.
+    \item {\bf Protección perimetral de red}: Firewall de red, Sistema de Prevención de Intrusos.
+      \par Reto: Visibilidad reducida.
+    \item {\bf Herramientas de firewall de aplicación.}: \acrshort{waf}.
       \par Reto: Elevado coste o complejo de mantener.
   \end{itemize}
 \end{frame}
@@ -176,40 +139,30 @@
   \end{block}
 \end{frame}
 
-\subsection{Aplicaciones web y la seguridad}
 \begin{frame}[shrink=20]
   \frametitle{Visibilidad reducida}
-  \par Causas: TLS 1.3.
-  \par Causas: Diffie–Hellman.
-  \par Causas: Autenticación con certificado de cliente.
-  \par Consecuencia: Visibilidad muy reducida
+    \begin{figure}[c]
+			\includegraphics[width=0.9\textwidth]{fig/TLS_Visibility}
+      \caption{\small{Evolución de HTTP a HTTPS con {\em Diffie–Hellman}}}
+		\end{figure}
 \end{frame}
 
+\subsection{¿Qué es un WAF?}
 \begin{frame}[shrink=20,fragile]
   \frametitle{\acrlong{waf} (\acrshort{waf})}
-  ¿Qué es un WAF?
-  \begin{exampleblock}{Definición}
+  \begin{exampleblock}{¿Qué es un WAF?}
     Un WAF es una herramienta especializada en filtrar, monitorizar y bloquear las conexiones desde y hacia una aplicación web (Fuente: Instituto Nacional de Ciberseguridad~\cite{incibewaf}).
   \end{exampleblock}
   Características principales:
   \begin{itemize}
-    \item Analiza el tráfico web.
-    \item Listas blancas o negras de User Agents, IP, caracteres aceptados en URL o formularios, etc.
+    \item Analiza el tráfico web: Entiende GET, POST, parámetros URL, etc.
     \item Se aplican políticas y reglas de filtrado. Por ejemplo:
         \begin{lstlisting}
 admin'--
 ' or 1=1#
 ' or 1=1-- -
         \end{lstlisting}
-    \item Modelo de seguridad negativa.
-      \begin{itemize}
-        \item Busca patrones de ataques conocidos y bloquea las peticiones o respuestas.
-      \end{itemize}
-    \item Modelo de seguridad positiva.
-      \begin{itemize}
-        \item Proceso de aprendizaje.
-        \item Deniega las peticiones por defecto y sólo acepta aquellas que considera válidas.
-      \end{itemize}
+    \item Listas blancas o negras de User Agents, IP, caracteres aceptados en URL o formularios, etc.
   \end{itemize}
 \end{frame}
 

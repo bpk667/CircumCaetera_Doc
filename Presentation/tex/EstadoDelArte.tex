@@ -20,47 +20,19 @@
 \end{frame}
 
 \begin{frame}[shrink]
-  \frametitle{Soluciones WAF privativas SaaS}
-  Las soluciones WAF \acrshort{saas} ofrecen una serie de funcionalidades adicionales:
-  \begin{itemize}
-    \item Red de distribución de contenidos (\acrlong{cdn} del inglés).
-    \item Protección contra ataques de denegación de servicio (\acrshort{dos} del inglés) en capa de aplicación.
-    \item Caché de contenido estático.
-    \item Suscripción a listas de reputación de IP, dominios o Localizador de recursos uniforme (\acrshort{url} del inglés).
-    \item Bloqueo de bots maliciosos.
-    \item Sistema de creación de informes.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[shrink]
-  \frametitle{Soluciones WAF privativas tipo appliance}
-  Las soluciones WAF de tipo appliance ofrecen a su vez las siguientes funcionalidades adicionales:
-  \begin{itemize}
-    \item Crear perfiles de las aplicaciones web y filtrar parámetros no permitidos.
-    \item Parcheo virtual de vulnerabilidades mediante la integración con escaneadores de vulnerabilidades.
-    \item Suscripción a listas de reputación de IP, dominios o URL.
-    \item Aceleración TLS.
-    \item Bloqueo de bots maliciosos.
-    \item Sistema de creación de informes.
-    \item Antivirus.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[shrink]
   \frametitle{Ventajas e inconvenientes}
   {\bf Ventajas}:
   \begin{itemize}
-    \item Sencillas de implementar (especialmente en las soluciones SaaS).
-    \item Relativa independencia de la infraestructura de la plataforma web.
-    \item Permite implementar seguridad basada en roles (\acrshort{rbac} del inglés).
-    \item Buen soporte técnico.
+    \item Sencillas de implementar
+    \item Independencia de la infraestructura de la plataforma web.
+    \item (\acrshort{rbac} del inglés).
+    \item Soporte técnico.
     \item Funcionalidades adicionales.
   \end{itemize}
   {\bf Desventajas}:
   \begin{itemize}
     \item Elevado coste económico.
     \item No es posible adaptar la solución a necesidades específicas.
-    \item Capacidad muy limitada de crear o modificar reglas (especialmente en las soluciones SaaS).
   \end{itemize}
 \end{frame}
 
@@ -116,23 +88,23 @@
     \hline
     {\bf Características}                       &	{\bf WAF SaaS}          & {\bf WAF Appliance} & {\bf WAF Software libre}  & {\bf Propuesta}       \\
     \hline
-    Independencia de la plataforma web          & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    Independencia de la plataforma web  & \textcolor{green}{Muy buena}& \textcolor{green}{Buena}& \textcolor{red}{Mala}& \textcolor{green}{Buena}\\
     \hline
-    Independencia operacional (RBAC)            & \greenarrow Muy buena   & \greenarrow Buena   & \redarrow Mala            & \greenarrow Buena     \\
+    Independencia operacional (RBAC)    & \textcolor{green}{Muy buena}& \textcolor{green}{Buena}& \textcolor{red}{Mala}& \textcolor{green}{Buena}\\
     \hline
-    Complejidad de despliegue y administración  & \greenarrow Muy baja    & \greenarrow Baja    & \redarrow Alta            & \yellowarrow Media    \\
+    Complejidad (despliegue y operación)& \textcolor{green}{Muy baja}& \textcolor{green}{Baja}& \textcolor{red}{Alta}& \textcolor{yellow}{Media}\\
     \hline
-    Coste económico                             & \redarrow Alto          & \redarrow Alto      & \greenarrow Bajo          & \greenarrow Bajo      \\
+    Coste económico                     & \textcolor{red}{Alto}& \textcolor{red}{Alto}& \textcolor{green}{Bajo}& \textcolor{green}{Bajo}\\
     \hline
-    Soporte técnico                             & \greenarrow Bueno       & \greenarrow Bueno   & \redarrow Limitado        & \redarrow Limitado    \\
+    Soporte técnico                     & \textcolor{green}{Bueno}& \textcolor{green}{Bueno}& \textcolor{red}{Limitado}& \textcolor{red}{Limitado}\\
     \hline
-    Información accesible por terceros          & \redarrow Sí            & \greenarrow No      & \greenarrow No            & \greenarrow No        \\ 
+    Información accesible por terceros  & \textcolor{red}{Sí}& \textcolor{green}{No}& \textcolor{green}{No}& \textcolor{green}{No}\\ 
     \hline
-    Adaptabilidad / Personalización             & \redarrow Muy baja      & \redarrow Baja      & \greenarrow Alta          & \greenarrow Alta      \\ 
+    Adaptabilidad / Personalización     & \textcolor{red}{Muy baja}& \textcolor{red}{Baja}& \textcolor{green}{Alta}& \textcolor{green}{Alta}\\ 
     \hline
-    Acceso al código fuente                     & \redarrow No            & \redarrow No        & \greenarrow Sí            & \greenarrow Sí        \\ 
+    Acceso al código fuente             & \textcolor{red}{No}& \textcolor{red}{No}& \textcolor{green}{Sí}   & \textcolor{green}{Sí}   \\ 
     \hline
-    Funcionalidades adicionales (por defecto)   & \greenarrow Muy buenas  & \greenarrow Buenas  & \redarrow Limitadas       & \greenarrow Buenas    \\
+    Funcionalidades adicionales  & \textcolor{green}{Muy buenas}& \textcolor{green}{Buenas}& \textcolor{red}{Limitadas}& \textcolor{green}{Buenas}\\
     \hline
   \end{tabular}}
   \end{center}
